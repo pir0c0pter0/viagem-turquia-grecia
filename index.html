@@ -78,6 +78,31 @@
   .alert b{color:var(--warn)}
   .food{margin-top:12px;font-size:.9rem;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
 
+  /* ---------- ideias ---------- */
+  .ideias{margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+  .ideias-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .ideias-top span{font-size:.78rem;font-weight:700;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+  .add-idea{background:var(--accent-soft);color:var(--accent);border:none;border-radius:99px;padding:4px 12px;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer}
+  .add-idea:hover{filter:brightness(.93)}
+  .ideias-empty{font-size:.82rem;color:var(--muted);display:block;margin-top:6px}
+  .idea{display:flex;gap:10px;align-items:flex-start;background:var(--accent-soft);border-radius:10px;padding:8px 10px;margin-top:8px;font-size:.9rem}
+  .idea .cat{flex:none}
+  .idea-body{flex:1;min-width:0;overflow-wrap:break-word}
+  .idea-body small{display:block;color:var(--muted);font-size:.8rem}
+  .idea-body .who{font-style:italic}
+  .idea button{flex:none;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:2px 8px;font:inherit;font-size:.78rem;cursor:pointer;color:var(--ink)}
+  .idea .like.liked{border-color:var(--accent);color:var(--accent);font-weight:700}
+  #idea-dialog{border:none;border-radius:var(--radius);background:var(--card);color:var(--ink);padding:24px;width:min(440px,92vw);box-shadow:0 24px 64px rgba(0,0,0,.3);margin:auto}
+  #idea-dialog::backdrop{background:rgba(11,19,32,.55);backdrop-filter:blur(3px)}
+  #idea-form h3{margin-bottom:10px}
+  #idea-form label{display:block;font-size:.8rem;font-weight:700;color:var(--muted);margin:10px 0 4px}
+  #idea-form input,#idea-form select,#idea-form textarea{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;font-size:.9rem}
+  #idea-form textarea{resize:vertical;min-height:56px}
+  .form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+  .form-actions button{border:none;border-radius:99px;padding:8px 18px;font:inherit;font-weight:700;cursor:pointer}
+  .form-actions .save{background:var(--accent);color:#fff}
+  .form-actions .cancel{background:var(--accent-soft);color:var(--accent)}
+
   footer{text-align:center;color:var(--muted);font-size:.82rem;margin-top:48px}
 
   /* ---------- reveal ---------- */
@@ -107,6 +132,7 @@
     .card{break-inside:avoid;box-shadow:none;grid-template-columns:1fr}
     .card .pic{min-height:0;height:140px;position:relative}
     .route span{border:1px solid #999}
+    .ideias,#idea-dialog,#ideias-gerais{display:none !important}
   }
 </style>
 </head>
@@ -144,6 +170,39 @@
   </div>
 
   <div id="days"></div>
+
+  <div id="ideias-gerais">
+    <div class="section"><h2>💡 Ideias gerais</h2><div class="line"></div><span class="tag">sugestões do grupo</span></div>
+    <div class="card no-pic"><div class="body"><div class="ideias" data-dia="geral"></div></div></div>
+  </div>
+
+  <dialog id="idea-dialog">
+    <form id="idea-form">
+      <h3 id="idea-h">Nova ideia</h3>
+      <label for="f-nome">Seu nome</label>
+      <input id="f-nome" maxlength="50" placeholder="quem sugere?">
+      <label for="f-titulo">Ideia *</label>
+      <input id="f-titulo" maxlength="200" required placeholder="ex.: rooftop com vista da Acrópole">
+      <label for="f-cat">Categoria</label>
+      <select id="f-cat">
+        <option value="passeio">🏛️ Passeio</option>
+        <option value="restaurante">🍽️ Restaurante</option>
+        <option value="bar">🍸 Bar</option>
+        <option value="compras">🛍️ Compras</option>
+        <option value="outro">💡 Outro</option>
+      </select>
+      <label for="f-texto">Detalhes</label>
+      <textarea id="f-texto" maxlength="500" placeholder="opcional"></textarea>
+      <label for="f-link">Link</label>
+      <input id="f-link" maxlength="300" placeholder="Google Maps, Instagram… (opcional)">
+      <label for="f-dia">Dia</label>
+      <select id="f-dia"></select>
+      <div class="form-actions">
+        <button type="button" class="cancel" id="idea-cancel">Cancelar</button>
+        <button type="submit" class="save">Salvar</button>
+      </div>
+    </form>
+  </dialog>
 
   <footer>Cronograma inicial simplificado. Valores, hotéis e reservas em etapa seguinte. Fotos: Wikimedia Commons.</footer>
 </div>
@@ -239,6 +298,7 @@ document.getElementById('days').innerHTML = DAYS.map(x =>
           <div class="prog">${x.prog}</div>
           ${x.alert?`<div class="alert"><span>⚠️</span><div>${x.alert}</div></div>`:''}
           ${x.food?`<div class="food">🍽️ ${x.food}</div>`:''}
+          <div class="ideias" data-dia="${x.d.replace('/','-')}"></div>
         </div>
       </div>`
 ).join('');
@@ -246,6 +306,110 @@ document.getElementById('days').innerHTML = DAYS.map(x =>
 // reveal on scroll (colapsa p/ estático com prefers-reduced-motion)
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
 document.querySelectorAll('.card,.section,.critical').forEach(el=>io.observe(el));
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+<script>
+// ---------- ideias compartilhadas (Firebase Realtime Database) ----------
+const FIREBASE_CONFIG={
+  // ⬇️ Colar aqui o firebaseConfig do console do Firebase (Configurações do projeto → Seus apps).
+  // Precisa conter databaseURL. Enquanto vazio, a seção de ideias fica desativada e o resto da página funciona normal.
+  apiKey:"", authDomain:"", databaseURL:"", projectId:"", appId:""
+};
+
+(function(){
+  const $=s=>document.querySelector(s);
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const CATS={bar:'🍸',restaurante:'🍽️',passeio:'🏛️',compras:'🛍️',outro:'💡'};
+  const boxes=document.querySelectorAll('.ideias');
+  boxes.forEach(b=>b.innerHTML='<div class="ideias-top"><span>💡 Ideias</span><button type="button" class="add-idea">+ ideia</button></div><div class="ideias-list"><span class="ideias-empty">nenhuma sugestão ainda</span></div>');
+  const offline=msg=>boxes.forEach(b=>{b.querySelector('.add-idea').style.display='none';b.querySelector('.ideias-list').innerHTML=`<span class="ideias-empty">${msg}</span>`});
+
+  // ponytail: sem login — identidade é o navegador (celular e notebook da mesma pessoa são "donos" diferentes)
+  let clientId=localStorage.ideaClient;
+  if(!clientId){clientId=crypto.randomUUID();localStorage.ideaClient=clientId}
+
+  const sel=$('#f-dia');
+  sel.innerHTML='<option value="geral">💡 Geral (sem dia definido)</option>'+
+    DAYS.filter(x=>x.d).map(x=>`<option value="${x.d.replace('/','-')}">${x.d} · ${x.city}</option>`).join('');
+
+  let ref=null,cache={};
+  if(!FIREBASE_CONFIG.databaseURL){
+    offline('ideias desativadas — falta configurar o Firebase');
+  }else{
+    try{
+      firebase.initializeApp(FIREBASE_CONFIG);
+      ref=firebase.database().ref('ideias');
+      ref.on('value',snap=>{cache=snap.val()||{};render()},
+        err=>{console.error('Firebase:',err);offline('ideias indisponíveis no momento')});
+    }catch(e){console.error('Firebase:',e);offline('ideias indisponíveis (sem conexão)')}
+  }
+
+  function render(){
+    const byDay={};
+    Object.entries(cache).forEach(([id,i])=>{(byDay[i.dia]=byDay[i.dia]||[]).push([id,i])});
+    boxes.forEach(box=>{
+      const items=byDay[box.dataset.dia]||[];
+      box.querySelector('.ideias-list').innerHTML=items.length?items.map(([id,i])=>{
+        const nLikes=Object.keys(i.likes||{}).length;
+        const liked=i.likes&&i.likes[clientId];
+        const mine=i.ownerId===clientId;
+        const link=/^https?:\/\//i.test(i.link||'')?` <a href="${esc(i.link)}" target="_blank" rel="noopener">🔗</a>`:'';
+        return `<div class="idea">
+          <span class="cat" title="${esc(i.categoria)}">${CATS[i.categoria]||'💡'}</span>
+          <div class="idea-body"><strong>${esc(i.titulo)}</strong>${link}${i.texto?`<small>${esc(i.texto)}</small>`:''}<small class="who">— ${esc(i.nome)}</small></div>
+          <button type="button" class="like${liked?' liked':''}" data-id="${id}">👍${nLikes?' '+nLikes:''}</button>
+          ${mine?`<button type="button" data-edit="${id}">✏️</button><button type="button" data-del="${id}">🗑️</button>`:''}
+        </div>`;
+      }).join(''):'<span class="ideias-empty">nenhuma sugestão ainda</span>';
+    });
+  }
+
+  const dlg=$('#idea-dialog'),form=$('#idea-form');
+  let editId=null;
+
+  document.addEventListener('click',e=>{
+    const t=e.target.closest('button');if(!t)return;
+    if(t.classList.contains('add-idea')){
+      editId=null;form.reset();
+      $('#f-nome').value=localStorage.ideaName||'';
+      sel.value=t.closest('.ideias').dataset.dia;
+      $('#idea-h').textContent='Nova ideia';
+      dlg.showModal();
+    }else if(t.classList.contains('like')&&ref){
+      const id=t.dataset.id;
+      const liked=cache[id]&&cache[id].likes&&cache[id].likes[clientId];
+      ref.child(id+'/likes/'+clientId).set(liked?null:true);
+    }else if(t.dataset.del&&ref){
+      if(confirm('Excluir esta ideia?'))ref.child(t.dataset.del).remove();
+    }else if(t.dataset.edit&&ref){
+      const i=cache[t.dataset.edit];if(!i)return;
+      editId=t.dataset.edit;
+      $('#f-nome').value=i.nome;$('#f-titulo').value=i.titulo;$('#f-cat').value=i.categoria;
+      $('#f-texto').value=i.texto||'';$('#f-link').value=i.link||'';sel.value=i.dia;
+      $('#idea-h').textContent='Editar ideia';
+      dlg.showModal();
+    }
+  });
+
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    if(!ref)return dlg.close();
+    const nome=($('#f-nome').value.trim()||'Alguém').slice(0,50);
+    localStorage.ideaName=nome;
+    let link=$('#f-link').value.trim();
+    if(link&&!/^https?:\/\//i.test(link))link='https://'+link; // neutraliza javascript: e afins
+    const data={dia:sel.value,nome,categoria:$('#f-cat').value,
+      titulo:$('#f-titulo').value.trim().slice(0,200),
+      texto:$('#f-texto').value.trim().slice(0,500),link:link.slice(0,300)};
+    if(!data.titulo)return;
+    if(editId){ref.child(editId).update(data)} // update, nunca set: preserva os likes dos outros
+    else{ref.push({...data,ownerId:clientId,criadoEm:Date.now()})}
+    dlg.close();
+  });
+  $('#idea-cancel').addEventListener('click',()=>dlg.close());
+})();
 </script>
 </body>
 </html>
