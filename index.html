@@ -3,65 +3,164 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Turquia + Grécia 2026 — Cronograma</title>
+<title>Turquia + Grécia 2026 · Cronograma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  :root{
+    --bg:#f2f5f8; --card:#ffffff; --ink:#101c2b; --muted:#5a6b7d;
+    --line:#dde5ec; --accent:#0d5dbb; --accent-soft:#e3edf9;
+    --navy:#0d1f3a; --navy-ink:#eef3fa;
+    --warn:#b45309; --warn-bg:#fdf1dc; --warn-line:#f0c36b;
+    --radius:18px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1320; --card:#131f30; --ink:#e8eef6; --muted:#96a7ba;
+      --line:#233247; --accent:#5ea3f2; --accent-soft:#16283f;
+      --navy:#122745; --navy-ink:#eef3fa;
+      --warn:#f2b45c; --warn-bg:#2a2013; --warn-line:#7a5a22;
+    }
+  }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:Georgia,'Times New Roman',serif;background:#faf7f2;color:#2b2b2b;line-height:1.55}
-  .wrap{max-width:860px;margin:0 auto;padding:32px 20px 60px}
-  header{text-align:center;padding:28px 0 8px}
-  header h1{font-size:2rem;letter-spacing:.5px}
-  header .sub{color:#8a6d3b;font-style:italic;margin-top:6px}
-  .note{background:#fff8e6;border:1px solid #e8d9a8;border-radius:10px;padding:14px 18px;margin:22px 0;font-size:.95rem}
-  .section{display:flex;align-items:center;gap:14px;margin:38px 0 18px}
-  .section h2{font-size:1.25rem;white-space:nowrap}
-  .section .line{flex:1;height:1px;background:#d8cdb8}
-  .section .tag{font-size:.8rem;background:#2b2b2b;color:#fff;padding:3px 10px;border-radius:99px;white-space:nowrap}
-  .card{background:#fff;border:1px solid #e5ddcc;border-radius:14px;overflow:hidden;margin-bottom:22px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
-  .card img{width:100%;height:230px;object-fit:cover;display:block}
-  .card .body{padding:16px 20px 18px}
-  .top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-  .date{font-weight:bold;font-size:1.05rem;color:#8a6d3b}
-  .city{font-size:1.15rem;font-weight:bold}
-  .move{font-size:.88rem;color:#666;margin-top:2px}
-  .prog{margin-top:8px;font-size:.98rem}
-  .food{margin-top:8px;font-size:.92rem;color:#555;border-top:1px dashed #e0d6c2;padding-top:8px}
-  footer{text-align:center;color:#999;font-size:.8rem;margin-top:40px}
+  body{font-family:'Outfit',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+  img{max-width:100%}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px 64px}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:clamp(420px,62dvh,660px);display:flex;align-items:flex-end;overflow:hidden;background:var(--navy)}
+  .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,31,58,.15) 0%,rgba(13,31,58,.35) 45%,rgba(11,19,32,.92) 100%)}
+  .hero-inner{position:relative;width:100%;max-width:960px;margin:0 auto;padding:96px 20px 88px;color:#fff}
+  .hero .dates{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(6px);border-radius:99px;padding:6px 16px;font-weight:600;font-size:.9rem;letter-spacing:.02em}
+  .hero h1{font-size:clamp(2.4rem,7vw,4.2rem);font-weight:800;line-height:1.05;margin:14px 0 10px}
+  .hero .sub{font-size:1.05rem;color:rgba(255,255,255,.85);font-weight:500}
+  .hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .hero .meta span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:5px 14px;font-size:.85rem;font-weight:600}
+
+  /* ---------- painel de reservas críticas ---------- */
+  .critical{position:relative;z-index:2;margin-top:-56px;background:var(--navy);color:var(--navy-ink);border-radius:var(--radius);padding:26px 26px 20px;box-shadow:0 18px 48px rgba(13,31,58,.35);border-top:5px solid #f2b45c}
+  .critical h2{display:flex;align-items:center;gap:12px;font-size:1.3rem;font-weight:800;margin-bottom:4px}
+  .critical h2 .sign{flex:none;width:38px;height:38px;border-radius:10px;background:#f2b45c;color:#3a2a08;display:grid;place-items:center;font-size:1.3rem}
+  .critical .lead{color:rgba(238,243,250,.75);font-size:.95rem;margin-bottom:16px}
+  .critical ol{list-style:none;display:grid;gap:10px}
+  .critical li{display:flex;gap:14px;align-items:flex-start;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 16px}
+  .critical .n{flex:none;width:26px;height:26px;border-radius:8px;background:#f2b45c;color:#3a2a08;font-weight:800;font-size:.9rem;display:grid;place-items:center;margin-top:2px}
+  .critical li strong{display:block;font-size:1rem}
+  .critical li small{color:rgba(238,243,250,.72);font-size:.88rem;line-height:1.45}
+
+  /* ---------- rota ---------- */
+  .route{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;margin:28px 0 8px}
+  .route span{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:5px 13px;font-size:.83rem;font-weight:600}
+  .route i{color:var(--muted);font-style:normal;font-size:.8rem}
+
+  /* ---------- seções ---------- */
+  .section{display:flex;align-items:center;gap:14px;margin:52px 0 22px}
+  .section h2{font-size:1.6rem;font-weight:800;white-space:nowrap}
+  .section .line{flex:1;height:2px;background:var(--line);border-radius:2px}
+  .section .tag{font-size:.8rem;font-weight:700;background:var(--accent);color:#fff;padding:4px 14px;border-radius:99px;white-space:nowrap}
+
+  /* ---------- cards de dia ---------- */
+  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:20px;box-shadow:0 4px 18px rgba(16,28,43,.06);display:grid;grid-template-columns:300px 1fr}
+  .card .pic{position:relative;min-height:100%}
+  .card .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .card.no-pic{grid-template-columns:1fr}
+  .card .body{padding:20px 24px 18px;min-width:0}
+  .daytag{position:absolute;top:14px;left:14px;background:rgba(13,31,58,.82);color:#fff;backdrop-filter:blur(4px);border-radius:10px;padding:4px 12px;font-size:.78rem;font-weight:700;letter-spacing:.03em}
+  .card.no-pic .daytag{position:static;background:var(--accent-soft);color:var(--accent);justify-self:start;margin:18px 0 0 24px}
+  .top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .date{font-weight:800;color:var(--accent);font-size:.95rem}
+  .city{font-size:1.3rem;font-weight:800;line-height:1.2}
+  .move{font-size:.88rem;color:var(--muted);font-weight:600;margin-top:6px}
+  .prog{margin-top:10px;font-size:.97rem}
+  .alert{display:flex;gap:10px;align-items:flex-start;margin-top:12px;background:var(--warn-bg);border:1px solid var(--warn-line);border-left:5px solid var(--warn);border-radius:10px;padding:10px 14px;font-size:.92rem;color:var(--ink)}
+  .alert b{color:var(--warn)}
+  .food{margin-top:12px;font-size:.9rem;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+
+  footer{text-align:center;color:var(--muted);font-size:.82rem;margin-top:48px}
+
+  /* ---------- reveal ---------- */
+  @media (prefers-reduced-motion: no-preference){
+    .card,.section,.critical{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+    .in{opacity:1 !important;transform:none !important}
+  }
+
+  /* ---------- mobile ---------- */
+  @media (max-width:720px){
+    .card{grid-template-columns:1fr}
+    .card .pic{min-height:190px}
+    .hero-inner{padding:72px 20px 84px}
+    .critical{padding:20px 18px 16px}
+  }
+
+  /* ---------- print ---------- */
   @media print{
-    body{background:#fff}
-    .card{break-inside:avoid;box-shadow:none}
-    .card img{height:150px}
+    body{background:#fff;color:#000}
+    .hero{min-height:0;background:#fff}
+    .hero>img,.hero .veil{display:none}
+    .hero-inner{color:#000;padding:20px}
+    .hero .dates,.hero .meta span{border:1px solid #999;background:none;color:#000}
+    .critical{margin-top:12px;background:#fff;color:#000;border:3px solid var(--warn);box-shadow:none}
+    .critical .lead,.critical li small{color:#333}
+    .critical li{border:1px solid #ccc;background:#fff}
+    .card{break-inside:avoid;box-shadow:none;grid-template-columns:1fr}
+    .card .pic{min-height:0;height:140px;position:relative}
+    .route span{border:1px solid #999}
   }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <h1>🇹🇷 Turquia + Grécia 🇬🇷</h1>
-    <div class="sub">04 a 20 de setembro de 2026 · saída e retorno em Curitiba · 7 pessoas</div>
-  </header>
 
-  <div class="note">
-    <strong>Grupo de 7:</strong> reservar com antecedência o balão na Capadócia, transfers de minivan (carro comum não comporta 7) e mesas nos restaurantes. Voo Izmir→Atenas tem poucos assentos — é a primeira reserva a fazer depois do internacional.
+<header class="hero">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Cappadocia_balloon_trip%2C_Ortahisar_Castle_%2811893715185%29.jpg/1280px-Cappadocia_balloon_trip%2C_Ortahisar_Castle_%2811893715185%29.jpg" alt="Balões sobre a Capadócia ao nascer do sol" fetchpriority="high">
+  <div class="veil"></div>
+  <div class="hero-inner">
+    <span class="dates">04 a 20 de setembro de 2026</span>
+    <h1>Turquia 🇹🇷 + Grécia 🇬🇷</h1>
+    <div class="sub">Saída e retorno em Curitiba · cronograma dia a dia</div>
+    <div class="meta">
+      <span>17 dias</span><span>7 pessoas</span><span>2 países</span><span>6 destinos</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="critical" id="reservas">
+    <h2><span class="sign">⚠</span>Reservas críticas · grupo de 7</h2>
+    <p class="lead">Com 7 pessoas nada se resolve na hora. Estas são as reservas que travam a viagem, em ordem de prioridade:</p>
+    <ol>
+      <li><span class="n">1</span><div><strong>Voo internacional Turkish (GRU ⇄ IST)</strong><small>Base de todo o roteiro. Bilhete multi-destino com retorno por Atenas.</small></div></li>
+      <li><span class="n">2</span><div><strong>Aegean Izmir → Atenas, 11/09 às 19:15</strong><small>Poucos assentos e o voo não opera ter/sáb. É a primeira reserva a fazer depois do internacional. Reconfirmar a grade de setembro.</small></div></li>
+      <li><span class="n">3</span><div><strong>Balão na Capadócia, manhã de 09/09</strong><small>Reservar a 1ª manhã. A manhã de 10/09 fica de reserva se o clima cancelar.</small></div></li>
+      <li><span class="n">4</span><div><strong>Transfers de minivan em todos os trechos</strong><small>Carro comum não comporta 7. Fechar minivan com antecedência em cada cidade.</small></div></li>
+      <li><span class="n">5</span><div><strong>Mesas nos restaurantes</strong><small>Grupo grande: reservar jantar nos lugares concorridos (caldeira em Santorini, Karaköy etc.).</small></div></li>
+    </ol>
+  </section>
+
+  <div class="route" aria-label="Rota da viagem">
+    <span>Curitiba</span><i>✈</i><span>São Paulo</span><i>✈</i><span>Istambul</span><i>✈</i><span>Capadócia</span><i>✈</i><span>Éfeso</span><i>✈</i><span>Atenas</span><i>✈</i><span>Santorini</span><i>⛴</i><span>Atenas</span><i>✈</i><span>Curitiba</span>
   </div>
 
   <div id="days"></div>
 
-  <footer>Cronograma inicial simplificado — valores, hotéis e reservas em etapa seguinte. Fotos: Wikimedia Commons.</footer>
+  <footer>Cronograma inicial simplificado. Valores, hotéis e reservas em etapa seguinte. Fotos: Wikimedia Commons.</footer>
 </div>
 
 <script>
 const DAYS=[
- {sec:"Saída — Brasil"},
+ {sec:"Saída · Brasil",tag:"2 dias"},
  {d:"04/09",dow:"sex",city:"Curitiba → São Paulo",move:"✈️ GOL, fim da tarde (~1h20)",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Afonso_Pena_International_Airport_%28CWB%29%2C_Curitiba%2C_Brazil_%2837303022604%29.jpg/960px-Afonso_Pena_International_Airport_%28CWB%29%2C_Curitiba%2C_Brazil_%2837303022604%29.jpg",
-  prog:"Voo CWB→GRU no fim da tarde e noite em hotel perto de Guarulhos — sem conexão apertada no mesmo dia.",
-  food:"Jantar tranquilo no hotel — amanhã são ~13h de voo."},
+  prog:"Voo CWB→GRU no fim da tarde e noite em hotel perto de Guarulhos, sem conexão apertada no mesmo dia.",
+  food:"Jantar tranquilo no hotel. Amanhã são ~13h de voo."},
  {d:"05/09",dow:"sáb",city:"São Paulo → Istambul",move:"✈️ Turkish Airlines, ~13h direto, chega ~22:45",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Historical_peninsula_and_modern_skyline_of_Istanbul.jpg/960px-Historical_peninsula_and_modern_skyline_of_Istanbul.jpg",
-  prog:"Único voo direto Brasil–Turquia. Chegada à noite, transfer de minivan (~45min) e descanso em Sultanahmet.",
-  food:"Chegada tarde — algo leve perto do hotel."},
+  prog:"Único voo direto Brasil-Turquia. Chegada à noite, transfer de minivan (~45min) e descanso em Sultanahmet.",
+  food:"Chegada tarde: algo leve perto do hotel."},
 
- {sec:"Turquia — 7 dias"},
+ {sec:"Turquia",tag:"7 dias"},
  {d:"06/09",dow:"dom",city:"Istambul",move:"🚶 a pé, tudo em Sultanahmet",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Hagia_Sophia_%28228968325%29.jpeg/960px-Hagia_Sophia_%28228968325%29.jpeg",
   prog:"As duas grandes mesquitas: <strong>Hagia Sophia</strong> e <strong>Mesquita Azul</strong> (uma em frente à outra), Cisterna da Basílica e Grand Bazaar.",
@@ -69,14 +168,15 @@ const DAYS=[
  {d:"07/09",dow:"seg",city:"Istambul",move:"🚶 a pé + ⛴️ barco no Bósforo",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Topkap%C4%B1_-_01.jpg/960px-Topkap%C4%B1_-_01.jpg",
   prog:"Palácio Topkapi pela manhã, Bazar das Especiarias e cruzeiro no Bósforo no fim da tarde.",
-  food:"Noite nos bares e mesas de rua de Karaköy/Galata — lado moderno da cidade."},
+  food:"Noite nos bares e mesas de rua de Karaköy/Galata, o lado moderno da cidade."},
  {d:"08/09",dow:"ter",city:"Istambul → Capadócia",move:"✈️ voo 1h30 p/ Kayseri + 🚐 1h até Göreme",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/G%C3%B6reme_town_and_valley_2015.JPG/960px-G%C3%B6reme_town_and_valley_2015.JPG",
   prog:"Voo da manhã, check-in em hotel-caverna e tarde livre nos vales de Göreme.",
-  food:"Testi kebab (cozido na cerâmica quebrada na mesa) — o prato da região."},
+  food:"Testi kebab (cozido na cerâmica quebrada na mesa), o prato da região."},
  {d:"09/09",dow:"qua",city:"Capadócia",move:"🎈 balão + 🚐 tour local",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Cappadocia_balloon_trip%2C_Ortahisar_Castle_%2811893715185%29.jpg/960px-Cappadocia_balloon_trip%2C_Ortahisar_Castle_%2811893715185%29.jpg",
-  prog:"<strong>Balão ao nascer do sol</strong> (reservar esta 1ª manhã — a manhã seguinte fica de reserva se o clima cancelar). Depois: Göreme Open Air Museum, castelo de Uçhisar e Love Valley.",
+  prog:"<strong>Balão ao nascer do sol</strong>. Depois: Göreme Open Air Museum, castelo de Uçhisar e Love Valley.",
+  alert:"<b>Reservar o balão para esta 1ª manhã.</b> A manhã de 10/09 fica de reserva se o clima cancelar.",
   food:"Jantar em restaurante-caverna em Göreme, vinho local da Capadócia."},
  {d:"10/09",dow:"qui",city:"Capadócia → Selçuk (Éfeso)",move:"✈️ Kayseri→Izmir 1h40 direto + 🚐 1h",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/House_of_the_Virgin_Mary_%2813951299641%29_%28cropped%29.jpg/960px-House_of_the_Virgin_Mary_%2813951299641%29_%28cropped%29.jpg",
@@ -84,17 +184,18 @@ const DAYS=[
   food:"Fim de tarde e jantar no vilarejo de Şirince, famoso pelos vinhos de fruta."},
  {d:"11/09",dow:"sex",city:"Éfeso → Atenas",move:"✈️ Aegean Izmir→Atenas 19:15→20:15 (1h)",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Ephesus_Celsus_Library_Fa%C3%A7ade.jpg/960px-Ephesus_Celsus_Library_Fa%C3%A7ade.jpg",
-  prog:"Manhã inteira nas ruínas de <strong>Éfeso</strong> (Biblioteca de Celso, Grande Teatro — cidade dos Atos dos Apóstolos). Tarde: aeroporto de Izmir. ⚠️ Esse voo não opera ter/sáb — sexta tem, mas reconfirmar a grade de setembro.",
+  prog:"Manhã inteira nas ruínas de <strong>Éfeso</strong> (Biblioteca de Celso, Grande Teatro, a cidade dos Atos dos Apóstolos). Tarde: aeroporto de Izmir.",
+  alert:"<b>Este voo não opera ter/sáb.</b> Sexta tem, mas reconfirmar a grade de setembro. Poucos assentos: reserva prioritária nº 2.",
   food:"Chegada e primeira noite grega: taverna perto do hotel em Atenas."},
 
- {sec:"Grécia — 8 dias"},
+ {sec:"Grécia",tag:"8 dias"},
  {d:"12/09",dow:"sáb",city:"Atenas",move:"🚶 a pé, centro histórico",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/1029_Acropolis_of_Athens_in_Greece_at_night_Photo_by_Giles_Laurent.jpg/960px-1029_Acropolis_of_Athens_in_Greece_at_night_Photo_by_Giles_Laurent.jpg",
   prog:"<strong>Acrópole</strong> logo cedo (ingresso com horário marcado) + Museu da Acrópole; tarde nos bairros de Plaka e Anafiotika.",
   food:"Tavernas de Plaka: moussaka, souvlaki e vinho da casa."},
  {d:"13/09",dow:"dom",city:"Atenas → Santorini",move:"✈️ voo 50 min pela manhã",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Oia_sunset_-_panoramio_%282%29.jpg/960px-Oia_sunset_-_panoramio_%282%29.jpg",
-  prog:"Voo da manhã, check-in e tarde em <strong>Oia</strong> — o cartão-postal das casinhas brancas. Pôr do sol clássico.",
+  prog:"Voo da manhã, check-in e tarde em <strong>Oia</strong>, o cartão-postal das casinhas brancas. Pôr do sol clássico.",
   food:"Jantar com vista da caldeira em Oia ou Fira."},
  {d:"14/09",dow:"seg",city:"Santorini",move:"🚐 minivan alugada / tour",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ancient_Akrotiri.jpeg/960px-Ancient_Akrotiri.jpeg",
@@ -114,7 +215,7 @@ const DAYS=[
   food:"Jantar de volta em Atenas, bairro de Koukaki."},
  {d:"18/09",dow:"sex",city:"Atenas → Delfos (bate-volta)",move:"🚐 ~2h30 cada trecho",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Delphi%2C_Greece_-_panoramio.jpg/960px-Delphi%2C_Greece_-_panoramio.jpg",
-  prog:"O santuário do Oráculo de <strong>Delfos</strong> na encosta do Parnaso — um dos sítios mais bonitos da Grécia. (Alternativa leve: dia livre ou ilha de Egina.)",
+  prog:"O santuário do Oráculo de <strong>Delfos</strong> na encosta do Parnaso, um dos sítios mais bonitos da Grécia. (Alternativa leve: dia livre ou ilha de Egina.)",
   food:"Noite de despedida nos bares e tavernas de Psiri."},
  {d:"19/09",dow:"sáb",city:"Atenas → São Paulo",move:"✈️ Turkish via Istambul, noite a bordo",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Athens_International_Airport_Eleftherios_Venizelos_%CE%94%CE%B9%CE%B5%CE%B8%CE%BD%CE%AE%CF%82_%CE%91%CE%B5%CF%81%CE%BF%CE%BB%CE%B9%CE%BC%CE%AD%CE%BD%CE%B1%CF%82_%CE%91%CE%B8%CE%B7%CE%BD%CF%8E%CE%BD_%CE%95%CE%BB%CE%B5%CF%85%CE%B8%CE%AD%CF%81%CE%B9%CE%BF%CF%82_%CE%92%CE%B5%CE%BD%CE%B9%CE%B6%CE%AD%CE%BB%CE%BF%CF%82_2019-12-01_i.jpg/960px-Athens_International_Airport_Eleftherios_Venizelos_%CE%94%CE%B9%CE%B5%CE%B8%CE%BD%CE%AE%CF%82_%CE%91%CE%B5%CF%81%CE%BF%CE%BB%CE%B9%CE%BC%CE%AD%CE%BD%CE%B1%CF%82_%CE%91%CE%B8%CE%B7%CE%BD%CF%8E%CE%BD_%CE%95%CE%BB%CE%B5%CF%85%CE%B8%CE%AD%CF%81%CE%B9%CE%BF%CF%82_%CE%92%CE%B5%CE%BD%CE%B9%CE%B6%CE%AD%CE%BB%CE%BF%CF%82_2019-12-01_i.jpg",
@@ -125,19 +226,26 @@ const DAYS=[
   prog:"Chegada internacional pela manhã em GRU, folga boa para imigração/bagagem e voo do início da tarde. <strong>Em Curitiba dia 20 ✓</strong>",
   food:""}
 ];
+
+let n=0;
 document.getElementById('days').innerHTML = DAYS.map(x =>
   x.sec
-    ? `<div class="section"><h2>${x.sec}</h2><div class="line"></div></div>`
-    : `<div class="card">
-        ${x.img?`<img src="${x.img}" loading="lazy" alt="${x.city}" onerror="this.style.display='none'">`:''}
+    ? `<div class="section"><h2>${x.sec}</h2><div class="line"></div><span class="tag">${x.tag}</span></div>`
+    : `<div class="card${x.img?'':' no-pic'}">
+        ${x.img?`<div class="pic"><img src="${x.img}" loading="lazy" alt="${x.city}" onerror="this.parentElement.parentElement.classList.add('no-pic');this.parentElement.remove()"><span class="daytag">Dia ${++n}</span></div>`:`<span class="daytag">Dia ${++n}</span>`}
         <div class="body">
           <div class="top"><span class="date">${x.d} · ${x.dow}</span><span class="city">${x.city}</span></div>
           <div class="move">${x.move}</div>
           <div class="prog">${x.prog}</div>
+          ${x.alert?`<div class="alert"><span>⚠️</span><div>${x.alert}</div></div>`:''}
           ${x.food?`<div class="food">🍽️ ${x.food}</div>`:''}
         </div>
       </div>`
 ).join('');
+
+// reveal on scroll (colapsa p/ estático com prefers-reduced-motion)
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.card,.section,.critical').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
