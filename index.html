@@ -379,6 +379,7 @@ const FIREBASE_CONFIG={
       editId=null;form.reset();
       $('#f-nome').value=localStorage.ideaName||'';
       sel.value=t.closest('.ideias').dataset.dia;
+      sel.disabled=true; // dia fixo do botão clicado; lido via sel.value no submit
       $('#idea-h').textContent='Nova ideia';
       dlg.showModal();
     }else if(t.classList.contains('like')&&ref){
@@ -392,6 +393,7 @@ const FIREBASE_CONFIG={
       editId=t.dataset.edit;
       $('#f-nome').value=i.nome;$('#f-titulo').value=i.titulo;$('#f-cat').value=i.categoria;
       $('#f-texto').value=i.texto||'';$('#f-link').value=i.link||'';sel.value=i.dia;
+      sel.disabled=false; // na edição pode mover a ideia de dia
       $('#idea-h').textContent='Editar ideia';
       dlg.showModal();
     }
