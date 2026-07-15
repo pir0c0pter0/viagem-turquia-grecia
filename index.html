@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turquia + Grécia 2026 — Cronograma</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:Georgia,'Times New Roman',serif;background:#faf7f2;color:#2b2b2b;line-height:1.55}
+  .wrap{max-width:860px;margin:0 auto;padding:32px 20px 60px}
+  header{text-align:center;padding:28px 0 8px}
+  header h1{font-size:2rem;letter-spacing:.5px}
+  header .sub{color:#8a6d3b;font-style:italic;margin-top:6px}
+  .note{background:#fff8e6;border:1px solid #e8d9a8;border-radius:10px;padding:14px 18px;margin:22px 0;font-size:.95rem}
+  .section{display:flex;align-items:center;gap:14px;margin:38px 0 18px}
+  .section h2{font-size:1.25rem;white-space:nowrap}
+  .section .line{flex:1;height:1px;background:#d8cdb8}
+  .section .tag{font-size:.8rem;background:#2b2b2b;color:#fff;padding:3px 10px;border-radius:99px;white-space:nowrap}
+  .card{background:#fff;border:1px solid #e5ddcc;border-radius:14px;overflow:hidden;margin-bottom:22px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+  .card img{width:100%;height:230px;object-fit:cover;display:block}
+  .card .body{padding:16px 20px 18px}
+  .top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .date{font-weight:bold;font-size:1.05rem;color:#8a6d3b}
+  .city{font-size:1.15rem;font-weight:bold}
+  .move{font-size:.88rem;color:#666;margin-top:2px}
+  .prog{margin-top:8px;font-size:.98rem}
+  .food{margin-top:8px;font-size:.92rem;color:#555;border-top:1px dashed #e0d6c2;padding-top:8px}
+  footer{text-align:center;color:#999;font-size:.8rem;margin-top:40px}
+  @media print{
+    body{background:#fff}
+    .card{break-inside:avoid;box-shadow:none}
+    .card img{height:150px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🇹🇷 Turquia + Grécia 🇬🇷</h1>
+    <div class="sub">04 a 20 de setembro de 2026 · saída e retorno em Curitiba · 7 pessoas</div>
+  </header>
+
+  <div class="note">
+    <strong>Grupo de 7:</strong> reservar com antecedência o balão na Capadócia, transfers de minivan (carro comum não comporta 7) e mesas nos restaurantes. Voo Izmir→Atenas tem poucos assentos — é a primeira reserva a fazer depois do internacional.
+  </div>
+
+  <div id="days"></div>
+
+  <footer>Cronograma inicial simplificado — valores, hotéis e reservas em etapa seguinte. Fotos: Wikimedia Commons.</footer>
+</div>
+
+<script>
+const DAYS=[
+ {sec:"Saída — Brasil"},
+ {d:"04/09",dow:"sex",city:"Curitiba → São Paulo",move:"✈️ GOL, fim da tarde (~1h20)",
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Afonso_Pena_International_Airport_%28CWB%29%2C_Curitiba%2C_Brazil_%2837303022604%29.jpg/960px-Afonso_Pena_International_Airport_%28CWB%29%2C_Curitiba%2C_Brazil_%2837303022604%29.jpg",
+  prog:"Voo CWB→GRU no fim da tarde e noite em hotel perto de Guarulhos — sem conexão apertada no mesmo dia.",
+  food:"Jantar tranquilo no hotel — amanhã são ~13h de voo."},
+ {d:"05/09",dow:"sáb",city:"São Paulo → Istambul",move:"✈️ Turkish Airlines, ~13h direto, chega ~22:45",
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Historical_peninsula_and_modern_skyline_of_Istanbul.jpg/960px-Historical_peninsula_and_modern_skyline_of_Istanbul.jpg",
+  prog:"Único voo direto Brasil–Turquia. Chegada à noite, transfer de minivan (~45min) e descanso em Sultanahmet.",
+  food:"Chegada tarde — algo leve perto do hotel."},
+
+ {sec:"Turquia — 7 dias"},
+ {d:"06/09",dow:"dom",city:"Istambul",move:"🚶 a pé, tudo em Sultanahmet",
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Hagia_Sophia_%28228968325%29.jpeg/960px-Hagia_Sophia_%28228968325%29.jpeg",
+  prog:"As duas grandes mesquitas: <strong>Hagia Sophia</strong> e <strong>Mesquita Azul</strong> (uma em frente à outra), Cisterna da Basílica e Grand Bazaar.",
+  food:"Meze e kebap nas ruazinhas de Hocapaşa; chá turco e baklava de sobremesa."},
+ {d:"07/09",dow:"seg",city:"Istambul",move:"🚶 a pé + ⛴️ barco no Bósforo",
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Topkap%C4%B1_-_01.jpg/960px-Topkap%C4%B1_-_01.jpg",
+  prog:"Palácio Topkapi pela manhã, Bazar das Especiarias e cruzeiro no Bósforo no fim da tarde.",
+  food:"Noite nos bares e mesas de rua de Karaköy/Galata — lado moderno da cidade."},
+ {d:"08/09",dow:"ter",city:"Istambul → Capadócia",move:"✈️ voo 1h30 p/ Kayseri + 🚐 1h até Göreme",
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/G%C3%B6reme_town_and_valley_2015.JPG/960px-G%C3%B6reme_town_and_valley_2015.JPG",
+  prog:"Voo da manhã, check-in em hotel-caverna e tarde livre nos vales de Göreme.",
+  food:"Testi kebab (cozido na cerâmica quebrada na mesa) — o prato da região."},
+ {d:"09/09",dow:"qua",city:"Capadócia",move:"🎈 balão + 🚐 tour local",
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Cappadocia_balloon_trip%2C_Ortahisar_Castle_%2811893715185%29.jpg/960px-Cappadocia_balloon_trip%2C_Ortahisar_Castle_%2811893715185%29.jpg",
+  prog:"<strong>Balão ao nascer do sol</strong> (reservar esta 1ª manhã — a manhã seguinte fica de reserva se o clima cancelar). Depois: Göreme Open Air Museum, castelo de Uçhisar e Love Valley.",
+  food:"Jantar em restaurante-caverna em Göreme, vinho local da Capadócia."},
+ {d:"10/09",dow:"qui",city:"Capadócia → Selçuk (Éfeso)",move:"✈️ Kayseri→Izmir 1h40 direto + 🚐 1h",
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/House_of_the_Virgin_Mary_%2813951299641%29_%28cropped%29.jpg/960px-House_of_the_Virgin_Mary_%2813951299641%29_%28cropped%29.jpg",
+  prog:"Manhã de reserva do balão; voo direto para Izmir (Pegasus/SunExpress). À tarde, <strong>Casa da Virgem Maria</strong> no alto do monte e Templo de Ártemis.",
+  food:"Fim de tarde e jantar no vilarejo de Şirince, famoso pelos vinhos de fruta."},
+ {d:"11/09",dow:"sex",city:"Éfeso → Atenas",move:"✈️ Aegean Izmir→Atenas 19:15→20:15 (1h)",
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Ephesus_Celsus_Library_Fa%C3%A7ade.jpg/960px-Ephesus_Celsus_Library_Fa%C3%A7ade.jpg",
+  prog:"Manhã inteira nas ruínas de <strong>Éfeso</strong> (Biblioteca de Celso, Grande Teatro — cidade dos Atos dos Apóstolos). Tarde: aeroporto de Izmir. ⚠️ Esse voo não opera ter/sáb — sexta tem, mas reconfirmar a grade de setembro.",
+  food:"Chegada e primeira noite grega: taverna perto do hotel em Atenas."},
+
+ {sec:"Grécia — 8 dias"},
+ {d:"12/09",dow:"sáb",city:"Atenas",move:"🚶 a pé, centro histórico",
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/1029_Acropolis_of_Athens_in_Greece_at_night_Photo_by_Giles_Laurent.jpg/960px-1029_Acropolis_of_Athens_in_Greece_at_night_Photo_by_Giles_Laurent.jpg",
+  prog:"<strong>Acrópole</strong> logo cedo (ingresso com horário marcado) + Museu da Acrópole; tarde nos bairros de Plaka e Anafiotika.",
+  food:"Tavernas de Plaka: moussaka, souvlaki e vinho da casa."},
+ {d:"13/09",dow:"dom",city:"Atenas → Santorini",move:"✈️ voo 50 min pela manhã",
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Oia_sunset_-_panoramio_%282%29.jpg/960px-Oia_sunset_-_panoramio_%282%29.jpg",
+  prog:"Voo da manhã, check-in e tarde em <strong>Oia</strong> — o cartão-postal das casinhas brancas. Pôr do sol clássico.",
+  food:"Jantar com vista da caldeira em Oia ou Fira."},
+ {d:"14/09",dow:"seg",city:"Santorini",move:"🚐 minivan alugada / tour",
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ancient_Akrotiri.jpeg/960px-Ancient_Akrotiri.jpeg",
+  prog:"Sítio arqueológico de Akrotiri (a \"Pompeia grega\"), Red Beach e vinícola com degustação.",
+  food:"Fava santorini, tomatokeftedes e vinho Assyrtiko na vinícola ou em Pyrgos."},
+ {d:"15/09",dow:"ter",city:"Santorini",move:"⛵ catamarã ou 🚶 trilha",
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Santorini_Fira3_tango7174.jpg/960px-Santorini_Fira3_tango7174.jpg",
+  prog:"Catamarã pela caldeira (águas termais + paradas para nadar) ou trilha Fira→Oia pela borda (~3h, vistas o caminho todo).",
+  food:"Peixe fresco nas mesas à beira-d'água de Ammoudi Bay."},
+ {d:"16/09",dow:"qua",city:"Santorini → Atenas",move:"⛴️ ferry Blue Star ~6h (ou voo 50min)",
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Monastiraki_Square_on_June_6%2C_2020.jpg/960px-Monastiraki_Square_on_June_6%2C_2020.jpg",
+  prog:"Dia de travessia do Egeu de ferry (a experiência vale) chegando ao Pireu; quem preferir tarde livre vai de avião.",
+  food:"Noite em Monastiraki: rooftops com vista iluminada da Acrópole."},
+ {d:"17/09",dow:"qui",city:"Atenas + Cabo Sounion",move:"🚶 a pé + 🚐 1h15 até Sounion",
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Cape_Sounion_AC.JPG/960px-Cape_Sounion_AC.JPG",
+  prog:"Ágora Antiga, Templo de Zeus e Estádio Panatenaico; fim de tarde no <strong>Templo de Poseidon</strong> em Sounion para o pôr do sol sobre o mar.",
+  food:"Jantar de volta em Atenas, bairro de Koukaki."},
+ {d:"18/09",dow:"sex",city:"Atenas → Delfos (bate-volta)",move:"🚐 ~2h30 cada trecho",
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Delphi%2C_Greece_-_panoramio.jpg/960px-Delphi%2C_Greece_-_panoramio.jpg",
+  prog:"O santuário do Oráculo de <strong>Delfos</strong> na encosta do Parnaso — um dos sítios mais bonitos da Grécia. (Alternativa leve: dia livre ou ilha de Egina.)",
+  food:"Noite de despedida nos bares e tavernas de Psiri."},
+ {d:"19/09",dow:"sáb",city:"Atenas → São Paulo",move:"✈️ Turkish via Istambul, noite a bordo",
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Athens_International_Airport_Eleftherios_Venizelos_%CE%94%CE%B9%CE%B5%CE%B8%CE%BD%CE%AE%CF%82_%CE%91%CE%B5%CF%81%CE%BF%CE%BB%CE%B9%CE%BC%CE%AD%CE%BD%CE%B1%CF%82_%CE%91%CE%B8%CE%B7%CE%BD%CF%8E%CE%BD_%CE%95%CE%BB%CE%B5%CF%85%CE%B8%CE%AD%CF%81%CE%B9%CE%BF%CF%82_%CE%92%CE%B5%CE%BD%CE%B9%CE%B6%CE%AD%CE%BB%CE%BF%CF%82_2019-12-01_i.jpg/960px-Athens_International_Airport_Eleftherios_Venizelos_%CE%94%CE%B9%CE%B5%CE%B8%CE%BD%CE%AE%CF%82_%CE%91%CE%B5%CF%81%CE%BF%CE%BB%CE%B9%CE%BC%CE%AD%CE%BD%CE%B1%CF%82_%CE%91%CE%B8%CE%B7%CE%BD%CF%8E%CE%BD_%CE%95%CE%BB%CE%B5%CF%85%CE%B8%CE%AD%CF%81%CE%B9%CE%BF%CF%82_%CE%92%CE%B5%CE%BD%CE%B9%CE%B6%CE%AD%CE%BB%CE%BF%CF%82_2019-12-01_i.jpg",
+  prog:"Manhã livre, voo ATH→IST→GRU no bilhete multi-destino da Turkish. Noite a bordo.",
+  food:""},
+ {d:"20/09",dow:"dom",city:"São Paulo → Curitiba",move:"✈️ GOL ~13:35→14:40",
+  img:"",
+  prog:"Chegada internacional pela manhã em GRU, folga boa para imigração/bagagem e voo do início da tarde. <strong>Em Curitiba dia 20 ✓</strong>",
+  food:""}
+];
+document.getElementById('days').innerHTML = DAYS.map(x =>
+  x.sec
+    ? `<div class="section"><h2>${x.sec}</h2><div class="line"></div></div>`
+    : `<div class="card">
+        ${x.img?`<img src="${x.img}" loading="lazy" alt="${x.city}" onerror="this.style.display='none'">`:''}
+        <div class="body">
+          <div class="top"><span class="date">${x.d} · ${x.dow}</span><span class="city">${x.city}</span></div>
+          <div class="move">${x.move}</div>
+          <div class="prog">${x.prog}</div>
+          ${x.food?`<div class="food">🍽️ ${x.food}</div>`:''}
+        </div>
+      </div>`
+).join('');
+</script>
+</body>
+</html>
