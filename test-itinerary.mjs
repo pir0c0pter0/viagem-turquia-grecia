@@ -7,6 +7,10 @@ const html = await readFile(new URL('index.html', root), 'utf8');
 
 assert.equal([...html.matchAll(/\{d:"\d{2}\/\d{2}"/g)].length, 17, '17 dias no roteiro');
 assert.equal([...html.matchAll(/\bschedule:\[/g)].length, 13, '13 dias com ordem detalhada');
+const galleries = [...html.matchAll(/gallery:\[(.*?)\]/gs)].map(x => x[1]);
+assert.equal(galleries.length, 13, '13 dias de passeio com galeria');
+assert(galleries.every(gallery => [...gallery.matchAll(/src:"assets\/images\//g)].length === 3), 'cada galeria tem exatamente 3 imagens');
+assert(html.includes('5 pessoas') && !/grupo de 7|para 7|espaço para 7/.test(html), 'grupo atualizado para 5 pessoas');
 assert(!/<img[^>]+src=["']https?:/i.test(html), 'nenhuma imagem HTML remota');
 assert(!/img:"https?:/i.test(html), 'nenhuma imagem remota em DAYS');
 assert(!html.includes('.card .pic{position:relative;min-height:100%'), 'foto não estica com a agenda');
