@@ -78,6 +78,9 @@
   .alert{display:flex;gap:10px;align-items:flex-start;margin-top:12px;background:var(--warn-bg);border:1px solid var(--warn-line);border-left:5px solid var(--warn);border-radius:10px;padding:10px 14px;font-size:.92rem;color:var(--ink)}
   .alert b{color:var(--warn)}
   .food{margin-top:12px;font-size:.9rem;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}
+  .gallery img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px}
+  .gallery figcaption{margin-top:3px;color:var(--muted);font-size:.72rem;text-align:center}
 
   /* ---------- ideias ---------- */
   .ideias{margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
@@ -160,7 +163,7 @@
     <ol>
       <li><span class="n">1</span><div><strong>Ferries rápidos da ida (08 e 09/09)</strong><small>SeaJets Pireu → Paros e Paros → Santorini. Reservar 7 lugares assim que a grade da data estiver aberta.</small></div></li>
       <li><span class="n">2</span><div><strong>Ferries rápidos da volta (12 e 15/09)</strong><small>Santorini → Naxos e Naxos → Pireu. A volta a Atenas fica toda pelo mar, sem voo interno.</small></div></li>
-      <li><span class="n">3</span><div><strong>Hotéis em Paros, Santorini e Naxos</strong><small>Paros tem 1 noite; Santorini, 3; Naxos, 3. Para 7 pessoas, reservar os três juntos.</small></div></li>
+      <li><span class="n">3</span><div><strong>Hotéis em Paros, Santorini e Naxos</strong><small>Em Paros, ficar em Parikia, a poucos minutos a pé do porto; Santorini e Naxos têm 3 noites cada. Para 7 pessoas, reservar os três juntos.</small></div></li>
       <li><span class="n">4</span><div><strong>Transfers de minivan em todos os trechos</strong><small>Carro comum não comporta 7. Fechar minivan com antecedência em cada cidade e nas ilhas.</small></div></li>
       <li><span class="n">5</span><div><strong>Acrópole com horário marcado + mesas nos restaurantes</strong><small>Ingresso da Acrópole tem slot de horário. Reservar jantar nos concorridos (caldeira em Santorini, rooftops de Monastiraki).</small></div></li>
     </ol>
@@ -232,16 +235,21 @@ const DAYS=[
   food:"Noite em Monastiraki: rooftops com vista iluminada da Acrópole."},
 
  {sec:"Paros",tag:"1 noite"},
- {d:"08/09",dow:"ter",city:"Atenas → Paros",move:"⛴️ SeaJets rápido · Pireu 08:30→11:10 · 2h40",
+ {d:"08/09",dow:"ter",city:"Atenas → Paros · volta pela ilha",move:"⛴️ SeaJets 08:30→11:10 + 🚐 Parikia → Lefkes → Kolymbithres → Naoussa",
   img:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Center_of_Naoussa_from_the_fishing_port,_Paros,_119129.jpg?width=1600",
-  prog:"Saída cedo do hotel para o Pireu, travessia rápida e check-in em Paros. Tarde em <strong>Parikia</strong> e fim de dia no porto de <strong>Naoussa</strong>.",
-  alert:"<b>Chegar ao Pireu às 07:30:</b> o horário publicado pode sofrer ajuste; confirmar navio e portão no bilhete antes da viagem.",
-  food:"Jantar de peixe e polvo grelhado no porto de Naoussa."},
+  prog:"<strong>11:10</strong> desembarque e malas no hotel em Parikia; <strong>12:00</strong> almoço rápido. Minivan às <strong>13:00</strong> para <strong>Lefkes</strong> (13:30–14:30), banho entre as pedras de <strong>Kolymbithres</strong> (15:15–17:15) e <strong>Naoussa</strong> a partir das 17:30: vielas, porto antigo, ruínas do castelo veneziano, pôr do sol e jantar. Retorno a Parikia por volta das 22:00.",
+  alert:"<b>Logística:</b> chegar ao Pireu às 07:30 e deixar uma minivan com motorista reservada em Paros das 13:00 às 22:00. Se o meltemi estiver forte, trocar o banho em Kolymbithres por mais tempo em Lefkes e Naoussa.",
+  gallery:[
+    {src:"https://commons.wikimedia.org/wiki/Special:Redirect/file/GR-paros-lefkes-1.jpg?width=800",alt:"Lefkes"},
+    {src:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Paros_Kolymbithres1_tango7174.jpg?width=800",alt:"Kolymbithres"},
+    {src:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Panagia_Ekatontapyliani,_Parikia,_Paros,_130542.jpg?width=800",alt:"Ekatontapiliani, Parikia"}
+  ],
+  food:"Almoço leve perto do porto de Parikia; reservar o jantar no porto de Naoussa para 7 pessoas, por volta das 20:00."},
 
  {sec:"Santorini",tag:"3 noites"},
- {d:"09/09",dow:"qua",city:"Paros → Santorini",move:"⛴️ SeaJets rápido · 12:55→14:30 · 1h35",
+ {d:"09/09",dow:"qua",city:"Paros → Santorini",move:"🚶 manhã em Parikia + ⛴️ SeaJets 12:55→14:30 · 1h35",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Oia_sunset_-_panoramio_%282%29.jpg/960px-Oia_sunset_-_panoramio_%282%29.jpg",
-  prog:"Manhã curta em Parikia, ferry para Athinios e transfer de minivan. Check-in e fim de tarde entre <strong>Fira e Imerovigli</strong>, com pôr do sol na caldeira.",
+  prog:"<strong>08:00</strong> café e check-out; <strong>08:45</strong> Panagia Ekatontapiliani; <strong>09:30</strong> vielas da cidade antiga, Rua do Mercado e Kastro; <strong>10:45</strong> café no calçadão e retirada das malas. Porto às 12:00 para o ferry a Athinios; check-in e fim de tarde entre <strong>Fira e Imerovigli</strong>.",
   alert:"<b>Embarque em Paros:</b> estar no porto às 12:00. A grade publicada de 2026 prevê este trecho às quartas-feiras.",
   food:"Fava santorini, tomatokeftedes e vinho Assyrtiko em Fira."},
  {d:"10/09",dow:"qui",city:"Santorini",move:"⛵ catamarã ou 🚶 trilha",
@@ -310,6 +318,7 @@ document.getElementById('days').innerHTML = DAYS.map(x =>
           <div class="prog">${x.prog}</div>
           ${x.alert?`<div class="alert"><span>⚠️</span><div>${x.alert}</div></div>`:''}
           ${x.food?`<div class="food">🍽️ ${x.food}</div>`:''}
+          ${x.gallery?`<div class="gallery">${x.gallery.map(p=>`<figure><img src="${p.src}" loading="lazy" alt="${p.alt}"><figcaption>${p.alt}</figcaption></figure>`).join('')}</div>`:''}
           <div class="ideias" data-dia="${x.d.replace('/','-')}"></div>
         </div>
       </div>`
