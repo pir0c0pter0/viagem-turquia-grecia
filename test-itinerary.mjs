@@ -53,6 +53,19 @@ const attractionLinks = [
 ];
 assert(attractionLinks.every(link => html.includes(link)), 'links oficiais das atrações');
 assert([...html.matchAll(/💶 Comprar/g)].length >= 14, 'links de compra têm prefixo monetário');
+for (const price of [
+  'Acrópole · €30/pessoa · €150 grupo',
+  'Museu da Acrópole · €20/pessoa · €100 grupo',
+  'Ágora Antiga · €20/pessoa · €100 grupo',
+  'Olympieion · €20/pessoa · €100 grupo',
+  'Estádio Panatenaico · €12/pessoa · €60 grupo',
+  'Akrotiri · €20/pessoa · €100 grupo',
+  'Templo de Deméter · €5/pessoa · €25 grupo',
+  'Delfos · €20/pessoa · €100 grupo',
+  'Sounion · €20/pessoa · €100 grupo',
+  'Museu Arqueológico Nacional · €20/pessoa · €100 grupo',
+]) assert(html.includes(price), `preço exibido: ${price}`);
+assert(html.includes('€187/pessoa · €935 para 5 adultos'), 'total das atrações para o grupo');
 
 const day14 = html.match(/\{d:"14\/09"([\s\S]*?)\n \{sec:/)?.[1] ?? '';
 const demeter = day14.indexOf('["09:20-10:20","Templo de Deméter"');
