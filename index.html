@@ -146,7 +146,7 @@
     <h1>Grécia 🇬🇷</h1>
     <div class="sub">Saída e retorno em Curitiba · cronograma dia a dia</div>
     <div class="meta">
-      <span>17 dias</span><span>7 pessoas</span><span>2 ilhas</span><span>5 destinos</span>
+      <span>17 dias</span><span>7 pessoas</span><span>3 ilhas</span><span>6 destinos</span>
     </div>
   </div>
 </header>
@@ -157,16 +157,16 @@
     <h2><span class="sign">⚠</span>Reservas críticas · grupo de 7</h2>
     <p class="lead">Voos internacionais já comprados ✓ (ITA Airways via Roma). Com 7 pessoas nada se resolve na hora — estas são as reservas que travam a viagem, em ordem de prioridade:</p>
     <ol>
-      <li><span class="n">1</span><div><strong>Voo Atenas → Santorini, manhã de 08/09</strong><small>Setembro ainda é alta temporada nas ilhas: 7 assentos juntos somem rápido. Primeira reserva a fazer.</small></div></li>
-      <li><span class="n">2</span><div><strong>Ferries entre ilhas (12/09 e 15/09)</strong><small>Santorini → Naxos e Naxos → Atenas (ou voo de 45min). Blue Star/SeaJets: reservar assim que a grade de setembro abrir.</small></div></li>
-      <li><span class="n">3</span><div><strong>Hotéis em Santorini e Naxos</strong><small>Vista da caldeira em Santorini esgota com meses de antecedência para grupo de 7.</small></div></li>
+      <li><span class="n">1</span><div><strong>Ferries rápidos da ida (08 e 09/09)</strong><small>SeaJets Pireu → Paros e Paros → Santorini. Reservar 7 lugares assim que a grade da data estiver aberta.</small></div></li>
+      <li><span class="n">2</span><div><strong>Ferries rápidos da volta (12 e 15/09)</strong><small>Santorini → Naxos e Naxos → Pireu. A volta a Atenas fica toda pelo mar, sem voo interno.</small></div></li>
+      <li><span class="n">3</span><div><strong>Hotéis em Paros, Santorini e Naxos</strong><small>Paros tem 1 noite; Santorini, 3; Naxos, 3. Para 7 pessoas, reservar os três juntos.</small></div></li>
       <li><span class="n">4</span><div><strong>Transfers de minivan em todos os trechos</strong><small>Carro comum não comporta 7. Fechar minivan com antecedência em cada cidade e nas ilhas.</small></div></li>
       <li><span class="n">5</span><div><strong>Acrópole com horário marcado + mesas nos restaurantes</strong><small>Ingresso da Acrópole tem slot de horário. Reservar jantar nos concorridos (caldeira em Santorini, rooftops de Monastiraki).</small></div></li>
     </ol>
   </section>
 
   <div class="route" aria-label="Rota da viagem">
-    <span>Curitiba</span><i>✈</i><span>São Paulo</span><i>✈</i><span>Roma</span><i>✈</i><span>Atenas</span><i>✈</i><span>Santorini</span><i>⛴</i><span>Naxos</span><i>✈</i><span>Atenas</span><i>✈</i><span>Roma</span><i>✈</i><span>Rio</span><i>✈</i><span>Curitiba</span>
+    <span>Curitiba</span><i>✈</i><span>São Paulo</span><i>✈</i><span>Roma</span><i>✈</i><span>Atenas</span><i>⛴</i><span>Paros</span><i>⛴</i><span>Santorini</span><i>⛴</i><span>Naxos</span><i>⛴</i><span>Atenas</span><i>✈</i><span>Roma</span><i>✈</i><span>Rio</span><i>✈</i><span>Curitiba</span>
   </div>
 
   <div id="days"></div>
@@ -230,30 +230,33 @@ const DAYS=[
   prog:"Ágora Antiga com o <strong>Templo de Hefesto</strong>, Templo de Zeus Olímpico e Estádio Panatenaico; fim de tarde no mercado de Monastiraki.",
   food:"Noite em Monastiraki: rooftops com vista iluminada da Acrópole."},
 
- {sec:"Santorini",tag:"4 noites"},
- {d:"08/09",dow:"ter",city:"Atenas → Santorini",move:"✈️ voo 50 min pela manhã",
+ {sec:"Paros",tag:"1 noite"},
+ {d:"08/09",dow:"ter",city:"Atenas → Paros",move:"⛴️ SeaJets rápido · Pireu 08:30→11:10 · 2h40",
+  img:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Paros_Naousa2_tango7174.jpg?width=960",
+  prog:"Saída cedo do hotel para o Pireu, travessia rápida e check-in em Paros. Tarde em <strong>Parikia</strong> e fim de dia no porto de <strong>Naoussa</strong>.",
+  alert:"<b>Chegar ao Pireu às 07:30:</b> o horário publicado pode sofrer ajuste; confirmar navio e portão no bilhete antes da viagem.",
+  food:"Jantar de peixe e polvo grelhado no porto de Naoussa."},
+
+ {sec:"Santorini",tag:"3 noites"},
+ {d:"09/09",dow:"qua",city:"Paros → Santorini",move:"⛴️ SeaJets rápido · 12:55→14:30 · 1h35",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Oia_sunset_-_panoramio_%282%29.jpg/960px-Oia_sunset_-_panoramio_%282%29.jpg",
-  prog:"Voo da manhã, check-in e tarde em <strong>Oia</strong>, o cartão-postal das casinhas brancas. Pôr do sol clássico.",
-  alert:"<b>Reserva prioritária nº 1:</b> 7 assentos juntos no voo da manhã somem rápido em setembro.",
-  food:"Jantar com vista da caldeira em Oia ou Fira."},
- {d:"09/09",dow:"qua",city:"Santorini",move:"🚐 minivan alugada / tour",
-  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ancient_Akrotiri.jpeg/960px-Ancient_Akrotiri.jpeg",
-  prog:"Sítio arqueológico de Akrotiri (a \"Pompeia grega\"), Red Beach e vinícola com degustação.",
-  food:"Fava santorini, tomatokeftedes e vinho Assyrtiko na vinícola ou em Pyrgos."},
+  prog:"Manhã curta em Parikia, ferry para Athinios e transfer de minivan. Check-in e fim de tarde entre <strong>Fira e Imerovigli</strong>, com pôr do sol na caldeira.",
+  alert:"<b>Embarque em Paros:</b> estar no porto às 12:00. A grade publicada de 2026 prevê este trecho às quartas-feiras.",
+  food:"Fava santorini, tomatokeftedes e vinho Assyrtiko em Fira."},
  {d:"10/09",dow:"qui",city:"Santorini",move:"⛵ catamarã ou 🚶 trilha",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Santorini_Fira3_tango7174.jpg/960px-Santorini_Fira3_tango7174.jpg",
   prog:"Catamarã pela caldeira (águas termais + paradas para nadar) ou trilha Fira→Oia pela borda (~3h, vistas o caminho todo).",
   food:"Peixe fresco nas mesas à beira-d'água de Ammoudi Bay."},
- {d:"11/09",dow:"sex",city:"Santorini",move:"🚐 minivan · dia leve",
+ {d:"11/09",dow:"sex",city:"Santorini",move:"🚐 minivan · volta pela ilha",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Perissa_Beach%2C_Santorini_on_June_7%2C_2009.jpg/960px-Perissa_Beach%2C_Santorini_on_June_7%2C_2009.jpg",
-  prog:"Dia livre nas praias de areia preta de <strong>Perissa/Perivolos</strong>; fim de tarde no vilarejo de Pyrgos, o ponto mais alto da ilha.",
-  food:"Taverna pé na areia em Perivolos; sunset drink em Pyrgos."},
+  prog:"Começar cedo por <strong>Akrotiri</strong> e Red Beach, seguir por Perissa/Perivolos e terminar em <strong>Oia</strong>. É o dia mais cheio de Santorini.",
+  food:"Taverna pé na areia em Perivolos; jantar após o pôr do sol em Oia."},
 
  {sec:"Naxos",tag:"3 noites"},
- {d:"12/09",dow:"sáb",city:"Santorini → Naxos",move:"⛴️ ferry ~1h30–2h (Blue Star/SeaJets)",
+ {d:"12/09",dow:"sáb",city:"Santorini → Naxos",move:"⛴️ SeaJets rápido · 08:25→09:55 · 1h30",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Naxos_%CE%9D%CE%AC%CE%BE%CE%BF%CF%82_Chora_evening_2020-08-20_09_sunset_Portara_%CE%A0%CE%BF%CF%81%CF%84%CE%AC%CF%81%CE%B1.jpg/960px-Naxos_%CE%9D%CE%AC%CE%BE%CE%BF%CF%82_Chora_evening_2020-08-20_09_sunset_Portara_%CE%A0%CE%BF%CF%81%CF%84%CE%AC%CF%81%CE%B1.jpg",
   prog:"Travessia curta de ferry, check-in e tarde nas vielas da <strong>Chora</strong>; pôr do sol na <strong>Portara</strong>, o portal do templo de Apolo sobre o mar.",
-  alert:"<b>Reservar o ferry junto com o de volta (15/09)</b> assim que a grade de setembro abrir.",
+  alert:"<b>Estar em Athinios às 07:30:</b> reservar este ferry junto com o de volta de Naxos e reconfirmar os horários nos bilhetes.",
   food:"Jantar nas ruelas da Chora, atrás do porto."},
  {d:"13/09",dow:"dom",city:"Naxos",move:"🚐 minivan até as praias",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Agios_Prokopios_Beach_at_sunset%2C_Naxos%2C_Greece_julesvernex2.jpg/960px-Agios_Prokopios_Beach_at_sunset%2C_Naxos%2C_Greece_julesvernex2.jpg",
@@ -265,9 +268,10 @@ const DAYS=[
   food:"Almoço no pátio de Halki; queijos e licor de kitron locais."},
 
  {sec:"Atenas · reta final",tag:"4 noites"},
- {d:"15/09",dow:"ter",city:"Naxos → Atenas",move:"✈️ voo 45 min (ou ⛴️ ferry ~5h30)",
+ {d:"15/09",dow:"ter",city:"Naxos → Atenas",move:"⛴️ SeaJets rápido · 14:10→17:50 · 3h40",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Monastiraki_Square_on_June_6%2C_2020.jpg/960px-Monastiraki_Square_on_June_6%2C_2020.jpg",
-  prog:"Manhã livre em Naxos e retorno a Atenas — voo de 45 min, ou ferry para quem quiser a travessia do Egeu com calma.",
+  prog:"Manhã livre em Naxos e retorno pelo Egeu no ferry mais rápido da grade publicada para o dia. Chegada ao Pireu, transfer e check-in em Atenas.",
+  alert:"<b>Estar no porto de Naxos às 13:15:</b> reconfirmar o horário final da SeaJets no bilhete.",
   food:"Jantar em Psiri, o bairro boêmio."},
  {d:"16/09",dow:"qua",city:"Atenas → Delfos (bate-volta)",move:"🚐 ~2h30 cada trecho",
   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Delphi%2C_Greece_-_panoramio.jpg/960px-Delphi%2C_Greece_-_panoramio.jpg",
