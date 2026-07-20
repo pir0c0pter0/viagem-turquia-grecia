@@ -6,7 +6,12 @@ const root = new URL('./', import.meta.url);
 const html = await readFile(new URL('index.html', root), 'utf8');
 
 assert.equal([...html.matchAll(/\{d:"\d{2}\/\d{2}"/g)].length, 17, '17 dias no roteiro');
-assert.equal([...html.matchAll(/\bschedule:\[/g)].length, 13, '13 dias com ordem detalhada');
+assert.equal([...html.matchAll(/\bschedule:\[/g)].length, 17, '17 dias com ordem detalhada');
+const schedules = [...html.matchAll(/schedule:\[(.*?)\],\n  (?:links|planB):/gs)].map(x => x[1]);
+assert.equal(schedules.length, 17, '17 agendas legíveis pelo teste');
+assert(schedules.every(schedule => /Acordar e se preparar|Despertar a bordo/.test(schedule)), 'toda agenda contém despertar');
+assert(schedules.every(schedule => /Almoço/.test(schedule)), 'toda agenda contém almoço');
+assert(schedules.every(schedule => /Jantar/.test(schedule)), 'toda agenda contém jantar');
 const galleries = [...html.matchAll(/gallery:\[(.*?)\]/gs)].map(x => x[1]);
 assert.equal(galleries.length, 13, '13 dias de passeio com galeria');
 assert(galleries.every(gallery => [...gallery.matchAll(/src:"assets\/images\//g)].length === 3), 'cada galeria tem exatamente 3 imagens');
@@ -25,4 +30,4 @@ await Promise.all([...images].map(path => access(new URL(path, root))));
 const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x => x[1]).join('\n');
 new Script(scripts, { filename: 'index.inline.js' });
 
-console.log(`OK: 17 dias, 13 agendas e ${images.size} imagens locais.`);
+console.log(`OK: 17 dias, 17 agendas e ${images.size} imagens locais.`);
