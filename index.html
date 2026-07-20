@@ -7,7 +7,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 18'%3E%3Cpath fill='%230d5eaf' d='M0 0h27v18H0z'/%3E%3Cpath stroke='white' stroke-width='2' d='M0 3h27M0 7h27M0 11h27M0 15h27'/%3E%3Cpath fill='%230d5eaf' d='M0 0h10v10H0z'/%3E%3Cpath stroke='white' stroke-width='2' d='M0 5h10M5 0v10'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#f2f5f8; --card:#ffffff; --ink:#101c2b; --muted:#5a6b7d;
@@ -23,10 +23,15 @@
       --navy:#122745; --navy-ink:#eef3fa;
       --warn:#f2b45c; --warn-bg:#2a2013; --warn-line:#7a5a22;
     }
+    a:visited{color:#b89af5}
   }
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:'Outfit',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
   img{max-width:100%}
+  a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
+  a:hover{text-decoration-thickness:2px}
+  a:visited{color:#6b4aa5}
+  :where(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #f2b45c;outline-offset:3px}
   .wrap{max-width:960px;margin:0 auto;padding:0 20px 64px}
 
   /* ---------- hero ---------- */
@@ -50,11 +55,15 @@
   .critical .n{flex:none;width:26px;height:26px;border-radius:8px;background:#f2b45c;color:#3a2a08;font-weight:800;font-size:.9rem;display:grid;place-items:center;margin-top:2px}
   .critical li strong{display:block;font-size:1rem}
   .critical li small{color:rgba(238,243,250,.72);font-size:.88rem;line-height:1.45}
+  .critical a{color:#fff;font-weight:700}
 
   /* ---------- rota ---------- */
   .route{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;margin:28px 0 8px}
   .route span{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:5px 13px;font-size:.83rem;font-weight:600}
   .route i{color:var(--muted);font-style:normal;font-size:.8rem}
+  .ferry-guide{margin:18px 0 8px;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:14px;padding:16px 18px}
+  .ferry-guide h2{font-size:1.08rem;margin-bottom:6px}
+  .ferry-guide p{font-size:.9rem;color:var(--muted)}
 
   /* ---------- seções ---------- */
   .section{display:flex;align-items:center;gap:14px;margin:52px 0 22px}
@@ -64,7 +73,7 @@
 
   /* ---------- cards de dia ---------- */
   .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:20px;box-shadow:0 4px 18px rgba(16,28,43,.06);display:grid;grid-template-columns:300px 1fr}
-  .card .pic{position:relative;min-height:100%}
+  .card .pic{position:relative;min-height:100%;background:var(--accent-soft)}
   .card .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
   .card.no-pic{grid-template-columns:1fr}
   .card .body{padding:20px 24px 18px;min-width:0}
@@ -78,6 +87,17 @@
   .alert{display:flex;gap:10px;align-items:flex-start;margin-top:12px;background:var(--warn-bg);border:1px solid var(--warn-line);border-left:5px solid var(--warn);border-radius:10px;padding:10px 14px;font-size:.92rem;color:var(--ink)}
   .alert b{color:var(--warn)}
   .food{margin-top:12px;font-size:.9rem;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+  .day-details{margin-top:14px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .day-details summary{cursor:pointer;padding:10px 13px;background:var(--accent-soft);color:var(--accent);font-size:.9rem;font-weight:800}
+  .day-details ol{list-style:none;display:grid;gap:0;padding:4px 13px}
+  .day-details li{display:grid;grid-template-columns:92px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+  .day-details li:last-child{border-bottom:0}
+  .day-details time{font-weight:800;color:var(--accent);font-size:.86rem}
+  .day-details strong{display:block;font-size:.92rem}
+  .day-details small{display:block;color:var(--muted);font-size:.82rem;line-height:1.4}
+  .plan-b{margin:4px 13px 12px;padding-top:8px;border-top:1px dashed var(--line);font-size:.85rem;color:var(--muted)}
+  .day-links{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+  .day-links a{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:5px 10px;font-size:.8rem;font-weight:700;background:var(--bg);text-decoration:none}
   .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}
   .gallery img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px}
   .gallery figcaption{margin-top:3px;color:var(--muted);font-size:.72rem;text-align:center}
@@ -108,12 +128,10 @@
   .form-actions .cancel{background:var(--accent-soft);color:var(--accent)}
 
   footer{text-align:center;color:var(--muted);font-size:.82rem;margin-top:48px}
-
-  /* ---------- reveal ---------- */
-  @media (prefers-reduced-motion: no-preference){
-    .card,.section,.critical{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
-    .in{opacity:1 !important;transform:none !important}
-  }
+  .credits{margin-top:14px;text-align:left}
+  .credits summary{cursor:pointer;font-weight:700;text-align:center}
+  .credits ul{columns:2;list-style-position:inside;margin-top:8px}
+  .credits li{margin-bottom:4px}
 
   /* ---------- mobile ---------- */
   @media (max-width:720px){
@@ -121,6 +139,11 @@
     .card .pic{min-height:190px}
     .hero-inner{padding:72px 20px 84px}
     .critical{padding:20px 18px 16px}
+    .section{align-items:flex-start;flex-wrap:wrap}
+    .section h2{white-space:normal;max-width:100%}
+    .section .line{display:none}
+    .day-details li{grid-template-columns:1fr;gap:2px}
+    .credits ul{columns:1}
   }
 
   /* ---------- print ---------- */
@@ -133,9 +156,13 @@
     .critical{margin-top:12px;background:#fff;color:#000;border:3px solid var(--warn);box-shadow:none}
     .critical .lead,.critical li small{color:#333}
     .critical li{border:1px solid #ccc;background:#fff}
+    .card,.section,.critical{opacity:1 !important;transform:none !important}
     .card{break-inside:avoid;box-shadow:none;grid-template-columns:1fr}
     .card .pic{min-height:0;height:140px;position:relative}
     .route span{border:1px solid #999}
+    .day-details:not([open])>*:not(summary){display:block !important}
+    .day-details summary{list-style:none}
+    .day-links a{color:#000;border-color:#999}
     .ideias,#idea-dialog,#ideias-gerais{display:none !important}
   }
 </style>
@@ -143,7 +170,7 @@
 <body>
 
 <header class="hero">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Oia_sunset_-_panoramio_%282%29.jpg/1280px-Oia_sunset_-_panoramio_%282%29.jpg" alt="Pôr do sol em Oia, Santorini" fetchpriority="high">
+  <img src="assets/images/hero-oia.webp" width="1801" height="1200" alt="Casas brancas de Oia sobre a caldeira de Santorini ao pôr do sol" fetchpriority="high">
   <div class="veil"></div>
   <div class="hero-inner">
     <span class="dates">04 a 20 de setembro de 2026</span>
@@ -161,11 +188,11 @@
     <h2><span class="sign">⚠</span>Reservas críticas · grupo de 7</h2>
     <p class="lead">Voos internacionais já comprados ✓ (ITA Airways via Roma). Com 7 pessoas nada se resolve na hora — estas são as reservas que travam a viagem, em ordem de prioridade:</p>
     <ol>
-      <li><span class="n">1</span><div><strong>Ferries rápidos da ida (08 e 09/09)</strong><small>SeaJets Pireu → Paros e Paros → Santorini. Reservar 7 lugares assim que a grade da data estiver aberta.</small></div></li>
-      <li><span class="n">2</span><div><strong>Ferries rápidos da volta (12 e 15/09)</strong><small>Santorini → Naxos e Naxos → Pireu. A volta a Atenas fica toda pelo mar, sem voo interno.</small></div></li>
-      <li><span class="n">3</span><div><strong>Hotéis em Paros, Santorini e Naxos</strong><small>Em Paros, ficar em Parikia, a poucos minutos a pé do porto; Santorini e Naxos têm 3 noites cada. Para 7 pessoas, reservar os três juntos.</small></div></li>
-      <li><span class="n">4</span><div><strong>Transfers de minivan em todos os trechos</strong><small>Carro comum não comporta 7. Fechar minivan com antecedência em cada cidade e nas ilhas.</small></div></li>
-      <li><span class="n">5</span><div><strong>Acrópole com horário marcado + mesas nos restaurantes</strong><small>Ingresso da Acrópole tem slot de horário. Reservar jantar nos concorridos (caldeira em Santorini, rooftops de Monastiraki).</small></div></li>
+      <li><span class="n">1</span><div><strong>Ferries rápidos da ida (08 e 09/09)</strong><small><a href="https://www.seajets.com/" target="_blank" rel="noopener">SeaJets oficial</a> · Pireu → Paros e Paros → Santorini · <b>limite: 31/07/2026</b>.</small></div></li>
+      <li><span class="n">2</span><div><strong>Ferries rápidos da volta (12 e 15/09)</strong><small><a href="https://www.seajets.com/" target="_blank" rel="noopener">SeaJets oficial</a> · Santorini → Naxos e Naxos → Pireu · <b>limite: 31/07/2026</b>.</small></div></li>
+      <li><span class="n">3</span><div><strong>Hotéis em Paros, Santorini e Naxos</strong><small>Parikia perto do porto; Santorini e Naxos com 3 noites cada. Reservar as opções para 7 juntas · <b>limite: 24/07/2026</b>.</small></div></li>
+      <li><span class="n">4</span><div><strong>Transfers de minivan em todos os trechos</strong><small>Pedir aos hotéis operadores locais com veículo e bagageiro para 7 · <b>limite: 31/07/2026</b>.</small></div></li>
+      <li><span class="n">5</span><div><strong>Acrópole com horário marcado + mesas</strong><small><a href="https://hhticket.gr/tap_b2c_new/english/tap.exe?PM=P1P&amp;place=000000002" target="_blank" rel="noopener">Bilheteria oficial</a> · slot das 08:00 para 06/09 e mesas concorridas · <b>limite: 06/08/2026</b>.</small></div></li>
     </ol>
   </section>
 
@@ -173,7 +200,19 @@
     <span>Curitiba</span><i>✈</i><span>São Paulo</span><i>✈</i><span>Roma</span><i>✈</i><span>Atenas</span><i>⛴</i><span>Paros</span><i>⛴</i><span>Santorini</span><i>⛴</i><span>Naxos</span><i>⛴</i><span>Atenas</span><i>✈</i><span>Roma</span><i>✈</i><span>Rio</span><i>✈</i><span>Curitiba</span>
   </div>
 
+  <aside class="ferry-guide" aria-labelledby="ferry-title">
+    <h2 id="ferry-title">⛴️ Regra simples para os quatro ferries</h2>
+    <p>Chegar ao <strong>porto exato indicado abaixo 60 minutos antes</strong>, com bilhete e documento em mãos. Confirmar navio, horário e porta no app/site da SeaJets 24–48 h antes e novamente no dia. A bagagem permitida é de até 50 kg ou 1 m³ por passageiro: volumes grandes vão nos racks indicados pela tripulação; documentos e objetos de valor ficam com cada pessoa. As paradas intermediárias são operacionais — o grupo permanece a bordo até o destino do bilhete.</p>
+  </aside>
+
   <div id="days"></div>
+
+  <noscript>
+    <section class="ferry-guide">
+      <h2>Roteiro resumido (JavaScript indisponível)</h2>
+      <p>04–05/09 voos Curitiba–Roma–Atenas; 06/09 Acrópole, museu, Koukaki, Plaka e Anafiotika; 07/09 Ágora, Monastiraki, Templo de Zeus e Estádio Panatenaico; 08/09 ferry Pireu–Paros e circuito Lefkes–Kolymbithres–Naoussa; 09/09 Parikia, ferry a Santorini e Fira/Imerovigli; 10/09 caminhada Fira–Firostefani–Imerovigli e minivan a Oia; 11/09 Akrotiri, mirante de Red Beach, Perissa/Perivolos e Pyrgos; 12/09 ferry a Naxos, Chora e Portara; 13/09 praias; 14/09 Halki, Apiranthos e Templo de Deméter; 15/09 ferry a Atenas; 16/09 Delfos e museu; 17/09 Syntagma, Jardim Nacional e Sounion; 18/09 Museu Arqueológico, compras e malas; 19–20/09 voos de volta.</p>
+    </section>
+  </noscript>
 
   <div id="ideias-gerais">
     <div class="section"><h2>💡 Ideias gerais</h2><div class="line"></div><span class="tag">sugestões do grupo</span></div>
@@ -208,91 +247,152 @@
     </form>
   </dialog>
 
-  <footer>Cronograma inicial simplificado. Valores, hotéis e reservas em etapa seguinte. Fotos: Wikimedia Commons.</footer>
+  <footer>
+    Roteiro operacional · horários de ferries sujeitos à reconfirmação.
+    <details class="credits">
+      <summary>Créditos e licenças das fotos (Wikimedia Commons)</summary>
+      <ul>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Oia_sunset_-_panoramio_(2).jpg">Oia</a> · TomasEE · CC BY 3.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:1029_Acropolis_of_Athens_in_Greece_at_night_Photo_by_Giles_Laurent.jpg">Acrópole</a> · Giles Laurent · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Center_of_Naoussa_from_the_fishing_port,_Paros,_119129.jpg">Naoussa</a> · Zde · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:GR-paros-lefkes-1.jpg">Lefkes</a> · Bgabel · CC BY-SA 3.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Paros_Kolymbithres1_tango7174.jpg">Kolymbithres</a> · Tango7174 · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Panagia_Ekatontapyliani,_Parikia,_Paros,_130542.jpg">Parikia</a> · Zde · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Santorini_Fira3_tango7174.jpg">Fira</a> · Tango7174 · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Akrotiri_Archaeological_Site_in_Santorini_by_Joy_of_Museums.jpg">Akrotiri</a> · Joyofmuseums · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Naxos_%CE%9D%CE%AC%CE%BE%CE%BF%CF%82_Chora_evening_2020-08-20_09_sunset_Portara_%CE%A0%CE%BF%CF%81%CF%84%CE%AC%CF%81%CE%B1.jpg">Portara</a> · Manfred Werner · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Agios_Prokopios_Beach_at_sunset,_Naxos,_Greece_julesvernex2.jpg">Agios Prokopios</a> · Jules Verne Times Two · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Halki,_Naxos_and_Lesser_Cyclades,_South_Aegean.jpg">Halki</a> · Jocelyn Erskine-Kellie · CC BY-SA 2.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Delphi,_Greece_-_panoramio.jpg">Delfos</a> · Tamara Semina · CC BY-SA 3.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Cape_Sounion_AC.JPG">Sounion</a> · Adam Carr · CC BY-SA 3.0</li>
+      </ul>
+    </details>
+  </footer>
 </div>
 
 <script>
+const IMAGES={
+  'assets/images/acropole.webp':[1600,1067,'Acrópole de Atenas iluminada sobre a cidade'],
+  'assets/images/paros-naoussa.webp':[1600,1065,'Porto de pesca e casario branco de Naoussa, em Paros'],
+  'assets/images/fira.webp':[1350,600,'Fira na borda da caldeira de Santorini'],
+  'assets/images/akrotiri.webp':[1600,1067,'Ruínas preservadas no sítio arqueológico de Akrotiri'],
+  'assets/images/naxos-portara.webp':[1600,900,'Portara de Naxos ao pôr do sol'],
+  'assets/images/naxos-praia.webp':[1600,1081,'Mar azul e areia de Agios Prokopios, Naxos'],
+  'assets/images/halki.webp':[1600,1053,'Ruela sombreada entre casas de pedra em Halki, Naxos'],
+  'assets/images/delfos.webp':[1600,900,'Ruínas de Delfos na encosta do Parnaso'],
+  'assets/images/sounion.webp':[1600,1200,'Templo de Poseidon no cabo Sounion diante do mar Egeu'],
+  'assets/images/lefkes.webp':[1200,800,'Viela branca e florida em Lefkes, Paros'],
+  'assets/images/kolymbithres.webp':[1080,600,'Formações de granito e mar em Kolymbithres, Paros'],
+  'assets/images/parikia.webp':[1200,801,'Pátio da Panagia Ekatontapiliani em Parikia, Paros']
+};
+
 const DAYS=[
  {sec:"Ida · Brasil → Grécia",tag:"2 dias"},
  {d:"04/09",dow:"sex",city:"Curitiba → Roma",move:"✈️ ITA 6506 (Azul) CWB 05:40→GRU 06:50 · ITA 675 GRU 14:15→FCO",
-  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Afonso_Pena_International_Airport_%28CWB%29%2C_Curitiba%2C_Brazil_%2837303022604%29.jpg/960px-Afonso_Pena_International_Airport_%28CWB%29%2C_Curitiba%2C_Brazil_%2837303022604%29.jpg",
+  img:"",
   prog:"ITA 6506, operado pela Azul, até Guarulhos; conexão de 7h25 e embarque no ITA 675 para Roma. Noite a bordo.",
   food:"Almoço em GRU antes do embarque; jantar a bordo."},
  {d:"05/09",dow:"sáb",city:"Roma → Atenas",move:"✈️ chega FCO 06:50 · ITA 720 FCO 08:15→ATH 11:10",
-  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Athens_International_Airport_Eleftherios_Venizelos_%CE%94%CE%B9%CE%B5%CE%B8%CE%BD%CE%AE%CF%82_%CE%91%CE%B5%CF%81%CE%BF%CE%BB%CE%B9%CE%BC%CE%AD%CE%BD%CE%B1%CF%82_%CE%91%CE%B8%CE%B7%CE%BD%CF%8E%CE%BD_%CE%95%CE%BB%CE%B5%CF%85%CE%B8%CE%AD%CF%81%CE%B9%CE%BF%CF%82_%CE%92%CE%B5%CE%BD%CE%B9%CE%B6%CE%AD%CE%BB%CE%BF%CF%82_2019-12-01_i.jpg/960px-Athens_International_Airport_Eleftherios_Venizelos_%CE%94%CE%B9%CE%B5%CE%B8%CE%BD%CE%AE%CF%82_%CE%91%CE%B5%CF%81%CE%BF%CE%BB%CE%B9%CE%BC%CE%AD%CE%BD%CE%B1%CF%82_%CE%91%CE%B8%CE%B7%CE%BD%CF%8E%CE%BD_%CE%95%CE%BB%CE%B5%CF%85%CE%B8%CE%AD%CF%81%CE%B9%CE%BF%CF%82_%CE%92%CE%B5%CE%BD%CE%B9%CE%B6%CE%AD%CE%BB%CE%BF%CF%82_2019-12-01_i.jpg",
+  img:"",
   prog:"Conexão de 1h25 em Fiumicino e voo de 1h55 para Atenas. Chegada às 11:10, transfer de minivan (~40min) e check-in. Total da ida: 23h30.",
   alert:"<b>Conexão apertada — imigração em Roma:</b> seguir direto para Connections/Transfer → Area A, refazer a segurança e passar pelo controle de passaporte. Confirmar em CWB que as malas estão etiquetadas até ATH; retirada e alfândega só em Atenas. Se um atraso causar a perda da conexão, procurar a ITA para reacomodação.",
   food:"Almoço e tarde livres; primeira noite grega em uma taverna perto do hotel."},
 
  {sec:"Atenas",tag:"3 noites"},
- {d:"06/09",dow:"dom",city:"Atenas",move:"🚶 a pé, centro histórico",
-  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/1029_Acropolis_of_Athens_in_Greece_at_night_Photo_by_Giles_Laurent.jpg/960px-1029_Acropolis_of_Athens_in_Greece_at_night_Photo_by_Giles_Laurent.jpg",
-  prog:"<strong>Acrópole</strong> logo cedo (ingresso com horário marcado) + Museu da Acrópole; tarde nos bairros de Plaka e Anafiotika.",
+ {d:"06/09",dow:"dom",city:"Atenas",move:"🚶 a pé · centro histórico",img:"assets/images/acropole.webp",
+  prog:"Acrópole na abertura, Museu da Acrópole e tarde sem pressa entre Koukaki, Plaka e Anafiotika.",
+  schedule:[["07:30–08:00","Entrada da Acrópole","30 min · a pé/minivan · reserva obrigatória para 08:00 · melhor horário: abertura"],["08:00–10:00","Acrópole e encostas","2h · caminhada com subida; água, chapéu e calçado aderente"],["10:15–12:15","Museu da Acrópole","2h · 8 min a pé · ingresso antecipado recomendado"],["12:30–14:30","Almoço e pausa em Koukaki","2h · a pé"],["15:00–18:00","Plaka e Anafiotika","3h · a pé · melhor horário: tarde"]],
+  links:[["Acrópole · ingresso oficial","https://hhticket.gr/tap_b2c_new/english/tap.exe?PM=P1P&place=000000002"],["Museu · site oficial","https://www.theacropolismuseum.gr/en"],["Koukaki · mapa","https://www.google.com/maps/search/?api=1&query=Koukaki+Athens"],["Anafiotika · mapa","https://www.google.com/maps/search/?api=1&query=Anafiotika+Athens"]],
+  planB:"Calor excessivo: manter Acrópole e museu cedo, fazer pausa longa no hotel e deixar Plaka/Anafiotika para depois das 17:00.",
   food:"Tavernas de Plaka: moussaka, souvlaki e vinho da casa."},
  {d:"07/09",dow:"seg",city:"Atenas",move:"🚶 a pé + metrô",
-  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/View_of_the_Temple_of_Hephaestus_from_the_Agora%2C_Athens%2C_20240531_1444_9772.jpg/960px-View_of_the_Temple_of_Hephaestus_from_the_Agora%2C_Athens%2C_20240531_1444_9772.jpg",
-  prog:"Ágora Antiga com o <strong>Templo de Hefesto</strong>, Templo de Zeus Olímpico e Estádio Panatenaico; fim de tarde no mercado de Monastiraki.",
+  img:"",prog:"Ágora e Monastiraki pela manhã; Templo de Zeus Olímpico e Estádio Panatenaico à tarde.",
+  schedule:[["08:00–10:00","Ágora Antiga e Templo de Hefesto","2h · a pé · ingresso recomendado · melhor horário: abertura"],["10:10–12:00","Monastiraki","1h50 · 8 min a pé · mercado, praça e café"],["12:00–14:00","Almoço e descanso","2h"],["14:30–15:30","Templo de Zeus Olímpico","1h · metrô + 10 min a pé · conferir acesso no dia"],["16:00–17:30","Estádio Panatenaico","1h30 · 15 min a pé · melhor horário: fim da tarde"]],
+  links:[["Ágora · mapa","https://www.google.com/maps/search/?api=1&query=Ancient+Agora+of+Athens"],["Monastiraki · mapa","https://www.google.com/maps/search/?api=1&query=Monastiraki+Square+Athens"],["Templo de Zeus · mapa","https://www.google.com/maps/search/?api=1&query=Temple+of+Olympian+Zeus+Athens"],["Estádio · site oficial","https://www.panathenaicstadium.gr/"]],
+  planB:"Se o Olympieion estiver fechado ou o calor apertar, trocar por uma visita curta ao Museu de Arte Cicládica antes do estádio.",
   food:"Noite em Monastiraki: rooftops com vista iluminada da Acrópole."},
 
  {sec:"Paros",tag:"1 noite"},
- {d:"08/09",dow:"ter",city:"Atenas → Paros · volta pela ilha",move:"⛴️ SeaJets 08:30→11:10 + 🚐 Parikia → Lefkes → Kolymbithres → Naoussa",
-  img:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Center_of_Naoussa_from_the_fishing_port,_Paros,_119129.jpg?width=1600",
-  prog:"<strong>11:10</strong> desembarque e malas no hotel em Parikia; <strong>12:00</strong> almoço rápido. Minivan às <strong>13:00</strong> para <strong>Lefkes</strong> (13:30–14:30), banho entre as pedras de <strong>Kolymbithres</strong> (15:15–17:15) e <strong>Naoussa</strong> a partir das 17:30: vielas, porto antigo, ruínas do castelo veneziano, pôr do sol e jantar. Retorno a Parikia por volta das 22:00.",
-  alert:"<b>Logística:</b> chegar ao Pireu às 07:30 e deixar uma minivan com motorista reservada em Paros das 13:00 às 22:00. Se o meltemi estiver forte, trocar o banho em Kolymbithres por mais tempo em Lefkes e Naoussa.",
+ {d:"08/09",dow:"ter",city:"Atenas → Paros · volta pela ilha",move:"⛴️ SeaJets 08:30→11:10 (previsto) + 🚐 circuito reservado",img:"assets/images/paros-naoussa.webp",
+  prog:"Ferry a Paros e circuito moderado por Lefkes, Kolymbithres e Naoussa com minivan exclusiva.",
+  alert:"<b>Porto:</b> Piraeus Passenger Port, na porta indicada no bilhete. Sair do hotel por volta das 06:40 e estar na área de embarque às 07:30. Reconfirmar 24–48 h antes; documentos e valores ficam na mochila, volumes grandes nos racks do ferry.",
+  schedule:[["07:30–11:10","Embarque no Pireu e ferry a Paros","1h de antecedência + 2h40 previstos · reserva obrigatória"],["11:10–12:45","Desembarque, bagagem e almoço em Parikia","1h35 · hotel a pé ou transfer curto"],["13:00–14:30","Lefkes","1h30 + ~25 min de minivan"],["15:05–17:00","Kolymbithres","1h55 + ~35 min de minivan · banho só com mar seguro"],["17:20–21:45","Naoussa","4h25 · porto, melhor luz, pôr do sol e jantar reservado"],["21:45–22:10","Retorno a Parikia","~25 min · motorista aguardando"]],
+  links:[["Porto do Pireu · mapa","https://www.google.com/maps/search/?api=1&query=Piraeus+Passenger+Port"],["SeaJets · oficial","https://www.seajets.com/"],["Lefkes · mapa","https://www.google.com/maps/search/?api=1&query=Lefkes+Paros"],["Kolymbithres · mapa","https://www.google.com/maps/search/?api=1&query=Kolymbithres+Beach+Paros"],["Naoussa · mapa","https://www.google.com/maps/search/?api=1&query=Naoussa+Paros"]],
+  planB:"Meltemi forte: retirar o banho em Kolymbithres e usar o tempo em Lefkes, Ekatontapiliani/Parikia e Naoussa; manter a minivan.",
   gallery:[
-    {src:"https://commons.wikimedia.org/wiki/Special:Redirect/file/GR-paros-lefkes-1.jpg?width=800",alt:"Lefkes"},
-    {src:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Paros_Kolymbithres1_tango7174.jpg?width=800",alt:"Kolymbithres"},
-    {src:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Panagia_Ekatontapyliani,_Parikia,_Paros,_130542.jpg?width=800",alt:"Ekatontapiliani, Parikia"}
+    {src:"assets/images/lefkes.webp",alt:"Viela de Lefkes"},
+    {src:"assets/images/kolymbithres.webp",alt:"Rochas de Kolymbithres"},
+    {src:"assets/images/parikia.webp",alt:"Panagia Ekatontapiliani em Parikia"}
   ],
   food:"Almoço leve perto do porto de Parikia; reservar o jantar no porto de Naoussa para 7 pessoas, por volta das 20:00."},
 
  {sec:"Santorini",tag:"3 noites"},
- {d:"09/09",dow:"qua",city:"Paros → Santorini",move:"🚶 manhã em Parikia + ⛴️ SeaJets 12:55→14:30 · 1h35",
-  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Oia_sunset_-_panoramio_%282%29.jpg/960px-Oia_sunset_-_panoramio_%282%29.jpg",
-  prog:"<strong>08:00</strong> café e check-out; <strong>08:45</strong> Panagia Ekatontapiliani; <strong>09:30</strong> vielas da cidade antiga, Rua do Mercado e Kastro; <strong>10:45</strong> café no calçadão e retirada das malas. Porto às 12:00 para o ferry a Athinios; check-in e fim de tarde entre <strong>Fira e Imerovigli</strong>.",
-  alert:"<b>Embarque em Paros:</b> estar no porto às 12:00. A grade publicada de 2026 prevê este trecho às quartas-feiras.",
+ {d:"09/09",dow:"qua",city:"Paros → Santorini",move:"🚶 Parikia + ⛴️ SeaJets 12:55→14:30 (previsto)",img:"assets/images/fira.webp",
+  prog:"Parikia pela manhã, ferry ao porto de Athinios e fim de tarde leve em Fira/Imerovigli.",
+  alert:"<b>Portos:</b> embarque no Parikia Ferry Port às 11:55; desembarque no Athinios Ferry Port. Reservar minivan do porto ao hotel. Escalas intermediárias são operacionais: não desembarcar.",
+  schedule:[["08:30–10:45","Parikia","2h15 · a pé · Ekatontapiliani, cidade antiga, Rua do Mercado e Kastro"],["10:45–11:55","Café, malas e porto","1h10 · a pé/transfer curto"],["11:55–14:30","Embarque e ferry a Santorini","1h de antecedência + 1h35 previstos · reserva obrigatória"],["14:30–16:30","Transfer de Athinios e check-in","até 2h com trânsito · minivan reservada"],["17:00–19:30","Fira a Imerovigli, sem pressa","2h30 · caminhada parcial ou táxi · melhor horário: fim da tarde"]],
+  links:[["Porto de Parikia · mapa","https://www.google.com/maps/search/?api=1&query=Parikia+Ferry+Port"],["Athinios · mapa","https://www.google.com/maps/search/?api=1&query=Athinios+Ferry+Port"],["Fira · mapa","https://www.google.com/maps/search/?api=1&query=Fira+Santorini"],["Imerovigli · mapa","https://www.google.com/maps/search/?api=1&query=Imerovigli+Santorini"]],
+  planB:"Ferry atrasado: ir direto ao hotel e jantar por perto; Fira/Imerovigli entra no começo do dia seguinte, sem correr.",
   food:"Fava santorini, tomatokeftedes e vinho Assyrtiko em Fira."},
- {d:"10/09",dow:"qui",city:"Santorini",move:"⛵ catamarã ou 🚶 trilha",
-  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Santorini_Fira3_tango7174.jpg/960px-Santorini_Fira3_tango7174.jpg",
-  prog:"Catamarã pela caldeira (águas termais + paradas para nadar) ou trilha Fira→Oia pela borda (~3h, vistas o caminho todo).",
-  food:"Peixe fresco nas mesas à beira-d'água de Ammoudi Bay."},
- {d:"11/09",dow:"sex",city:"Santorini",move:"🚐 minivan · volta pela ilha",
-  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Perissa_Beach%2C_Santorini_on_June_7%2C_2009.jpg/960px-Perissa_Beach%2C_Santorini_on_June_7%2C_2009.jpg",
-  prog:"Começar cedo por <strong>Akrotiri</strong> e Red Beach, seguir por Perissa/Perivolos e terminar em <strong>Oia</strong>. É o dia mais cheio de Santorini.",
-  food:"Taverna pé na areia em Perivolos; jantar após o pôr do sol em Oia."},
+ {d:"10/09",dow:"qui",city:"Santorini · caldeira e Oia",move:"🚶 Fira → Firostefani → Imerovigli + 🚐 Oia",img:"",
+  prog:"Caminhada curta pela borda da caldeira e tarde em Oia de minivan.",
+  schedule:[["08:30–10:00","Fira","1h30 · a pé · mirantes antes dos grupos"],["10:00–11:00","Fira → Firostefani","1h com paradas · caminhada fácil"],["11:00–13:00","Firostefani → Imerovigli","2h com mirantes · melhor horário: manhã"],["13:00–15:30","Almoço e descanso","2h30 · evitar o sol forte"],["15:30–16:15","Minivan para Oia","~45 min, mais com trânsito · reserva obrigatória"],["16:15–20:30","Oia","4h15 · vielas, pôr do sol e jantar reservado; retorno de minivan"]],
+  links:[["Firostefani · mapa","https://www.google.com/maps/search/?api=1&query=Firostefani+Santorini"],["Imerovigli · mapa","https://www.google.com/maps/search/?api=1&query=Imerovigli+Santorini"],["Oia · mapa","https://www.google.com/maps/search/?api=1&query=Oia+Santorini"]],
+  planB:"Calor, vento ou mobilidade reduzida: fazer Fira–Firostefani a pé, seguir a Imerovigli de minivan e manter Oia no fim da tarde.",
+  food:"Reservar jantar em Oia após o pôr do sol; Ammoudi só com transfer dedicado ou disposição para muitas escadas."},
+ {d:"11/09",dow:"sex",city:"Santorini · sul da ilha",move:"🚐 Akrotiri → Red Beach → Perissa/Perivolos → Pyrgos",img:"assets/images/akrotiri.webp",
+  prog:"Akrotiri cedo, Red Beach apenas do mirante, pausa de praia e encerramento em Pyrgos.",
+  schedule:[["08:00–10:00","Sítio arqueológico de Akrotiri","2h · minivan · ingresso antecipado recomendado · melhor horário: abertura"],["10:10–10:45","Mirante de Red Beach","35 min · caminhada curta; não descer se houver bloqueio/risco"],["11:15–15:15","Perissa e Perivolos","4h · ~30 min de minivan · almoço e descanso"],["15:45–18:30","Pyrgos","2h45 · ~30 min de minivan · vielas e vista no fim da tarde"]],
+  links:[["Akrotiri · mapa","https://www.google.com/maps/search/?api=1&query=Akrotiri+Archaeological+Site+Santorini"],["Red Beach · mapa","https://www.google.com/maps/search/?api=1&query=Red+Beach+Viewpoint+Santorini"],["Perivolos · mapa","https://www.google.com/maps/search/?api=1&query=Perivolos+Beach+Santorini"],["Pyrgos · mapa","https://www.google.com/maps/search/?api=1&query=Pyrgos+Kallistis+Santorini"]],
+  planB:"Vento forte ou mar ruim: manter Akrotiri e Pyrgos, trocar a praia pelo Museu da Pré-História de Thera em Fira.",
+  food:"Taverna pé na areia em Perivolos; jantar leve perto do hotel."},
 
  {sec:"Naxos",tag:"3 noites"},
- {d:"12/09",dow:"sáb",city:"Santorini → Naxos",move:"⛴️ SeaJets rápido · 08:25→09:55 · 1h30",
-  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Naxos_%CE%9D%CE%AC%CE%BE%CE%BF%CF%82_Chora_evening_2020-08-20_09_sunset_Portara_%CE%A0%CE%BF%CF%81%CF%84%CE%AC%CF%81%CE%B1.jpg/960px-Naxos_%CE%9D%CE%AC%CE%BE%CE%BF%CF%82_Chora_evening_2020-08-20_09_sunset_Portara_%CE%A0%CE%BF%CF%81%CF%84%CE%AC%CF%81%CE%B1.jpg",
-  prog:"Travessia curta de ferry, check-in e tarde nas vielas da <strong>Chora</strong>; pôr do sol na <strong>Portara</strong>, o portal do templo de Apolo sobre o mar.",
-  alert:"<b>Estar em Athinios às 07:30:</b> reservar este ferry junto com o de volta de Naxos e reconfirmar os horários nos bilhetes.",
+ {d:"12/09",dow:"sáb",city:"Santorini → Naxos",move:"⛴️ SeaJets 08:25→09:55 (previsto)",img:"assets/images/naxos-portara.webp",
+  prog:"Ferry cedo, check-in sem pressa e tarde na Chora com pôr do sol na Portara.",
+  alert:"<b>Portos:</b> estar no Athinios Ferry Port às 07:25, com transfer reservado; desembarque no Naxos Ferry Port, em Chora. Reconfirmar navio e horário 24–48 h antes.",
+  schedule:[["07:25–09:55","Embarque em Athinios e ferry a Naxos","1h de antecedência + 1h30 previstos · reserva obrigatória"],["10:00–12:30","Bagagem, check-in e pausa","2h30 · transfer curto/a pé em Chora"],["14:30–17:30","Chora e Kastro","3h · a pé · melhor horário: depois do calor"],["17:45–19:45","Portara","2h · 15 min a pé · chegar cedo para um ponto seguro"],["20:00–22:00","Jantar em Chora","2h · reservar se já houver restaurante escolhido"]],
+  links:[["Athinios · mapa","https://www.google.com/maps/search/?api=1&query=Athinios+Ferry+Port"],["Porto de Naxos · mapa","https://www.google.com/maps/search/?api=1&query=Naxos+Ferry+Port"],["Chora · mapa","https://www.google.com/maps/search/?api=1&query=Naxos+Chora"],["Portara · mapa","https://www.google.com/maps/search/?api=1&query=Portara+Naxos"]],
+  planB:"Ferry atrasado: deixar Kastro para outra noite e manter só caminhada curta em Chora/Portara se houver luz e energia.",
   food:"Jantar nas ruelas da Chora, atrás do porto."},
- {d:"13/09",dow:"dom",city:"Naxos",move:"🚐 minivan até as praias",
-  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Agios_Prokopios_Beach_at_sunset%2C_Naxos%2C_Greece_julesvernex2.jpg/960px-Agios_Prokopios_Beach_at_sunset%2C_Naxos%2C_Greece_julesvernex2.jpg",
-  prog:"Dia de praia nas melhores das Cíclades: <strong>Agios Prokopios</strong> e Plaka, areia clara e mar calmo — descanso no meio da viagem.",
+ {d:"13/09",dow:"dom",city:"Naxos · praias",move:"🚐 minivan · Agios Prokopios e Plaka",img:"assets/images/naxos-praia.webp",
+  prog:"Dia de descanso em Agios Prokopios e Plaka, com deslocamentos curtos e poucas trocas.",
+  schedule:[["09:00–09:20","Minivan a Agios Prokopios","~20 min · reservar ida/volta e espaço para 7"],["09:20–12:30","Agios Prokopios","3h10 · melhor horário: manhã · espreguiçadeiras opcionais"],["12:45–16:30","Plaka","3h45 · ~15 min de minivan · almoço e praia"],["16:30–17:00","Retorno a Chora","~30 min · noite livre"]],
+  links:[["Agios Prokopios · mapa","https://www.google.com/maps/search/?api=1&query=Agios+Prokopios+Beach+Naxos"],["Plaka · mapa","https://www.google.com/maps/search/?api=1&query=Plaka+Beach+Naxos"]],
+  planB:"Vento forte: escolher a praia protegida indicada pelo motorista no dia ou ficar em Agios Georgios/Chora, sem cruzar a ilha.",
   food:"Peixe grelhado e salada grega em taverna de praia."},
- {d:"14/09",dow:"seg",city:"Naxos · interior",move:"🚐 minivan pelos vilarejos",
-  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Halki%2C_Naxos_and_Lesser_Cyclades%2C_South_Aegean.jpg/960px-Halki%2C_Naxos_and_Lesser_Cyclades%2C_South_Aegean.jpg",
-  prog:"Volta pelo interior: vilarejos de <strong>Halki</strong> (destilaria de kitron) e Apiranthos (casas de mármore), com parada no Templo de Deméter.",
-  food:"Almoço no pátio de Halki; queijos e licor de kitron locais."},
+ {d:"14/09",dow:"seg",city:"Naxos · interior",move:"🚐 Halki → Apiranthos → Templo de Deméter",img:"assets/images/halki.webp",
+  prog:"Circuito moderado pelo interior, com tempo para caminhar e almoçar sem transformar o dia em corrida.",
+  schedule:[["08:45–09:20","Chora → Halki","~35 min · minivan reservada para o dia"],["09:20–11:20","Halki","2h · a pé · melhor horário: manhã; destilaria se aberta"],["11:20–14:20","Apiranthos","40 min de minivan + 2h20 para vielas e almoço"],["14:20–16:10","Templo de Deméter","~50 min de minivan + 1h de visita · confirmar fechamento no dia anterior"],["16:10–16:45","Retorno a Chora","~35 min · noite livre"]],
+  links:[["Halki · mapa","https://www.google.com/maps/search/?api=1&query=Halki+Naxos"],["Apiranthos · mapa","https://www.google.com/maps/search/?api=1&query=Apiranthos+Naxos"],["Templo de Deméter · mapa","https://www.google.com/maps/search/?api=1&query=Temple+of+Demeter+Naxos"]],
+  planB:"Se o Templo de Deméter fechar cedo, inverter o circuito e começar por ele; com cansaço, retirar Apiranthos e manter Deméter + Halki.",
+  food:"Almoço em Apiranthos; queijos e licor de kitron locais."},
 
  {sec:"Atenas · reta final",tag:"4 noites"},
- {d:"15/09",dow:"ter",city:"Naxos → Atenas",move:"⛴️ SeaJets rápido · 14:10→17:50 · 3h40",
-  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Monastiraki_Square_on_June_6%2C_2020.jpg/960px-Monastiraki_Square_on_June_6%2C_2020.jpg",
-  prog:"Manhã livre em Naxos e retorno pelo Egeu no ferry mais rápido da grade publicada para o dia. Chegada ao Pireu, transfer e check-in em Atenas.",
-  alert:"<b>Estar no porto de Naxos às 13:15:</b> reconfirmar o horário final da SeaJets no bilhete.",
-  food:"Jantar em Psiri, o bairro boêmio."},
- {d:"16/09",dow:"qua",city:"Atenas → Delfos (bate-volta)",move:"🚐 ~2h30 cada trecho",
-  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Delphi%2C_Greece_-_panoramio.jpg/960px-Delphi%2C_Greece_-_panoramio.jpg",
-  prog:"O santuário do Oráculo de <strong>Delfos</strong> na encosta do Parnaso, um dos sítios mais bonitos da Grécia. (Alternativa leve: dia livre ou ilha de Egina.)",
-  food:"Parada em Arachova na volta; jantar leve em Atenas."},
- {d:"17/09",dow:"qui",city:"Atenas + Cabo Sounion",move:"🚶 a pé + 🚐 1h15 até Sounion",
-  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Cape_Sounion_AC.JPG/960px-Cape_Sounion_AC.JPG",
-  prog:"Manhã tranquila (Jardim Nacional, Syntagma e troca da guarda); fim de tarde no <strong>Templo de Poseidon</strong> em Sounion para o pôr do sol sobre o mar.",
+ {d:"15/09",dow:"ter",city:"Naxos → Atenas",move:"⛴️ SeaJets 14:10→17:50 (previsto)",img:"",
+  prog:"Manhã livre em Naxos, ferry ao Pireu e transfer reservado ao hotel em Atenas.",
+  alert:"<b>Portos:</b> Naxos Ferry Port, em Chora, às 13:10; desembarque no Piraeus Passenger Port, na porta informada no bilhete. Reservar minivan com folga para atraso.",
+  schedule:[["09:00–11:30","Manhã livre em Chora","2h30 · a pé · café, compras e check-out"],["11:30–13:10","Almoço, malas e porto","1h40 · melhor margem para organizar o grupo"],["13:10–17:50","Embarque e ferry ao Pireu","1h de antecedência + 3h40 previstos · reserva obrigatória"],["17:50–19:30","Desembarque e transfer","até 1h40 · minivan acompanhando o navio"]],
+  links:[["Porto de Naxos · mapa","https://www.google.com/maps/search/?api=1&query=Naxos+Ferry+Port"],["SeaJets · oficial","https://www.seajets.com/"],["Porto do Pireu · mapa","https://www.google.com/maps/search/?api=1&query=Piraeus+Passenger+Port"]],
+  planB:"Com atraso relevante, cancelar Psiri e jantar perto do hotel; não marcar atração ou reserva não reembolsável nesta noite.",
+  food:"Jantar em Psiri, se a chegada permitir."},
+ {d:"16/09",dow:"qua",city:"Atenas → Delfos (bate-volta)",move:"🚐 ~2h30 cada trecho · saída cedo",img:"assets/images/delfos.webp",
+  prog:"Sítio arqueológico e museu de Delfos; Arachova só entra se o horário real permitir.",
+  schedule:[["06:30–09:00","Atenas → Delfos","~2h30 · minivan reservada · parada curta"],["09:00–11:30","Sítio arqueológico de Delfos","2h30 · subida a pé · ingresso recomendado · melhor horário: manhã"],["11:40–13:15","Museu Arqueológico de Delfos","1h35 · 5 min a pé"],["13:20–14:30","Almoço em Delfos","1h10 · mesa simples"],["14:30–15:15","Arachova, só se houver tempo","até 45 min · retirar primeiro se houver atraso"],["15:15–17:45","Retorno a Atenas","~2h30"]],
+  links:[["Delfos · site oficial","http://odysseus.culture.gr/h/3/eh355.jsp?obj_id=2507"],["Ingressos oficiais","https://hhticket.gr/"],["Arachova · mapa","https://www.google.com/maps/search/?api=1&query=Arachova+Greece"]],
+  planB:"Calor, restrições ou atraso: priorizar a área principal + museu, sem zonas fechadas e sem Arachova. Quem quiser descanso fica em Atenas.",
+  food:"Almoço em Delfos; jantar leve em Atenas."},
+ {d:"17/09",dow:"qui",city:"Atenas + Cabo Sounion",move:"🚶 Syntagma/Jardim Nacional + 🚐 Sounion",img:"assets/images/sounion.webp",
+  prog:"Centro cívico pela manhã e Templo de Poseidon antes do pôr do sol.",
+  schedule:[["09:00–10:00","Syntagma e troca da guarda","1h · metrô/a pé · confirmar a cerimônia no dia"],["10:00–11:30","Jardim Nacional","1h30 · 5 min a pé · passeio leve"],["11:30–15:15","Almoço e descanso","3h45 · voltar ao hotel"],["15:30–17:00","Atenas → Sounion","~1h30 com margem · minivan reservada"],["17:00–19:35","Templo de Poseidon","até o pôr do sol (~19:30) · ingresso recomendado · última entrada 20 min antes"],["19:40–21:00","Retorno a Atenas","~1h20"]],
+  links:[["Syntagma · mapa","https://www.google.com/maps/search/?api=1&query=Syntagma+Square+Athens"],["Jardim Nacional · mapa","https://www.google.com/maps/search/?api=1&query=National+Garden+Athens"],["Sounion · site oficial","http://odysseus.culture.gr/h/3/eh355.jsp?obj_id=2390"],["Sounion · mapa","https://www.google.com/maps/search/?api=1&query=Temple+of+Poseidon+Sounion"]],
+  planB:"Céu fechado ou vento forte: manter a visita se o sítio abrir; em caso de fechamento oficial, trocar por Museu Benaki e jantar cedo.",
   food:"Jantar de volta em Atenas, bairro de Koukaki."},
- {d:"18/09",dow:"sex",city:"Atenas",move:"🚶 dia livre",
-  img:"",
-  prog:"Dia livre: compras em Ermou, Museu Arqueológico Nacional para quem quiser, ou simplesmente cafés e mercados. Arrumar as malas.",
+ {d:"18/09",dow:"sex",city:"Atenas · fechamento leve",move:"🚶 a pé + metrô",img:"",
+  prog:"Museu Arqueológico Nacional, compras objetivas e tempo protegido para organizar as malas.",
+  schedule:[["08:45–12:00","Museu Arqueológico Nacional","3h15 · metrô/táxi · ingresso recomendado · melhor horário: abertura"],["12:15–13:45","Almoço","1h30"],["14:00–16:00","Compras em Ermou","2h · metrô/a pé · ponto de encontro definido"],["16:00–18:30","Hotel e malas","2h30 · separar documentos, líquidos e roupas do voo"],["19:30–22:00","Jantar de despedida","2h30 · reservar mesa em Psiri para 7"]],
+  links:[["Museu · site oficial","https://www.namuseum.gr/en/"],["Museu · mapa","https://www.google.com/maps/search/?api=1&query=National+Archaeological+Museum+Athens"],["Ermou · mapa","https://www.google.com/maps/search/?api=1&query=Ermou+Street+Athens"]],
+  planB:"Cansaço acumulado: reduzir o museu a 2h, fazer compras em duplas e preservar a tarde inteira para descanso e malas.",
   food:"Noite de despedida nos bares e tavernas de Psiri."},
 
  {sec:"Volta",tag:"2 dias"},
@@ -306,27 +406,27 @@ const DAYS=[
   food:""}
 ];
 
+const image=(src,alt)=>{const [width,height,description]=IMAGES[src];return `<img src="${src}" width="${width}" height="${height}" loading="lazy" alt="${alt||description}" onerror="this.parentElement.parentElement.classList.add('no-pic');this.parentElement.remove()">`};
+const details=x=>x.schedule?`<details class="day-details" open><summary>Ordem do dia · horários aproximados</summary><ol>${x.schedule.map(([time,title,note])=>`<li><time>${time}</time><span><strong>${title}</strong><small>${note}</small></span></li>`).join('')}</ol><p class="plan-b"><strong>Plano B:</strong> ${x.planB}</p></details><nav class="day-links" aria-label="Links de ${x.d}">${x.links.map(([label,url])=>`<a href="${url}" target="_blank" rel="noopener">${label} ↗</a>`).join('')}</nav>`:'';
+
 let n=0;
 document.getElementById('days').innerHTML = DAYS.map(x =>
   x.sec
     ? `<div class="section"><h2>${x.sec}</h2><div class="line"></div><span class="tag">${x.tag}</span></div>`
-    : `<div class="card${x.img?'':' no-pic'}">
-        ${x.img?`<div class="pic"><img src="${x.img}" loading="lazy" alt="${x.city}" onerror="this.parentElement.parentElement.classList.add('no-pic');this.parentElement.remove()"><span class="daytag">Dia ${++n}</span></div>`:`<span class="daytag">Dia ${++n}</span>`}
+    : `<article class="card${x.img?'':' no-pic'}">
+        ${x.img?`<div class="pic">${image(x.img)}<span class="daytag">Dia ${++n}</span></div>`:`<span class="daytag">Dia ${++n}</span>`}
         <div class="body">
           <div class="top"><span class="date">${x.d} · ${x.dow}</span><span class="city">${x.city}</span></div>
           <div class="move">${x.move}</div>
           <div class="prog">${x.prog}</div>
           ${x.alert?`<div class="alert"><span>⚠️</span><div>${x.alert}</div></div>`:''}
+          ${details(x)}
           ${x.food?`<div class="food">🍽️ ${x.food}</div>`:''}
-          ${x.gallery?`<div class="gallery">${x.gallery.map(p=>`<figure><img src="${p.src}" loading="lazy" alt="${p.alt}"><figcaption>${p.alt}</figcaption></figure>`).join('')}</div>`:''}
+          ${x.gallery?`<div class="gallery">${x.gallery.map(p=>`<figure>${image(p.src,p.alt)}<figcaption>${p.alt}</figcaption></figure>`).join('')}</div>`:''}
           <div class="ideias" data-dia="${x.d.replace('/','-')}"></div>
         </div>
-      </div>`
+      </article>`
 ).join('');
-
-// reveal on scroll (colapsa p/ estático com prefers-reduced-motion)
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
-document.querySelectorAll('.card,.section,.critical').forEach(el=>io.observe(el));
 </script>
 
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
