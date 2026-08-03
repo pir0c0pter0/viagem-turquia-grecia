@@ -74,6 +74,10 @@ const apiranthos = day14.indexOf('["14:15-15:30","Apiranthos"');
 assert(demeter >= 0 && demeter < halki && halki < apiranthos, '14/09 segue Deméter → Halki → Apiranthos');
 assert(day14.includes('visita concluída bem antes do fechamento às 15:30'), 'Templo de Deméter termina antes das 15:30');
 
+const day13 = html.match(/\{d:"13\/09"([\s\S]*?)\n \{d:"14\/09"/)?.[1] ?? '';
+assert(day13.includes('Lancha pela costa sudoeste') && day13.includes('lotação legal para as 5 pessoas'), '13/09 inclui lancha segura para todo o grupo');
+assert(day13.includes('sem habilitação') && day13.includes('contratar skipper'), '13/09 mantém alternativa quando a lancha sem habilitação não comportar o grupo');
+
 const images = new Set([...html.matchAll(/assets\/images\/[a-z0-9-]+\.webp/g)].map(x => x[0]));
 await Promise.all([...images].map(path => access(new URL(path, root))));
 
