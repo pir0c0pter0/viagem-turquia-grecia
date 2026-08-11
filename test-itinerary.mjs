@@ -31,6 +31,38 @@ for (const oldTime of [/12:55[–→-]14:30/, /08:25[–→-]09:55/, /14:10[–�
   assert(!oldTime.test(html), `horário antigo removido: ${oldTime}`);
 }
 
+// ---------- coerência dos horários ----------
+const toMin = t => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+const fmt = v => `${Math.floor(v / 60)}h${String(v % 60).padStart(2, '0')}`;
+// Trechos que cruzam fuso: o bloco é o relógio local, a nota traz a duração real do voo.
+const crossTimezone = new Set(['08:15-11:10', '19:30-20:40']);
+
+for (const [, day, body] of html.matchAll(/\{d:"(\d{2}\/\d{2})"[\s\S]*?schedule:\[(.*?)\],\n {2}(?:links|planB):/g)) {
+  const blocks = [...body.matchAll(/\["(\d{2}:\d{2})-(\d{2}:\d{2})","(.*?)","(.*?)"\]/g)];
+  assert(blocks.length >= 5, `${day}: agenda com blocos legíveis`);
+  let prevEnd = null;
+  for (const [, start, end, title, note] of blocks) {
+    const [from, to] = [toMin(start), toMin(end)];
+    assert(to > from, `${day} · ${title}: bloco ${start}-${end} termina antes de começar`);
+    if (prevEnd !== null) {
+      assert(from >= prevEnd, `${day} · ${title}: sobreposição com o bloco anterior`);
+      assert(from - prevEnd < 20, `${day} · ${title}: buraco de ${fmt(from - prevEnd)} sem bloco antes de ${start}`);
+    }
+    const stated = note.match(/^~?(?:até )?(?:(\d+)h(\d{2})?|(\d+)\s*min)(?=$| |·)/);
+    if (stated && !crossTimezone.has(`${start}-${end}`)) {
+      const minutes = stated[1] !== undefined ? Number(stated[1]) * 60 + Number(stated[2] ?? 0) : Number(stated[3]);
+      assert.equal(minutes, to - from, `${day} · ${title}: nota diz ${fmt(minutes)}, bloco tem ${fmt(to - from)}`);
+    }
+    prevEnd = to;
+  }
+}
+
+// horários corrigidos na revisão das agendas
+assert(html.includes('["03:30-06:50","Deslocamento, embarque e voo a Guarulhos"'), '04/09 cobre o voo até o pouso em GRU às 06:50');
+assert(html.includes('["05:30-06:50","Despertar a bordo"'), '05/09 cobre a bordo até o pouso em Roma às 06:50');
+assert(html.includes('voo de 1h55 · ITA 720') && html.includes('voo de 2h10 · ITA 721'), 'voos entre fusos com a duração real');
+assert(html.includes('por volta das 19:45'), 'jantar em Naoussa alinhado com a agenda');
+
 const ferryLinks = [
   'https://www.ferryhopper.com/?itinerary=PIR%2CPAS&dates=20260908',
   'https://www.ferryhopper.com/?itinerary=PAS%2CJTR&dates=20260909',
