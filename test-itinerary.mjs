@@ -81,7 +81,29 @@ assert(day13.includes('sem habilitação') && day13.includes('contratar skipper'
 const images = new Set([...html.matchAll(/assets\/images\/[a-z0-9-]+\.webp/g)].map(x => x[0]));
 await Promise.all([...images].map(path => access(new URL(path, root))));
 
-const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x => x[1]).join('\n');
+// ---------- clima ----------
+assert(html.includes('id="clima"') && html.includes('Clima esperado'), 'painel de clima no roteiro');
+assert(html.indexOf('id="clima"') < html.indexOf('<div id="days">'), 'clima antes dos dias');
+for (const base of ['Atenas', 'Paros', 'Santorini', 'Naxos', 'Delfos (570 m)', 'Sounion'])
+  assert(html.includes(`<th scope="row">${base}</th>`), `média climática de ${base}`);
+assert(/médias acima/.test(html) && /não são previsão para 2026/.test(html), 'clima explicita média histórica, não previsão');
+assert(html.includes('https://www.meteo.gr/index-en.cfm') && html.includes('https://www.windy.com/'), 'fontes de previsão perto da viagem');
+const spots = [...html.matchAll(/"\d{2}\/09":"(?:atenas|paros|santorini|naxos|delfos|sounion)"/g)];
+assert.equal(spots.length, 14, '14 dias na Grécia com ponto de referência para a previsão');
+assert(html.includes('api.open-meteo.com/v1/forecast'), 'previsão diária vem do Open-Meteo');
+assert(!/open-meteo[^"']*(?:apikey|api_key)/i.test(html), 'Open-Meteo usado sem chave');
+
+const scriptBlocks = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x => x[1]);
+const scripts = scriptBlocks.join('\n');
 new Script(scripts, { filename: 'index.inline.js' });
 
-console.log(`OK: 17 dias, 17 agendas e ${images.size} imagens locais.`);
+// renderiza os cards com um document mínimo para conferir o encaixe da previsão
+let rendered = '';
+const context = { document: { getElementById: () => ({ set innerHTML(v) { rendered = v } }) } };
+new Script(scriptBlocks[0], { filename: 'index.days.js' }).runInNewContext(context);
+assert.equal([...rendered.matchAll(/class="wx" data-wx="\d{2}\/09"/g)].length, 14, '14 cards com espaço para a previsão');
+assert(!/data-wx="(?:04|19|20)\/09"/.test(rendered), 'dias de voo ficam sem previsão');
+assert.equal([...rendered.matchAll(/class="wx" data-wx="\d{2}\/09"><\/div>\s*<div class="prog">/g)].length, 14,
+  'previsão logo acima do resumo de cada dia');
+
+console.log(`OK: 17 dias, 17 agendas, ${images.size} imagens locais e clima de ${spots.length} dias.`);

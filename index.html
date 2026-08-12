@@ -65,6 +65,27 @@
   .ferry-guide h2{font-size:1.08rem;margin-bottom:6px}
   .ferry-guide p{font-size:.9rem;color:var(--muted)}
 
+  /* ---------- clima ---------- */
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .climate{margin:18px 0 8px;background:var(--card);border:1px solid var(--line);border-left:5px solid #f2b45c;border-radius:14px;padding:16px 18px}
+  .climate h2{font-size:1.08rem;margin-bottom:6px}
+  .climate p{font-size:.9rem;color:var(--muted)}
+  .climate .table-scroll{overflow-x:auto;margin:12px 0 6px}
+  .climate table{width:100%;min-width:560px;border-collapse:collapse;font-size:.86rem}
+  .climate th,.climate td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+  .climate thead th{font-size:.74rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:700}
+  .climate tbody th{font-weight:800}
+  .climate tbody tr:last-child th,.climate tbody tr:last-child td{border-bottom:0}
+  .climate ul{list-style:none;display:grid;gap:8px;margin:12px 0 0;font-size:.9rem}
+  .climate li strong{display:block;font-size:.9rem}
+  .climate li small{color:var(--muted);font-size:.86rem;line-height:1.45}
+  .climate .wx-status{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-size:.84rem}
+
+  /* previsão diária injetada em cada card */
+  .wx{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;font-size:.8rem;font-weight:700}
+  .wx:empty{display:none}
+  .wx span{background:var(--accent-soft);color:var(--accent);border-radius:99px;padding:3px 11px}
+
   /* ---------- seções ---------- */
   .section{display:flex;align-items:center;gap:14px;margin:52px 0 22px}
   .section h2{font-size:1.6rem;font-weight:800;white-space:nowrap}
@@ -220,6 +241,36 @@
     <h2 id="luggage-title">🧳 Ilhas só com bagagem de mão</h2>
     <p>Em 08/09, antes do ferry, deixar as malas grandes no <a href="https://luggagedrop.gr/piraeus/" target="_blank" rel="noopener"><strong>Luggage Drop Piraeus</strong></a>, Kapodistriou 20 (passagem com outra entrada pela Dimitriou Gounari 21–23), a 2–3 minutos dos gates E7–E10. O local é automatizado, monitorado e funciona 24/7. Em 20/07/2026, o locker grande custava €12/dia e comportava uma mala de 23 kg mais itens pequenos; confirmar antes a quantidade necessária e guardar PIN/comprovante. Retirar tudo no retorno ao Pireu, em 15/09, antes do transfer ao hotel.</p>
   </aside>
+
+  <section class="climate" id="clima" aria-labelledby="clima-title">
+    <h2 id="clima-title">🌦️ Clima esperado · 04 a 20 de setembro</h2>
+    <p>Setembro é verão tardio na Grécia: dias quentes e secos, mar ainda morno e menos gente que em agosto. Os números abaixo são a <strong>média histórica dos mesmos dias 4-20/09 nos últimos 10 anos</strong> (reanálise ERA5 via Open-Meteo, 2015-2025) - servem para planejar mala e roteiro, não são previsão para 2026.</p>
+    <div class="table-scroll">
+      <table>
+        <caption class="sr-only">Médias de 4 a 20 de setembro por base do roteiro</caption>
+        <thead>
+          <tr><th scope="col">Base</th><th scope="col">Máxima</th><th scope="col">Mínima</th><th scope="col">Dias com chuva</th><th scope="col">Vento (pico do dia)</th><th scope="col">Mar</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Atenas</th><td>30 °C</td><td>20 °C</td><td>1 em 17</td><td>fraco · 16 km/h</td><td>26 °C</td></tr>
+          <tr><th scope="row">Paros</th><td>27 °C</td><td>23 °C</td><td>menos de 1 em 17</td><td>forte · 26 km/h</td><td>25 °C</td></tr>
+          <tr><th scope="row">Santorini</th><td>26 °C</td><td>22 °C</td><td>raríssimo</td><td>forte · 28 km/h</td><td>25 °C</td></tr>
+          <tr><th scope="row">Naxos</th><td>28 °C</td><td>22 °C</td><td>menos de 1 em 17</td><td>moderado · 23 km/h</td><td>25 °C</td></tr>
+          <tr><th scope="row">Delfos (570 m)</th><td>27 °C</td><td>17 °C</td><td>3 em 17</td><td>fraco · 11 km/h</td><td>—</td></tr>
+          <tr><th scope="row">Sounion</th><td>29 °C</td><td>23 °C</td><td>menos de 1 em 17</td><td>moderado · 23 km/h</td><td>26 °C</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul>
+      <li><strong>☀️ Calor seco em Atenas</strong><small>Máxima passa de 33 °C em cerca de 1 dia a cada 10 (recorde recente: 39 °C). O pico é das 13h às 17h - por isso Acrópole, Ágora e Delfos já estão marcados de manhã cedo. Levar água, chapéu e protetor: o índice UV segue alto o mês inteiro.</small></li>
+      <li><strong>💨 Meltemi nas Ciclades</strong><small>O vento norte do Egeu ainda sopra em setembro: em Paros e Santorini, cerca de 1 dia em cada 15-20 tem rajadas fortes, e as ondas passam de 1,5 m em ~13% dos dias. É a principal causa de ferry atrasado ou cancelado - reconfirmar cada travessia 24-48 h antes e manter os planos B dos dias 08, 09, 12 e 15/09. Em terra o meltemi é aliado: derruba a sensação de calor.</small></li>
+      <li><strong>🌧️ Chuva quase nula (menos em Delfos)</strong><small>Nas ilhas a chance é próxima de zero. Delfos, na montanha, tem ~3 dias com chuva a cada 17 e amanhece perto de 17 °C: no bate-volta de 16/09 vale um corta-vento leve na mochila.</small></li>
+      <li><strong>🏊 Mar a 25-26 °C</strong><small>Temperatura de banho confortável em Kolymbithres, Perissa/Perivolos e nas praias de Naxos, inclusive no passeio de lancha de 13/09. Sombra é escassa nas praias: guarda-sol alugado ou chapéu.</small></li>
+      <li><strong>🌅 Luz do dia</strong><small>Sol nasce 06:57 em 04/09 e 07:11 em 20/09; se põe 19:50 e 19:25. Pôr do sol em Oia (10/09) por volta de 19:33 e em Sounion (17/09) por volta de 19:30 - os horários da ordem do dia já batem com isso.</small></li>
+      <li><strong>🎒 O que isso muda na mala</strong><small>Roupa leve para os dias, um agasalho fino ou corta-vento para o convés dos ferries, as noites em Delfos e o ar-condicionado dos hotéis, calçado fechado e firme para as ruínas, óculos de sol e protetor. Guarda-chuva é dispensável.</small></li>
+    </ul>
+    <p class="wx-status" id="wx-status">A previsão real dia a dia aparece automaticamente em cada card do roteiro quando as datas entrarem no horizonte de 16 dias (por volta de 20/08/2026). Até lá valem as médias acima. Perto da viagem, conferir também <a href="https://www.meteo.gr/index-en.cfm" target="_blank" rel="noopener">meteo.gr</a> (serviço grego) e <a href="https://www.windy.com/?37.000,25.300,7" target="_blank" rel="noopener">Windy</a> (vento e ondas para os ferries).</p>
+  </section>
 
   <div id="days"></div>
 
@@ -476,6 +527,19 @@ const DAYS=[
   food:"Almoço e jantar livres em Curitiba."}
 ];
 
+// ---------- previsão do tempo: ponto de referência de cada dia ----------
+const WX_YEAR=2026;
+const WX_PLACES={
+  atenas:[37.98,23.73],paros:[37.08,25.15],santorini:[36.42,25.43],
+  naxos:[37.10,25.38],delfos:[38.48,22.50],sounion:[37.65,24.02]
+};
+// dias de voo (04, 19 e 20/09) ficam de fora: o grupo passa o dia em trânsito
+const WX_SPOTS={
+  "05/09":"atenas","06/09":"atenas","07/09":"atenas","08/09":"paros","09/09":"santorini",
+  "10/09":"santorini","11/09":"santorini","12/09":"naxos","13/09":"naxos","14/09":"naxos",
+  "15/09":"atenas","16/09":"delfos","17/09":"sounion","18/09":"atenas"
+};
+
 const image=(src,alt)=>{const [width,height,description,focus='50% 50%']=IMAGES[src];return `<img src="${src}" width="${width}" height="${height}" loading="lazy" alt="${alt||description}" style="object-position:${focus}" onerror="this.parentElement.parentElement.classList.add('no-pic');this.parentElement.remove()">`};
 const details=x=>x.schedule?`<details class="day-details" open><summary>Ordem do dia · horários aproximados</summary><ol>${x.schedule.map(([time,title,note])=>`<li><time>${time}</time><span><strong>${title}</strong><small>${note}</small></span></li>`).join('')}</ol><p class="plan-b"><strong>Plano B:</strong> ${x.planB}</p></details><nav class="day-links" aria-label="Links de ${x.d}">${x.links.map(([label,url])=>`<a href="${url}" target="_blank" rel="noopener">${label} ↗</a>`).join('')}</nav>`:'';
 
@@ -490,6 +554,7 @@ document.getElementById('days').innerHTML = DAYS.map(x =>
           ${x.img?'':`<span class="daytag">Dia ${++n}</span>`}
           <div class="top"><span class="date">${x.d} · ${x.dow}</span><span class="city">${x.city}</span></div>
           <div class="move">${x.move}</div>
+          ${WX_SPOTS[x.d]?`<div class="wx" data-wx="${x.d}"></div>`:''}
           <div class="prog">${x.prog}</div>
           ${x.alert?`<div class="alert"><span>⚠️</span><div>${x.alert}</div></div>`:''}
           </div>
@@ -502,6 +567,50 @@ document.getElementById('days').innerHTML = DAYS.map(x =>
         </div>
       </article>`
 ).join('');
+</script>
+
+<script>
+// ---------- previsão diária (Open-Meteo, aberta e sem chave) ----------
+(function(){
+  const status=document.getElementById('wx-status');
+  const keys=Object.keys(WX_PLACES);
+  const url='https://api.open-meteo.com/v1/forecast'
+    +'?latitude='+keys.map(k=>WX_PLACES[k][0]).join(',')
+    +'&longitude='+keys.map(k=>WX_PLACES[k][1]).join(',')
+    +'&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max'
+    +'&timezone=Europe%2FAthens&forecast_days=16';
+
+  // códigos WMO agrupados: o primeiro limite que cobre o código vence
+  const WMO=[[0,'☀️','céu limpo'],[2,'🌤️','sol entre nuvens'],[3,'☁️','nublado'],[48,'🌫️','névoa'],
+    [57,'🌦️','garoa'],[67,'🌧️','chuva'],[77,'🌨️','neve'],[82,'🌦️','pancadas'],[86,'🌨️','neve'],[99,'⛈️','tempestade']];
+  const wmo=c=>WMO.find(([max])=>c<=max)||[0,'🌡️','tempo variável'];
+  const nota='Perto da viagem, conferir também <a href="https://www.meteo.gr/index-en.cfm" target="_blank" rel="noopener">meteo.gr</a> (serviço grego) e <a href="https://www.windy.com/?37.000,25.300,7" target="_blank" rel="noopener">Windy</a> (vento e ondas para os ferries).';
+
+  fetch(url).then(r=>r.ok?r.json():Promise.reject(r.status)).then(res=>{
+    const list=Array.isArray(res)?res:[res];
+    const daily={};keys.forEach((k,i)=>{if(list[i]&&list[i].daily)daily[k]=list[i].daily});
+    let n=0;
+    document.querySelectorAll('.wx').forEach(box=>{
+      const dia=box.dataset.wx,d=daily[WX_SPOTS[dia]];
+      if(!d)return;
+      const i=d.time.indexOf(WX_YEAR+'-'+dia.slice(3)+'-'+dia.slice(0,2));
+      if(i<0)return; // dia ainda fora do horizonte de 16 dias
+      const [,icon,desc]=wmo(d.weather_code[i]);
+      box.innerHTML=`<span>${icon} ${desc}</span>`
+        +`<span>🌡️ ${Math.round(d.temperature_2m_max[i])}° / ${Math.round(d.temperature_2m_min[i])}°</span>`
+        +`<span>💧 ${d.precipitation_probability_max[i]??0}% chuva</span>`
+        +`<span>💨 ${Math.round(d.wind_speed_10m_max[i])} km/h</span>`;
+      n++;
+    });
+    if(!status)return;
+    status.innerHTML=n
+      ? `✅ Previsão real carregada para ${n} de ${Object.keys(WX_SPOTS).length} dias na Grécia (Open-Meteo, atualizada agora) - ela aparece em cada card, acima do resumo do dia. `+nota
+      : `A previsão real dia a dia aparece automaticamente em cada card do roteiro quando as datas entrarem no horizonte de 16 dias (por volta de 20/08/2026). Até lá valem as médias acima. `+nota;
+  }).catch(e=>{
+    console.error('Open-Meteo:',e);
+    if(status)status.innerHTML='Não foi possível carregar a previsão agora (sem conexão com o Open-Meteo). As médias acima continuam valendo. '+nota;
+  });
+})();
 </script>
 
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
