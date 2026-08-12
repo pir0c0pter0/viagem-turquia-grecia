@@ -67,6 +67,15 @@ for (const price of [
 ]) assert(html.includes(price), `preço exibido: ${price}`);
 assert(html.includes('€187/pessoa · €935 para 5 adultos'), 'total das atrações para o grupo');
 
+assert(html.includes('🔒 Onde comprar · conferência dos sites em 12/08/2026'), 'seção de conferência dos sites de compra');
+assert([...html.matchAll(/hh\.gr, loja oficial do ODAP/g)].length === 8, 'oito compras marcadas como loja oficial do ODAP');
+assert(html.includes('bilheteria oficial do museu'), 'Museu da Acrópole marcado como bilheteria própria');
+assert(html.includes('site oficial do estádio') && html.includes('página oficial do Ministério da Cultura'), 'compras presenciais apontam para páginas oficiais');
+assert([...html.matchAll(/Ferryhopper, revendedor autorizado/g)].length === 4, 'quatro ferries marcados como revenda autorizada');
+assert([...html.matchAll(/https:\/\/www\.seajets\.com\//g)].length === 6, 'alternativa oficial da companhia nos quatro ferries, nas reservas e na conferência');
+assert(html.includes('marketplace de terceiros') && html.includes('site do operador local'), 'lancha de Naxos sem canal oficial fica explícita');
+assert(!/hhticket\.gr\/tap|etickets\.tap\.gr/.test(html), 'nenhum endereço de bilheteria estatal descontinuado');
+
 const day14 = html.match(/\{d:"14\/09"([\s\S]*?)\n \{sec:/)?.[1] ?? '';
 const demeter = day14.indexOf('["09:20-10:20","Templo de Deméter"');
 const halki = day14.indexOf('["10:40-12:15","Halki"');
