@@ -11,8 +11,8 @@
         "dia":       { ".validate": "newData.isString() && newData.val().length <= 10" },
         "categoria": { ".validate": "newData.isString() && newData.val().length <= 20" },
         "link":      { ".validate": "newData.isString() && newData.val().length <= 300" },
-        "ownerId":   { ".validate": "newData.isString() && newData.val().length <= 40" },
-        "criadoEm":  { ".validate": "newData.isNumber()" },
+        "ownerId":   { ".validate": "newData.isString() && newData.val().length <= 40 && (!data.exists() || data.val() === newData.val())" },
+        "criadoEm":  { ".validate": "newData.isNumber() && (!data.exists() || data.val() === newData.val())" },
         "likes":     { "$uid": { ".validate": "newData.isBoolean()" } },
         "$other":    { ".validate": false }
       }

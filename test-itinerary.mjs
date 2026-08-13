@@ -81,7 +81,44 @@ assert(day13.includes('sem habilitação') && day13.includes('contratar skipper'
 const images = new Set([...html.matchAll(/assets\/images\/[a-z0-9-]+\.webp/g)].map(x => x[0]));
 await Promise.all([...images].map(path => access(new URL(path, root))));
 
+// --- semântica, acessibilidade e compartilhamento ---
+assert(html.includes('<main class="wrap">') && html.includes('</main>'), 'conteúdo dentro de <main>');
+assert(html.includes('<meta name="description"') && html.includes('property="og:title"'), 'metadados de descrição e compartilhamento');
+assert(html.includes('<meta name="color-scheme" content="light dark">'), 'color-scheme declarado');
+assert(html.includes('<dialog id="idea-dialog" aria-labelledby="idea-h">'), 'diálogo com nome acessível');
+assert(html.includes('class="route" role="img" aria-label="Rota da viagem:'), 'rota com descrição acessível');
+for (const label of ['aria-label="Curtir', 'aria-label="Editar ideia"', 'aria-label="Excluir ideia"'])
+  assert(html.includes(label), `botão de ideia com nome acessível: ${label}`);
+assert(html.includes('aria-pressed="${liked'), 'estado do curtir exposto');
+assert(html.includes('<figure>${image(p.src)}<figcaption>${p.alt}</figcaption>'), 'alt da galeria não repete a legenda');
+
+// --- cor de link visitado: uma variável, sem regra duplicada vencendo o modo escuro ---
+assert(html.includes('a:visited{color:var(--visited)}'), 'link visitado usa variável');
+assert.equal([...html.matchAll(/a:visited\{/g)].length, 1, 'uma única regra a:visited');
+assert(html.includes('--visited:#6b4aa5') && html.includes('--visited:#b89af5'), 'variante clara e escura do visitado');
+
+// --- robustez do JavaScript ---
+assert(html.includes('function imageFailed(img)') && html.includes("img.closest('.card')"),
+  'foto quebrada colapsa o card certo, não o .card-head');
+assert(!/onerror="this\.parentElement/.test(html), 'sem fallback de imagem no elemento errado');
+assert(html.includes('onerror="imageFailed(this)"'), 'imagens usam o fallback único');
+assert(html.includes('x.links.length?'), 'dias sem link não geram <nav> vazia');
+assert(!/localStorage\.idea/.test(html), 'localStorage sempre via guarda try/catch');
+assert(html.includes('self.crypto&&crypto.randomUUID'), 'id do cliente com alternativa fora de contexto seguro');
+assert(html.includes("Object.prototype.hasOwnProperty.call(CATS,i.categoria)"), 'categoria não busca no protótipo');
+assert(html.includes('const byDay=new Map()'), 'agrupamento por dia imune a chaves como __proto__');
+assert.equal([...html.matchAll(/guard\(ref\./g)].length, 4, 'as quatro escritas no Firebase avisam em caso de erro');
+assert(html.includes('campo.setCustomValidity'), 'título só com espaços recebe aviso');
+
 const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x => x[1]).join('\n');
 new Script(scripts, { filename: 'index.inline.js' });
+
+// --- regras do Firebase ---
+const rules = JSON.parse(await readFile(new URL('firebase-rules.json', root), 'utf8'));
+const idea = rules.rules.ideias.$id;
+for (const field of ['ownerId', 'criadoEm'])
+  assert(/!data\.exists\(\) \|\| data\.val\(\) === newData\.val\(\)/.test(idea[field]['.validate']),
+    `${field} imutável depois de criado`);
+assert.equal(rules.rules.$other['.read'], false, 'resto do banco fechado');
 
 console.log(`OK: 17 dias, 17 agendas e ${images.size} imagens locais.`);
