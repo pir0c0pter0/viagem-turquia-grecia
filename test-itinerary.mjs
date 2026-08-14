@@ -129,8 +129,11 @@ assert(html.includes('name="twitter:card" content="summary_large_image"'), 'prev
 
 // --- painel de reservas: as datas se datam sozinhas na abertura da página ---
 const reservas = html.match(/<section class="critical" id="reservas">([\s\S]*?)<\/section>/)[1];
-assert.equal([...reservas.matchAll(/limite: <time datetime="\d{4}-\d{2}-\d{2}">/g)].length, 3, 'os três limites viraram <time>');
+assert.equal([...reservas.matchAll(/limite: <time datetime="\d{4}-\d{2}-\d{2}">/g)].length, 6, 'os seis itens críticos têm limite em <time>');
 assert(!/limite: \d{2}\/\d{2}\/\d{4}/.test(reservas), 'nenhum limite solto, sem <time>');
+assert(!/limite: <time datetime="2026-07/.test(reservas), 'nenhum limite anterior à revisão de agosto');
+assert(!/lugares confirmados/.test(html), 'disponibilidade consultada não é reserva confirmada');
+assert(reservas.includes('<b>Nenhuma outra reserva foi fechada até agora</b>'), 'estado real das reservas em destaque');
 assert.equal([...reservas.matchAll(/<time datetime="2026-07-20" class="snap">/g)].length, 2, 'as duas cotações marcadas como retrato');
 
 const firstScript = html.match(/<script>([\s\S]*?)<\/script>/)[1];
@@ -154,13 +157,13 @@ const etiquetas = hoje => {
   runInContext(firstScript, ctx);
   return out;
 };
-const vencidos = etiquetas('2026-08-14');
-assert(vencidos.includes('24/07/2026 due overdue: prazo vencido há 21 dias'), 'limite passado aparece como vencido');
-assert(vencidos.includes('20/07/2026 due: cotação de 25 dias atrás · reconferir'), 'cotação antiga mostra a idade');
-const emDia = etiquetas('2026-07-20');
-assert(emDia.includes('24/07/2026 due: faltam 4 dias'), 'limite futuro mostra a contagem');
-assert(!emDia.some(c => c.startsWith('20/07/2026')), 'cotação do próprio dia não vira aviso');
-assert(etiquetas('2026-07-31').includes('31/07/2026 due overdue: vence hoje'), 'limite do dia avisa que vence hoje');
-assert(etiquetas('2026-07-30').includes('31/07/2026 due: falta 1 dia'), 'singular correto na véspera');
+const emDia = etiquetas('2026-08-14');
+assert(emDia.includes('17/08/2026 due: faltam 3 dias'), 'limite futuro mostra a contagem');
+assert(emDia.includes('18/08/2026 due: faltam 4 dias'), 'limite dos hotéis na semana da revisão');
+assert(emDia.includes('20/07/2026 due: cotação de 25 dias atrás · reconferir'), 'cotação antiga mostra a idade');
+assert(etiquetas('2026-09-01').includes('17/08/2026 due overdue: prazo vencido há 15 dias'), 'limite passado aparece como vencido');
+assert(etiquetas('2026-08-17').includes('17/08/2026 due overdue: vence hoje'), 'limite do dia avisa que vence hoje');
+assert(etiquetas('2026-08-16').includes('17/08/2026 due: falta 1 dia'), 'singular correto na véspera');
+assert(!etiquetas('2026-07-20').some(c => c.startsWith('20/07/2026')), 'cotação do próprio dia não vira aviso');
 
 console.log(`OK: 17 dias, 17 agendas e ${images.size} imagens locais.`);
