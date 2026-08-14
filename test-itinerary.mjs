@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { access, readFile } from 'node:fs/promises';
-import { Script } from 'node:vm';
+import { Script, createContext, runInContext } from 'node:vm';
 
 const root = new URL('./', import.meta.url);
 const html = await readFile(new URL('index.html', root), 'utf8');
@@ -120,5 +120,47 @@ for (const field of ['ownerId', 'criadoEm'])
   assert(/!data\.exists\(\) \|\| data\.val\(\) === newData\.val\(\)/.test(idea[field]['.validate']),
     `${field} imutável depois de criado`);
 assert.equal(rules.rules.$other['.read'], false, 'resto do banco fechado');
+
+// --- link compartilhado no grupo ---
+const site = 'https://pir0c0pter0.github.io/viagem-turquia-grecia/';
+assert(html.includes(`<meta property="og:url" content="${site}">`), 'og:url absoluta');
+assert(html.includes(`content="${site}assets/images/hero-oia.webp"`), 'og:image absoluta');
+assert(html.includes('name="twitter:card" content="summary_large_image"'), 'preview grande no Twitter/X');
+
+// --- painel de reservas: as datas se datam sozinhas na abertura da página ---
+const reservas = html.match(/<section class="critical" id="reservas">([\s\S]*?)<\/section>/)[1];
+assert.equal([...reservas.matchAll(/limite: <time datetime="\d{4}-\d{2}-\d{2}">/g)].length, 3, 'os três limites viraram <time>');
+assert(!/limite: \d{2}\/\d{2}\/\d{4}/.test(reservas), 'nenhum limite solto, sem <time>');
+assert.equal([...reservas.matchAll(/<time datetime="2026-07-20" class="snap">/g)].length, 2, 'as duas cotações marcadas como retrato');
+
+const firstScript = html.match(/<script>([\s\S]*?)<\/script>/)[1];
+const etiquetas = hoje => {
+  const out = [];
+  const els = [...reservas.matchAll(/<time datetime="([^"]+)"( class="snap")?>([^<]+)<\/time>/g)].map(m => ({
+    dateTime: m[1],
+    classList: { contains: c => c === 'snap' && Boolean(m[2]) },
+    after: (_espaco, chip) => out.push(`${m[3]} ${chip.className}: ${chip.textContent}`),
+  }));
+  const ctx = {
+    console,
+    Date: class extends Date { constructor(...a) { a.length ? super(...a) : super(`${hoje}T12:00:00`) } },
+    document: {
+      getElementById: () => ({ set innerHTML(_) {} }),
+      querySelectorAll: s => (s.includes('#reservas') ? els : []),
+      createElement: () => ({ className: '', textContent: '' }),
+    },
+  };
+  createContext(ctx);
+  runInContext(firstScript, ctx);
+  return out;
+};
+const vencidos = etiquetas('2026-08-14');
+assert(vencidos.includes('24/07/2026 due overdue: prazo vencido há 21 dias'), 'limite passado aparece como vencido');
+assert(vencidos.includes('20/07/2026 due: cotação de 25 dias atrás · reconferir'), 'cotação antiga mostra a idade');
+const emDia = etiquetas('2026-07-20');
+assert(emDia.includes('24/07/2026 due: faltam 4 dias'), 'limite futuro mostra a contagem');
+assert(!emDia.some(c => c.startsWith('20/07/2026')), 'cotação do próprio dia não vira aviso');
+assert(etiquetas('2026-07-31').includes('31/07/2026 due overdue: vence hoje'), 'limite do dia avisa que vence hoje');
+assert(etiquetas('2026-07-30').includes('31/07/2026 due: falta 1 dia'), 'singular correto na véspera');
 
 console.log(`OK: 17 dias, 17 agendas e ${images.size} imagens locais.`);
