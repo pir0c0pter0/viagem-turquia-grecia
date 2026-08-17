@@ -539,26 +539,16 @@ document.getElementById('days').innerHTML = DAYS.map(x =>
 // com cara de prazo futuro. Agora cada <time> ganha a etiqueta do dia em que a página é aberta.
 (function(){
   const hoje=new Date();hoje.setHours(0,0,0,0);
-  const plural=(n,palavra)=>`${n} ${palavra}${n>1?'s':''}`;
+  const rtf=new Intl.RelativeTimeFormat('pt-BR',{numeric:'auto'}); // dá "há 14 dias", "amanhã" e "hoje" sem plural na mão
   document.querySelectorAll('#reservas time[datetime]').forEach(t=>{
-    const alvo=new Date(t.dateTime+'T00:00:00');
-    if(isNaN(alvo))return;
-    const dias=Math.round((alvo-hoje)/864e5);
+    const dias=Math.round((new Date(t.dateTime+'T00:00:00')-hoje)/864e5);
+    if(isNaN(dias))return;
+    const cotacao=t.classList.contains('snap');
+    if(cotacao&&dias>=0)return; // cotação do próprio dia não precisa de aviso
+    const rel=rtf.format(dias,'day');
     const chip=document.createElement('span');
-    if(t.classList.contains('snap')){
-      if(dias>=0)return; // cotação de hoje não precisa de aviso
-      chip.className='due';
-      chip.textContent=`cotação de ${plural(-dias,'dia')} atrás · reconferir`;
-    }else if(dias<0){
-      chip.className='due overdue';
-      chip.textContent=`prazo vencido há ${plural(-dias,'dia')}`;
-    }else if(dias===0){
-      chip.className='due overdue';
-      chip.textContent='vence hoje';
-    }else{
-      chip.className='due';
-      chip.textContent=`${dias===1?'falta':'faltam'} ${plural(dias,'dia')}`;
-    }
+    chip.className='due'+(!cotacao&&dias<=0?' overdue':'');
+    chip.textContent=cotacao?`cotação ${rel} · reconferir`:dias<0?`prazo vencido ${rel}`:`vence ${rel}`;
     t.after(' ',chip);
   });
 })();

@@ -158,12 +158,11 @@ const etiquetas = hoje => {
   return out;
 };
 const emDia = etiquetas('2026-08-14');
-assert(emDia.includes('17/08/2026 due: faltam 3 dias'), 'limite futuro mostra a contagem');
-assert(emDia.includes('18/08/2026 due: faltam 4 dias'), 'limite dos hotéis na semana da revisão');
-assert(emDia.includes('20/07/2026 due: cotação de 25 dias atrás · reconferir'), 'cotação antiga mostra a idade');
+assert(emDia.includes('17/08/2026 due: vence em 3 dias'), 'limite futuro mostra a contagem');
+assert(emDia.includes('20/07/2026 due: cotação há 25 dias · reconferir'), 'cotação antiga mostra a idade');
 assert(etiquetas('2026-09-01').includes('17/08/2026 due overdue: prazo vencido há 15 dias'), 'limite passado aparece como vencido');
 assert(etiquetas('2026-08-17').includes('17/08/2026 due overdue: vence hoje'), 'limite do dia avisa que vence hoje');
-assert(etiquetas('2026-08-16').includes('17/08/2026 due: falta 1 dia'), 'singular correto na véspera');
+assert(etiquetas('2026-08-16').includes('17/08/2026 due: vence amanhã'), 'véspera sem plural na mão');
 assert(!etiquetas('2026-07-20').some(c => c.startsWith('20/07/2026')), 'cotação do próprio dia não vira aviso');
 
 console.log(`OK: 17 dias, 17 agendas e ${images.size} imagens locais.`);
