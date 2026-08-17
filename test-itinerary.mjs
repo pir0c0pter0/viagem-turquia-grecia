@@ -76,6 +76,8 @@ for (const stay of [
 ]) assert(html.includes(stay), `hospedagem reservada exibida: ${stay}`);
 assert(html.includes('Hospedagens de Atenas · reservadas ✓'), 'status das hospedagens de Atenas exibido');
 assert(html.includes('Total reservado: R$ 7.264,01 · rateio final: 4 × R$ 1.452,80 + 1 × R$ 1.452,81'), 'total e centavo residual exibidos');
+assert(html.includes('{sec:"Atenas",tag:"05–08/09 · 3 noites · reservado ✓ · R$ 2.844,70 total · R$ 568,94 por hóspede"}'), 'cabeçalho da hospedagem inicial de Atenas exibido');
+assert(html.includes('{sec:"Atenas · reta final",tag:"15–19/09 · 4 noites · reservado ✓ · R$ 4.419,31 total · R$ 883,86 por hóspede"}'), 'cabeçalho da hospedagem final de Atenas exibido');
 
 const day06 = html.match(/\{d:"06\/09"([\s\S]*?)\n \{d:"07\/09"/)?.[1] ?? '';
 const acropolis = day06.indexOf('["11:00-13:00","Acrópole e encostas"');
