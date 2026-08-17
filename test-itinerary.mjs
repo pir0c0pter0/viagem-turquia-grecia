@@ -56,6 +56,8 @@ assert([...html.matchAll(/💶 Comprar|✅ [^<"]+ · comprado/g)].length >= 16, 
 for (const price of [
   'Pireu → Paros · comprado · R$529/pessoa · R$2.645 grupo',
   'Paros → Santorini · comprado · R$459/pessoa · R$2.295 grupo',
+  'Santorini → Naxos · comprado · R$438/pessoa · R$2.190 grupo',
+  'Naxos → Pireu · comprado · R$444/pessoa · R$2.220 grupo',
   'Ingresso da Acrópole de Atenas · comprado · R$192/pessoa · R$960 grupo',
   'Ingresso do Museu da Acrópole · comprado · R$129/pessoa · R$645 grupo',
   'Ágora Antiga · €20/pessoa · €100 grupo',
