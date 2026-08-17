@@ -3,7 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
 <title>Grécia 2026 · Cronograma</title>
+<meta name="description" content="Cronograma dia a dia da viagem à Grécia de 04 a 20 de setembro de 2026: Atenas, Paros, Santorini, Naxos, Delfos e Sounion, com horários, ferries, reservas críticas e planos B.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Grécia 2026 · Cronograma">
+<meta property="og:description" content="17 dias na Grécia com 5 pessoas: roteiro dia a dia, ferries, reservas críticas e planos B.">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://pir0c0pter0.github.io/viagem-turquia-grecia/">
+<meta property="og:image" content="https://pir0c0pter0.github.io/viagem-turquia-grecia/assets/images/hero-oia.webp">
+<meta property="og:image:type" content="image/webp">
+<meta property="og:image:width" content="1801">
+<meta property="og:image:height" content="1200">
+<meta property="og:image:alt" content="Casas brancas de Oia sobre a caldeira de Santorini ao pôr do sol">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 18'%3E%3Cpath fill='%230d5eaf' d='M0 0h27v18H0z'/%3E%3Cpath stroke='white' stroke-width='2' d='M0 3h27M0 7h27M0 11h27M0 15h27'/%3E%3Cpath fill='%230d5eaf' d='M0 0h10v10H0z'/%3E%3Cpath stroke='white' stroke-width='2' d='M0 5h10M5 0v10'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,6 +27,7 @@
     --line:#dde5ec; --accent:#0d5dbb; --accent-soft:#e3edf9;
     --navy:#0d1f3a; --navy-ink:#eef3fa;
     --warn:#b45309; --warn-bg:#fdf1dc; --warn-line:#f0c36b;
+    --visited:#6b4aa5;
     --radius:18px;
   }
   @media (prefers-color-scheme: dark){
@@ -22,15 +36,15 @@
       --line:#233247; --accent:#5ea3f2; --accent-soft:#16283f;
       --navy:#122745; --navy-ink:#eef3fa;
       --warn:#f2b45c; --warn-bg:#2a2013; --warn-line:#7a5a22;
+      --visited:#b89af5;
     }
-    a:visited{color:#b89af5}
   }
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:'Outfit',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
   img{max-width:100%}
   a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
   a:hover{text-decoration-thickness:2px}
-  a:visited{color:#6b4aa5}
+  a:visited{color:var(--visited)}
   :where(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #f2b45c;outline-offset:3px}
   .wrap{max-width:960px;margin:0 auto;padding:0 20px 64px}
 
@@ -56,6 +70,8 @@
   .critical li strong{display:block;font-size:1rem}
   .critical li small{color:rgba(238,243,250,.72);font-size:.88rem;line-height:1.45}
   .critical a{color:#fff;font-weight:700}
+  .critical .due{display:inline-block;margin-left:6px;border-radius:99px;padding:1px 9px;font-size:.78rem;font-weight:800;white-space:nowrap;background:rgba(255,255,255,.16);color:#eef3fa;vertical-align:middle}
+  .critical .due.overdue{background:#f2b45c;color:#3a2a08}
 
   /* ---------- rota ---------- */
   .route{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;margin:28px 0 8px}
@@ -158,6 +174,8 @@
     .hero .dates,.hero .meta span{border:1px solid #999;background:none;color:#000}
     .critical{margin-top:12px;background:#fff;color:#000;border:3px solid var(--warn);box-shadow:none}
     .critical .lead,.critical li small{color:#333}
+    .critical .due{background:none;border:1px solid #999;color:#000}
+    .critical .due.overdue{border:2px solid #000}
     .critical li{border:1px solid #ccc;background:#fff}
     .card,.section,.critical{opacity:1 !important;transform:none !important}
     .card{break-inside:avoid;box-shadow:none}
@@ -186,23 +204,23 @@
   </div>
 </header>
 
-<div class="wrap">
+<main class="wrap">
 
   <section class="critical" id="reservas">
-    <h2><span class="sign">⚠</span>Reservas críticas · grupo de 5</h2>
-    <p class="lead">Voos internacionais já comprados ✓ (ITA Airways via Roma). A disponibilidade abaixo é um retrato de 20/07/2026: os 5 lugares só ficam garantidos após pagamento e emissão. Estas são as reservas que travam a viagem, em ordem de prioridade:</p>
+    <h2><span class="sign" aria-hidden="true">⚠</span>Reservas críticas · grupo de 5</h2>
+    <p class="lead">Voos internacionais já comprados ✓ (ITA Airways via Roma). <b>Nenhuma outra reserva foi fechada até agora</b> — preços e disponibilidade abaixo são um retrato de <time datetime="2026-07-20" class="snap">20/07/2026</time> e os 5 lugares só ficam garantidos após pagamento e emissão. Os prazos contam de trás para frente a partir do embarque em 04/09, nesta ordem:</p>
     <ol>
-      <li><span class="n">1</span><div><strong>Ferries da ida (08 e 09/09)</strong><small><a href="https://www.ferryhopper.com/?itinerary=PIR%2CPAS&amp;dates=20260908" target="_blank" rel="noopener">💶 Comprar Pireu → Paros</a> · 08:30–11:10 · €68,70/pessoa · €343,50 pelo grupo · <b>5 lugares confirmados em 20/07/2026</b>.<br><a href="https://www.ferryhopper.com/?itinerary=PAS%2CJTR&amp;dates=20260909" target="_blank" rel="noopener">💶 Comprar Paros → Santorini</a> · 13:25–15:05 · €59,70/pessoa · €298,50 pelo grupo · <b>5 lugares confirmados em 20/07/2026</b>.</small></div></li>
-      <li><span class="n">2</span><div><strong>Ferries da volta (12 e 15/09)</strong><small><a href="https://www.ferryhopper.com/?itinerary=JTR%2CJNX&amp;dates=20260912" target="_blank" rel="noopener">💶 Comprar Santorini → Naxos</a> · 12:55–14:20 · €59,70/pessoa · €298,50 pelo grupo · <b>5 lugares confirmados em 20/07/2026</b>.<br><a href="https://www.ferryhopper.com/?itinerary=JNX%2CPIR&amp;dates=20260915" target="_blank" rel="noopener">💶 Comprar Naxos → Pireu</a> · 15:00–18:55 · €77,70/pessoa · €388,50 pelo grupo · <b>5 lugares confirmados em 20/07/2026</b>. Total dos quatro trechos: <b>€1.329 para 5 adultos</b>, sujeito a alteração até a compra. Reconfirmar cada ferry 24–48 horas antes.</small></div></li>
-      <li><span class="n">3</span><div><strong>Guarda-volumes no Pireu (08 a 15/09)</strong><small><a href="https://luggagedrop.gr/piraeus/" target="_blank" rel="noopener">Luggage Drop</a> · confirmar lockers grandes suficientes para as malas do grupo e a cobrança das 7 noites · <b>limite: 31/07/2026</b>.</small></div></li>
-      <li><span class="n">4</span><div><strong>Hotéis em Paros, Santorini e Naxos</strong><small>Parikia perto do porto; Santorini e Naxos com 3 noites cada. Reservar as opções para 5 juntas · <b>limite: 24/07/2026</b>.</small></div></li>
-      <li><span class="n">5</span><div><strong>Transfers de minivan em todos os trechos</strong><small>Pedir aos hotéis operadores locais com veículo e bagageiro para 5 · <b>limite: 31/07/2026</b>.</small></div></li>
-      <li><span class="n">6</span><div><strong>Acrópole e Museu da Acrópole com horário marcado + mesas</strong><small><a href="https://tickets.hh.gr/en/venues/acropolis-of-athens-tickets" target="_blank" rel="noopener">💶 Comprar Acrópole</a> · €30/pessoa · €150 pelo grupo · slot das 08:00 em 06/09 · <b>5 lugares a confirmar após login</b>.<br><a href="https://etickets.theacropolismuseum.gr/?culture=en" target="_blank" rel="noopener">💶 Comprar Museu da Acrópole</a> · €20/pessoa · €100 pelo grupo · slot das 10:00 · <b>5 lugares confirmados em 20/07/2026</b>.</small></div></li>
+      <li><span class="n">1</span><div><strong>Ferries da ida (08 e 09/09)</strong><small><a href="https://www.ferryhopper.com/?itinerary=PIR%2CPAS&amp;dates=20260908" target="_blank" rel="noopener">💶 Comprar Pireu → Paros</a> · 08:30–11:10 · €68,70/pessoa · €343,50 pelo grupo · <b>5 lugares disponíveis em 20/07/2026</b>.<br><a href="https://www.ferryhopper.com/?itinerary=PAS%2CJTR&amp;dates=20260909" target="_blank" rel="noopener">💶 Comprar Paros → Santorini</a> · 13:25–15:05 · €59,70/pessoa · €298,50 pelo grupo · <b>5 lugares disponíveis em 20/07/2026</b>. Os dois trechos definem toda a rota das ilhas: comprar juntos · <b>limite: <time datetime="2026-08-17">17/08/2026</time></b>.</small></div></li>
+      <li><span class="n">2</span><div><strong>Ferries da volta (12 e 15/09)</strong><small><a href="https://www.ferryhopper.com/?itinerary=JTR%2CJNX&amp;dates=20260912" target="_blank" rel="noopener">💶 Comprar Santorini → Naxos</a> · 12:55–14:20 · €59,70/pessoa · €298,50 pelo grupo · <b>5 lugares disponíveis em 20/07/2026</b>.<br><a href="https://www.ferryhopper.com/?itinerary=JNX%2CPIR&amp;dates=20260915" target="_blank" rel="noopener">💶 Comprar Naxos → Pireu</a> · 15:00–18:55 · €77,70/pessoa · €388,50 pelo grupo · <b>5 lugares disponíveis em 20/07/2026</b>. Total dos quatro trechos: <b>€1.329 para 5 adultos</b>, sujeito a alteração até a compra · <b>limite: <time datetime="2026-08-17">17/08/2026</time></b>. Reconfirmar cada ferry 24–48 horas antes.</small></div></li>
+      <li><span class="n">3</span><div><strong>Guarda-volumes no Pireu (08 a 15/09)</strong><small><a href="https://luggagedrop.gr/piraeus/" target="_blank" rel="noopener">Luggage Drop</a> · confirmar lockers grandes suficientes para as malas do grupo e a cobrança das 7 noites · <b>limite: <time datetime="2026-08-28">28/08/2026</time></b>.</small></div></li>
+      <li><span class="n">4</span><div><strong>Hotéis em Paros, Santorini e Naxos</strong><small>Parikia perto do porto; Santorini e Naxos com 3 noites cada. Reservar as opções para 5 juntas, priorizando tarifa com cancelamento grátis enquanto os ferries não estiverem emitidos · <b>limite: <time datetime="2026-08-18">18/08/2026</time></b>.</small></div></li>
+      <li><span class="n">5</span><div><strong>Transfers de minivan em todos os trechos</strong><small>Pedir aos hotéis operadores locais com veículo e bagageiro para 5 · depende dos hotéis fechados · <b>limite: <time datetime="2026-08-28">28/08/2026</time></b>.</small></div></li>
+      <li><span class="n">6</span><div><strong>Acrópole e Museu da Acrópole com horário marcado + mesas</strong><small><a href="https://tickets.hh.gr/en/venues/acropolis-of-athens-tickets" target="_blank" rel="noopener">💶 Comprar Acrópole</a> · €30/pessoa · €150 pelo grupo · slot das 08:00 em 06/09 · <b>5 lugares a confirmar após login</b>.<br><a href="https://etickets.theacropolismuseum.gr/?culture=en" target="_blank" rel="noopener">💶 Comprar Museu da Acrópole</a> · €20/pessoa · €100 pelo grupo · slot das 10:00 · <b>5 lugares disponíveis em 20/07/2026</b>. Ingressos com horário marcado e mesas do grupo · <b>limite: <time datetime="2026-08-20">20/08/2026</time></b>.</small></div></li>
     </ol>
-    <p class="lead">Orçamento das 10 atrações pagas: <b>€187/pessoa · €935 para 5 adultos</b>, pelos preços integrais consultados em 20/07/2026 e sujeitos a alteração até a compra.</p>
+    <p class="lead">Orçamento das 10 atrações pagas: <b>€187/pessoa · €935 para 5 adultos</b>, pelos preços integrais consultados em <time datetime="2026-07-20" class="snap">20/07/2026</time> e sujeitos a alteração até a compra.</p>
   </section>
 
-  <div class="route" aria-label="Rota da viagem">
+  <div class="route" role="img" aria-label="Rota da viagem: Curitiba, São Paulo e Roma de avião até Atenas; ferries para Paros, Santorini e Naxos; volta a Atenas e voos por Roma e Rio até Curitiba">
     <span>Curitiba</span><i>✈</i><span>São Paulo</span><i>✈</i><span>Roma</span><i>✈</i><span>Atenas</span><i>⛴</i><span>Paros</span><i>⛴</i><span>Santorini</span><i>⛴</i><span>Naxos</span><i>⛴</i><span>Atenas</span><i>✈</i><span>Roma</span><i>✈</i><span>Rio</span><i>✈</i><span>Curitiba</span>
   </div>
 
@@ -235,7 +253,7 @@
     <div class="card no-pic"><div class="body"><div class="ideias" data-dia="geral"></div></div></div>
   </div>
 
-  <dialog id="idea-dialog">
+  <dialog id="idea-dialog" aria-labelledby="idea-h">
     <form id="idea-form">
       <h3 id="idea-h">Nova ideia</h3>
       <label for="f-nome">Seu nome</label>
@@ -292,7 +310,7 @@
       </ul>
     </details>
   </footer>
-</div>
+</main>
 
 <script>
 const IMAGES={
@@ -344,7 +362,7 @@ const DAYS=[
   img:"",
   prog:"Conexão de 1h25 em Fiumicino e voo de 1h55 para Atenas. Chegada às 11:10, transfer de minivan (~40min) e check-in. Total da ida: 23h30.",
   alert:"<b>Conexão apertada - imigração em Roma:</b> seguir direto para Connections/Transfer → Area A, refazer a segurança e passar pelo controle de passaporte. Confirmar em CWB que as malas estão etiquetadas até ATH; retirada e alfândega só em Atenas. Se um atraso causar a perda da conexão, procurar a ITA para reacomodação.",
-  schedule:[["05:30-06:30","Despertar a bordo","1h · horário local de Roma; café e preparação para o pouso"],["06:50-08:15","Conexão em Fiumicino","1h25 · seguir direto por imigração, segurança e Area A"],["08:15-11:10","Voo Roma-Atenas","ITA 720 · chegada no horário local de Atenas"],["11:10-12:20","Bagagem e transfer a Psiri/Monastiraki","~40 min de minivan após a retirada das malas"],["12:30-14:00","Almoço em Atenas","1h30 · perto da base provisória"],["14:00-19:30","Check-in e tarde livre","descanso em Psiri/Monastiraki"],["19:30-21:30","Jantar em Atenas","2h · taverna perto da hospedagem"],],
+  schedule:[["05:30-06:30","Despertar a bordo","1h · horário local de Roma; café e preparação para o pouso"],["06:50-08:15","Conexão em Fiumicino","1h25 · seguir direto por imigração, segurança e Area A"],["08:15-11:10","Voo Roma-Atenas","ITA 720 · chegada no horário local de Atenas"],["11:10-12:20","Bagagem e transfer a Psiri/Monastiraki","~40 min de minivan após a retirada das malas"],["12:30-14:00","Almoço em Atenas","1h30 · perto da base provisória"],["14:00-19:30","Check-in e tarde livre","descanso em Psiri/Monastiraki"],["19:30-21:30","Jantar em Atenas","2h · taverna perto da hospedagem"]],
   links:[],
   planB:"Conexão perdida em Roma: aceitar a reacomodação da ITA e retirar os compromissos da tarde em Atenas.",
   food:"Almoço e tarde livres; primeira noite grega em uma taverna perto do hotel."},
@@ -353,7 +371,7 @@ const DAYS=[
  {d:"06/09",dow:"dom",city:"Atenas",move:"🚶 a pé · centro histórico",img:"assets/images/acropole.webp",
   prog:"Acrópole na abertura, Museu da Acrópole e tarde sem pressa entre Koukaki, Plaka e Anafiotika.",
   schedule:[["06:15-07:15","Acordar e se preparar","1h · café e saída da base em Psiri/Monastiraki"],["07:15-08:00","Caminhada e entrada da Acrópole","~20 min a pé + controle · reserva obrigatória para 08:00"],["08:00-09:40","Acrópole e encostas","1h40 · caminhada com subida; água, chapéu e calçado aderente"],["09:40-10:00","Descida e caminhada ao museu","20 min · seguir direto à entrada reservada"],["10:00-12:00","Museu da Acrópole","2h · ingresso reservado para 10:00"],["12:30-14:00","Almoço em Koukaki","1h30 · a pé"],["14:00-15:00","Pausa em Koukaki","1h · evitar o sol mais forte"],["15:00-18:00","Plaka e Anafiotika","3h · a pé · melhor horário: tarde"],["19:30-21:30","Jantar em Psiri/Monastiraki","2h · retorno de ~15 min a pé desde Plaka"]],
-  links:[["💶 Comprar Acrópole · €30/pessoa · €150 grupo · 5 lugares a confirmar após login","https://tickets.hh.gr/en/venues/acropolis-of-athens-tickets"],["💶 Comprar Museu da Acrópole · €20/pessoa · €100 grupo · 5 lugares confirmados em 20/07/2026","https://etickets.theacropolismuseum.gr/?culture=en"],["Koukaki · mapa","https://www.google.com/maps/search/?api=1&query=Koukaki+Athens"],["Anafiotika · mapa","https://www.google.com/maps/search/?api=1&query=Anafiotika+Athens"]],
+  links:[["💶 Comprar Acrópole · €30/pessoa · €150 grupo · 5 lugares a confirmar após login","https://tickets.hh.gr/en/venues/acropolis-of-athens-tickets"],["💶 Comprar Museu da Acrópole · €20/pessoa · €100 grupo · 5 lugares disponíveis em 20/07/2026","https://etickets.theacropolismuseum.gr/?culture=en"],["Koukaki · mapa","https://www.google.com/maps/search/?api=1&query=Koukaki+Athens"],["Anafiotika · mapa","https://www.google.com/maps/search/?api=1&query=Anafiotika+Athens"]],
   planB:"Calor excessivo: manter Acrópole e museu cedo, fazer pausa longa no hotel e deixar Plaka/Anafiotika para depois das 17:00.",
   gallery:[{src:"assets/images/acropole.webp",alt:"Acrópole"},{src:"assets/images/acropolis-museum.webp",alt:"Museu da Acrópole"},{src:"assets/images/plaka.webp",alt:"Plaka e Anafiotika"}],
   food:"Tavernas de Plaka: moussaka, souvlaki e vinho da casa."},
@@ -370,7 +388,7 @@ const DAYS=[
   prog:"Guardar as malas grandes no Pireu, seguir só com bagagem de mão e fazer o circuito por Lefkes, Kolymbithres e Naoussa.",
   alert:"<b>Malas grandes:</b> deixar no Luggage Drop, Kapodistriou 20, antes de seguir ao gate indicado no bilhete. Sair do hotel às 06:15 e estar na área de embarque até 07:20. O guarda-volumes funciona 24/7; documentos, remédios e valores seguem na mochila.",
   schedule:[["05:15-06:15","Acordar e se preparar","1h · café, check-out e separação das malas grandes da bagagem de mão"],["06:15-07:20","Transfer e guarda-volumes no Pireu","minivan até Kapodistriou 20 · guardar malas grandes e seguir ao gate"],["07:20-11:10","Embarque e ferry a Paros","1h10 de antecedência + 2h40 previstos · reserva obrigatória"],["11:10-11:30","Desembarque e bagagem de mão em Parikia","20 min · hospedagem a pé ou transfer curto"],["11:30-12:40","Almoço em Parikia","1h10 · perto do porto"],["12:40-13:05","Parikia → Lefkes","~25 min de minivan"],["13:05-14:30","Lefkes","1h25 · caminhada pela vila"],["14:30-15:05","Lefkes → Kolymbithres","~35 min de minivan"],["15:05-17:00","Kolymbithres","1h55 · banho só com mar seguro"],["17:00-17:20","Kolymbithres → Naoussa","~20 min de minivan"],["17:20-19:45","Naoussa","2h25 · porto, melhor luz e pôr do sol"],["19:45-21:15","Jantar em Naoussa","1h30 · mesa reservada para 5"],["21:15-21:40","Retorno à hospedagem em Parikia","~25 min · motorista aguardando"]],
-  links:[["Luggage Drop · oficial","https://luggagedrop.gr/piraeus/"],["Luggage Drop · mapa","https://www.google.com/maps/search/?api=1&query=Kapodistriou+20+Piraeus"],["💶 Comprar Pireu → Paros · 5 lugares confirmados em 20/07/2026","https://www.ferryhopper.com/?itinerary=PIR%2CPAS&dates=20260908"],["Lefkes · mapa","https://www.google.com/maps/search/?api=1&query=Lefkes+Paros"],["Kolymbithres · mapa","https://www.google.com/maps/search/?api=1&query=Kolymbithres+Beach+Paros"],["Naoussa · mapa","https://www.google.com/maps/search/?api=1&query=Naoussa+Paros"]],
+  links:[["Luggage Drop · oficial","https://luggagedrop.gr/piraeus/"],["Luggage Drop · mapa","https://www.google.com/maps/search/?api=1&query=Kapodistriou+20+Piraeus"],["💶 Comprar Pireu → Paros · 5 lugares disponíveis em 20/07/2026","https://www.ferryhopper.com/?itinerary=PIR%2CPAS&dates=20260908"],["Lefkes · mapa","https://www.google.com/maps/search/?api=1&query=Lefkes+Paros"],["Kolymbithres · mapa","https://www.google.com/maps/search/?api=1&query=Kolymbithres+Beach+Paros"],["Naoussa · mapa","https://www.google.com/maps/search/?api=1&query=Naoussa+Paros"]],
   planB:"Meltemi forte: retirar o banho em Kolymbithres e usar o tempo em Lefkes, Ekatontapiliani/Parikia e Naoussa; manter a minivan.",
   gallery:[
     {src:"assets/images/lefkes.webp",alt:"Viela de Lefkes"},
@@ -384,7 +402,7 @@ const DAYS=[
   prog:"Parikia pela manhã, ferry ao porto de Athinios e fim de tarde leve em Fira/Imerovigli.",
   alert:"<b>Portos:</b> estar no Parikia Ferry Port às 12:25; desembarque no Athinios Ferry Port. Reservar minivan do porto ao hotel. Escalas intermediárias são operacionais: não desembarcar.",
   schedule:[["07:00-08:00","Acordar e se preparar","1h · café na hospedagem em Parikia"],["08:00-10:30","Parikia","2h30 · a pé · Ekatontapiliani, cidade antiga, Rua do Mercado e Kastro"],["10:30-11:30","Almoço cedo em Parikia","1h · perto do porto"],["11:30-12:25","Malas, check-out e porto","55 min · a pé/transfer curto; estar no porto às 12:25"],["12:25-15:05","Embarque e ferry a Santorini","1h de antecedência + 1h40 previstos · reserva obrigatória"],["15:05-17:00","Transfer de Athinios e check-in em Fira","até 1h55 com trânsito · minivan reservada"],["17:30-19:00","Fira a Imerovigli, sem pressa","1h30 · caminhada parcial · melhor horário: fim da tarde"],["19:00-19:30","Retorno a Fira","~30 min de táxi/minivan"],["19:30-21:30","Jantar em Fira","2h · perto da base provisória"]],
-  links:[["💶 Comprar Paros → Santorini · 5 lugares confirmados em 20/07/2026","https://www.ferryhopper.com/?itinerary=PAS%2CJTR&dates=20260909"],["Porto de Parikia · mapa","https://www.google.com/maps/search/?api=1&query=Parikia+Ferry+Port"],["Athinios · mapa","https://www.google.com/maps/search/?api=1&query=Athinios+Ferry+Port"],["Fira · mapa","https://www.google.com/maps/search/?api=1&query=Fira+Santorini"],["Imerovigli · mapa","https://www.google.com/maps/search/?api=1&query=Imerovigli+Santorini"]],
+  links:[["💶 Comprar Paros → Santorini · 5 lugares disponíveis em 20/07/2026","https://www.ferryhopper.com/?itinerary=PAS%2CJTR&dates=20260909"],["Porto de Parikia · mapa","https://www.google.com/maps/search/?api=1&query=Parikia+Ferry+Port"],["Athinios · mapa","https://www.google.com/maps/search/?api=1&query=Athinios+Ferry+Port"],["Fira · mapa","https://www.google.com/maps/search/?api=1&query=Fira+Santorini"],["Imerovigli · mapa","https://www.google.com/maps/search/?api=1&query=Imerovigli+Santorini"]],
   planB:"Ferry atrasado: ir direto ao hotel e jantar por perto; Fira/Imerovigli entra no começo do dia seguinte, sem correr.",
   gallery:[{src:"assets/images/parikia.webp",alt:"Parikia"},{src:"assets/images/aegean-ferry.webp",alt:"Ferry pelo Egeu"},{src:"assets/images/fira.webp",alt:"Fira"}],
   food:"Fava santorini, tomatokeftedes e vinho Assyrtiko em Fira."},
@@ -408,7 +426,7 @@ const DAYS=[
   prog:"Manhã normal em Fira, ferry ao meio-dia e fim de tarde na Chora com pôr do sol na Portara.",
   alert:"<b>Portos:</b> estar no Athinios Ferry Port às 11:55, com transfer reservado; desembarque no Naxos Ferry Port, em Chora. Reconfirmar navio e horário 24–48 h antes.",
   schedule:[["07:30-08:30","Acordar e se preparar","1h · café na base em Fira"],["08:30-10:15","Manhã livre em Fira","1h45 · caminhada leve e últimos mirantes"],["10:15-11:10","Almoço cedo e check-out","55 min · perto da hospedagem"],["11:10-11:55","Transfer Fira-Athinios","~45 min com margem · minivan reservada"],["11:55-14:20","Embarque e ferry a Naxos","1h de antecedência + 1h25 previstos · reserva obrigatória"],["14:20-15:45","Desembarque, bagagem e check-in","1h25 · transfer curto/a pé na base em Chora"],["16:00-18:00","Chora e Kastro","2h · a pé · sem pressa"],["18:00-19:45","Portara","1h45 · 15 min a pé · chegar cedo para um ponto seguro"],["20:00-22:00","Jantar em Chora","2h · reservar se já houver restaurante escolhido"]],
-  links:[["💶 Comprar Santorini → Naxos · 5 lugares confirmados em 20/07/2026","https://www.ferryhopper.com/?itinerary=JTR%2CJNX&dates=20260912"],["Athinios · mapa","https://www.google.com/maps/search/?api=1&query=Athinios+Ferry+Port"],["Porto de Naxos · mapa","https://www.google.com/maps/search/?api=1&query=Naxos+Ferry+Port"],["Chora · mapa","https://www.google.com/maps/search/?api=1&query=Naxos+Chora"],["Portara · mapa","https://www.google.com/maps/search/?api=1&query=Portara+Naxos"]],
+  links:[["💶 Comprar Santorini → Naxos · 5 lugares disponíveis em 20/07/2026","https://www.ferryhopper.com/?itinerary=JTR%2CJNX&dates=20260912"],["Athinios · mapa","https://www.google.com/maps/search/?api=1&query=Athinios+Ferry+Port"],["Porto de Naxos · mapa","https://www.google.com/maps/search/?api=1&query=Naxos+Ferry+Port"],["Chora · mapa","https://www.google.com/maps/search/?api=1&query=Naxos+Chora"],["Portara · mapa","https://www.google.com/maps/search/?api=1&query=Portara+Naxos"]],
   planB:"Ferry atrasado: deixar Kastro para outra noite e manter só caminhada curta em Chora/Portara se houver luz e energia.",
   gallery:[{src:"assets/images/aegean-ferry.webp",alt:"Ferry pelo Egeu"},{src:"assets/images/naxos-chora.webp",alt:"Chora e Kastro"},{src:"assets/images/naxos-portara.webp",alt:"Portara"}],
   food:"Jantar nas ruelas da Chora, atrás do porto."},
@@ -433,7 +451,7 @@ const DAYS=[
   prog:"Manhã livre em Naxos, ferry ao Pireu, retirada das malas grandes e transfer reservado ao hotel em Atenas.",
   alert:"<b>Retirada das malas:</b> após desembarcar, voltar ao Luggage Drop, Kapodistriou 20, com o PIN/comprovante. Como funciona 24/7, atraso do ferry não impede a retirada. Marcar o encontro com a minivan no guarda-volumes.",
   schedule:[["07:30-08:30","Acordar e se preparar","1h · café e início do check-out na base em Chora"],["09:00-11:45","Manhã livre em Chora","2h45 · a pé · café, compras e check-out"],["11:45-13:00","Almoço em Chora","1h15 · perto da hospedagem"],["13:00-14:00","Bagagem de mão e porto","1h · porto próximo, a pé ou transfer curto"],["14:00-18:55","Embarque e ferry ao Pireu","1h de antecedência + 3h55 previstos · reserva obrigatória"],["18:55-19:35","Desembarque e retirada das malas grandes","caminhada até Kapodistriou 20 · usar PIN/comprovante"],["19:35-20:35","Transfer e check-in em Psiri/Monastiraki","~1h com margem · encontro da minivan no guarda-volumes"],["21:00-22:30","Jantar em Psiri","1h30 · após o check-in"]],
-  links:[["💶 Comprar Naxos → Pireu · 5 lugares confirmados em 20/07/2026","https://www.ferryhopper.com/?itinerary=JNX%2CPIR&dates=20260915"],["Porto de Naxos · mapa","https://www.google.com/maps/search/?api=1&query=Naxos+Ferry+Port"],["Luggage Drop · oficial","https://luggagedrop.gr/piraeus/"],["Luggage Drop · mapa","https://www.google.com/maps/search/?api=1&query=Kapodistriou+20+Piraeus"]],
+  links:[["💶 Comprar Naxos → Pireu · 5 lugares disponíveis em 20/07/2026","https://www.ferryhopper.com/?itinerary=JNX%2CPIR&dates=20260915"],["Porto de Naxos · mapa","https://www.google.com/maps/search/?api=1&query=Naxos+Ferry+Port"],["Luggage Drop · oficial","https://luggagedrop.gr/piraeus/"],["Luggage Drop · mapa","https://www.google.com/maps/search/?api=1&query=Kapodistriou+20+Piraeus"]],
   planB:"Com atraso relevante, cancelar Psiri e jantar perto do hotel; não marcar atração ou reserva não reembolsável nesta noite.",
   gallery:[{src:"assets/images/naxos-chora.webp",alt:"Chora de Naxos"},{src:"assets/images/aegean-ferry.webp",alt:"Ferry pelo Egeu"},{src:"assets/images/piraeus.webp",alt:"Porto do Pireu"}],
   food:"Jantar em Psiri, se a chegada permitir."},
@@ -476,8 +494,22 @@ const DAYS=[
   food:"Almoço e jantar livres em Curitiba."}
 ];
 
-const image=(src,alt)=>{const [width,height,description,focus='50% 50%']=IMAGES[src];return `<img src="${src}" width="${width}" height="${height}" loading="lazy" alt="${alt||description}" style="object-position:${focus}" onerror="this.parentElement.parentElement.classList.add('no-pic');this.parentElement.remove()">`};
-const details=x=>x.schedule?`<details class="day-details" open><summary>Ordem do dia · horários aproximados</summary><ol>${x.schedule.map(([time,title,note])=>`<li><time>${time}</time><span><strong>${title}</strong><small>${note}</small></span></li>`).join('')}</ol><p class="plan-b"><strong>Plano B:</strong> ${x.planB}</p></details><nav class="day-links" aria-label="Links de ${x.d}">${x.links.map(([label,url])=>`<a href="${url}" target="_blank" rel="noopener">${label} ↗</a>`).join('')}</nav>`:'';
+// foto quebrada: remove a figura da galeria ou colapsa o card para o layout sem foto,
+// preservando o selo "Dia N" que vive dentro de .pic
+function imageFailed(img){
+  const figure=img.closest('figure');
+  if(figure)return figure.remove();
+  const card=img.closest('.card'),pic=img.closest('.pic');
+  if(!card||!pic)return;
+  card.classList.add('no-pic');
+  const tag=pic.querySelector('.daytag');
+  if(tag)card.querySelector('.body').prepend(tag);
+  pic.remove();
+}
+
+const image=(src,alt)=>{const [width,height,description,focus='50% 50%']=IMAGES[src];return `<img src="${src}" width="${width}" height="${height}" loading="lazy" alt="${alt||description}" style="object-position:${focus}" onerror="imageFailed(this)">`};
+const links=x=>x.links.length?`<nav class="day-links" aria-label="Links de ${x.d}">${x.links.map(([label,url])=>`<a href="${url}" target="_blank" rel="noopener">${label} ↗</a>`).join('')}</nav>`:'';
+const details=x=>x.schedule?`<details class="day-details" open><summary>Ordem do dia · horários aproximados</summary><ol>${x.schedule.map(([time,title,note])=>`<li><time>${time}</time><span><strong>${title}</strong><small>${note}</small></span></li>`).join('')}</ol><p class="plan-b"><strong>Plano B:</strong> ${x.planB}</p></details>${links(x)}`:'';
 
 let n=0;
 document.getElementById('days').innerHTML = DAYS.map(x =>
@@ -491,17 +523,35 @@ document.getElementById('days').innerHTML = DAYS.map(x =>
           <div class="top"><span class="date">${x.d} · ${x.dow}</span><span class="city">${x.city}</span></div>
           <div class="move">${x.move}</div>
           <div class="prog">${x.prog}</div>
-          ${x.alert?`<div class="alert"><span>⚠️</span><div>${x.alert}</div></div>`:''}
+          ${x.alert?`<div class="alert"><span aria-hidden="true">⚠️</span><div>${x.alert}</div></div>`:''}
           </div>
         </div>
         <div class="card-rest">
           ${details(x)}
           ${x.food?`<div class="food">🍽️ ${x.food}</div>`:''}
-          ${x.gallery?`<div class="gallery">${x.gallery.map(p=>`<figure>${image(p.src,p.alt)}<figcaption>${p.alt}</figcaption></figure>`).join('')}</div>`:''}
+          ${x.gallery?`<div class="gallery">${x.gallery.map(p=>`<figure>${image(p.src)}<figcaption>${p.alt}</figcaption></figure>`).join('')}</div>`:''}
           <div class="ideias" data-dia="${x.d.replace('/','-')}"></div>
         </div>
       </article>`
 ).join('');
+
+// as datas do painel de reservas envelheciam caladas: o prazo vencido continuava
+// com cara de prazo futuro. Agora cada <time> ganha a etiqueta do dia em que a página é aberta.
+(function(){
+  const hoje=new Date();hoje.setHours(0,0,0,0);
+  const rtf=new Intl.RelativeTimeFormat('pt-BR',{numeric:'auto'}); // dá "há 14 dias", "amanhã" e "hoje" sem plural na mão
+  document.querySelectorAll('#reservas time[datetime]').forEach(t=>{
+    const dias=Math.round((new Date(t.dateTime+'T00:00:00')-hoje)/864e5);
+    if(isNaN(dias))return;
+    const cotacao=t.classList.contains('snap');
+    if(cotacao&&dias>=0)return; // cotação do próprio dia não precisa de aviso
+    const rel=rtf.format(dias,'day');
+    const chip=document.createElement('span');
+    chip.className='due'+(!cotacao&&dias<=0?' overdue':'');
+    chip.textContent=cotacao?`cotação ${rel} · reconferir`:dias<0?`prazo vencido ${rel}`:`vence ${rel}`;
+    t.after(' ',chip);
+  });
+})();
 </script>
 
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -526,9 +576,17 @@ const FIREBASE_CONFIG={
   boxes.forEach(b=>b.innerHTML='<div class="ideias-top"><span>💡 Ideias</span><button type="button" class="add-idea">+ ideia</button></div><div class="ideias-list"><span class="ideias-empty">nenhuma sugestão ainda</span></div>');
   const offline=msg=>boxes.forEach(b=>{b.querySelector('.add-idea').style.display='none';b.querySelector('.ideias-list').innerHTML=`<span class="ideias-empty">${msg}</span>`});
 
-  // ponytail: sem login - identidade é o navegador (celular e notebook da mesma pessoa são "donos" diferentes)
-  let clientId=localStorage.ideaClient;
-  if(!clientId){clientId=crypto.randomUUID();localStorage.ideaClient=clientId}
+  // localStorage lança em modo privado/cookies bloqueados; sem o guarda, as ideias inteiras quebravam
+  const store={
+    get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},
+    set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}
+  };
+  // randomUUID só existe em contexto seguro (https/localhost); fora dele o id vira um sorteio local
+  const uuid=()=>self.crypto&&crypto.randomUUID?crypto.randomUUID():'c-'+Math.random().toString(36).slice(2)+Date.now().toString(36);
+
+  // sem login - identidade é o navegador (celular e notebook da mesma pessoa são "donos" diferentes)
+  let clientId=store.get('ideaClient');
+  if(!clientId){clientId=uuid();store.set('ideaClient',clientId)}
 
   const sel=$('#f-dia');
   sel.innerHTML='<option value="geral">💡 Geral (sem dia definido)</option>'+
@@ -547,20 +605,26 @@ const FIREBASE_CONFIG={
   }
 
   function render(){
-    const byDay={};
-    Object.entries(cache).forEach(([id,i])=>{(byDay[i.dia]=byDay[i.dia]||[]).push([id,i])});
+    // Map em vez de objeto: um dia gravado como "__proto__" não contamina a agregação
+    const byDay=new Map();
+    Object.entries(cache).forEach(([id,i])=>{
+      const day=String(i&&i.dia);
+      if(!byDay.has(day))byDay.set(day,[]);
+      byDay.get(day).push([id,i]);
+    });
     boxes.forEach(box=>{
-      const items=byDay[box.dataset.dia]||[];
+      const items=byDay.get(box.dataset.dia)||[];
       box.querySelector('.ideias-list').innerHTML=items.length?items.map(([id,i])=>{
         const nLikes=Object.keys(i.likes||{}).length;
         const liked=i.likes&&i.likes[clientId];
         const mine=i.ownerId===clientId;
-        const link=/^https?:\/\//i.test(i.link||'')?` <a href="${esc(i.link)}" target="_blank" rel="noopener">🔗</a>`:'';
+        const link=/^https?:\/\//i.test(i.link||'')?` <a href="${esc(i.link)}" target="_blank" rel="noopener" aria-label="Abrir link da ideia">🔗</a>`:'';
+        const cat=Object.prototype.hasOwnProperty.call(CATS,i.categoria)?CATS[i.categoria]:'💡';
         return `<div class="idea">
-          <span class="cat" title="${esc(i.categoria)}">${CATS[i.categoria]||'💡'}</span>
+          <span class="cat" title="${esc(i.categoria)}" aria-hidden="true">${cat}</span>
           <div class="idea-body"><strong>${esc(i.titulo)}</strong>${link}${i.texto?`<small>${esc(i.texto)}</small>`:''}<small class="who">- ${esc(i.nome)}</small></div>
-          <button type="button" class="like${liked?' liked':''}" data-id="${id}">👍${nLikes?' '+nLikes:''}</button>
-          ${mine?`<button type="button" data-edit="${id}">✏️</button><button type="button" data-del="${id}">🗑️</button>`:''}
+          <button type="button" class="like${liked?' liked':''}" data-id="${id}" aria-pressed="${liked?'true':'false'}" aria-label="Curtir${nLikes?` · ${nLikes} curtida${nLikes>1?'s':''}`:''}">👍${nLikes?' '+nLikes:''}</button>
+          ${mine?`<button type="button" data-edit="${id}" aria-label="Editar ideia" title="Editar">✏️</button><button type="button" data-del="${id}" aria-label="Excluir ideia" title="Excluir">🗑️</button>`:''}
         </div>`;
       }).join(''):'<span class="ideias-empty">nenhuma sugestão ainda</span>';
     });
@@ -568,12 +632,14 @@ const FIREBASE_CONFIG={
 
   const dlg=$('#idea-dialog'),form=$('#idea-form');
   let editId=null;
+  // escrita rejeitada (regras/rede) falhava calada: a ideia sumia da tela sem aviso
+  const guard=p=>{if(p&&p.catch)p.catch(err=>{console.error('Firebase:',err);alert('Não foi possível salvar. Verifique a conexão e tente de novo.')});};
 
   document.addEventListener('click',e=>{
     const t=e.target.closest('button');if(!t)return;
     if(t.classList.contains('add-idea')){
       editId=null;form.reset();
-      $('#f-nome').value=localStorage.ideaName||'';
+      $('#f-nome').value=store.get('ideaName')||'';
       sel.value=t.closest('.ideias').dataset.dia;
       sel.disabled=true; // dia fixo do botão clicado; lido via sel.value no submit
       $('#idea-h').textContent='Nova ideia';
@@ -581,9 +647,9 @@ const FIREBASE_CONFIG={
     }else if(t.classList.contains('like')&&ref){
       const id=t.dataset.id;
       const liked=cache[id]&&cache[id].likes&&cache[id].likes[clientId];
-      ref.child(id+'/likes/'+clientId).set(liked?null:true);
+      guard(ref.child(id+'/likes/'+clientId).set(liked?null:true));
     }else if(t.dataset.del&&ref){
-      if(confirm('Excluir esta ideia?'))ref.child(t.dataset.del).remove();
+      if(confirm('Excluir esta ideia?'))guard(ref.child(t.dataset.del).remove());
     }else if(t.dataset.edit&&ref){
       const i=cache[t.dataset.edit];if(!i)return;
       editId=t.dataset.edit;
@@ -599,15 +665,20 @@ const FIREBASE_CONFIG={
     e.preventDefault();
     if(!ref)return dlg.close();
     const nome=($('#f-nome').value.trim()||'Alguém').slice(0,50);
-    localStorage.ideaName=nome;
+    store.set('ideaName',nome);
     let link=$('#f-link').value.trim();
     if(link&&!/^https?:\/\//i.test(link))link='https://'+link; // neutraliza javascript: e afins
     const data={dia:sel.value,nome,categoria:$('#f-cat').value,
       titulo:$('#f-titulo').value.trim().slice(0,200),
       texto:$('#f-texto').value.trim().slice(0,500),link:link.slice(0,300)};
-    if(!data.titulo)return;
-    if(editId){ref.child(editId).update(data)} // update, nunca set: preserva os likes dos outros
-    else{ref.push({...data,ownerId:clientId,criadoEm:Date.now()})}
+    if(!data.titulo){ // required não barra título só com espaços
+      const campo=$('#f-titulo');
+      campo.setCustomValidity('Escreva a ideia.');campo.reportValidity();
+      campo.addEventListener('input',()=>campo.setCustomValidity(''),{once:true});
+      return;
+    }
+    if(editId){guard(ref.child(editId).update(data))} // update, nunca set: preserva os likes dos outros
+    else{guard(ref.push({...data,ownerId:clientId,criadoEm:Date.now()}))}
     dlg.close();
   });
   $('#idea-cancel').addEventListener('click',()=>dlg.close());
