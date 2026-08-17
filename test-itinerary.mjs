@@ -71,28 +71,33 @@ for (const price of [
 ]) assert(html.includes(price), `preço exibido: ${price}`);
 assert(html.includes('€187/pessoa · €935 para 5 adultos'), 'total das atrações para o grupo');
 for (const stay of [
-  '05–08/09 · 3 noites · R$ 2.844,70 total · R$ 568,94 por hóspede',
-  '15–19/09 · 4 noites · R$ 4.419,31 total · R$ 883,86 por hóspede',
-]) assert(html.includes(stay), `hospedagem reservada exibida: ${stay}`);
+  '05–08/09 · 3 noites · R$ 2.845 total do rateio · R$ 569 por hóspede',
+  '15–19/09 · 4 noites · R$ 4.420 total do rateio · R$ 884 por hóspede',
+  '09–12/09 · 3 noites · R$ 6.785 total do rateio · R$ 1.357 por hóspede',
+  '12–15/09 · 3 noites · R$ 4.050 total do rateio · R$ 810 por hóspede',
+]) assert(html.includes(stay), `rateio inteiro exibido: ${stay}`);
 assert(html.includes('Hospedagens de Atenas · reservadas ✓'), 'status das hospedagens de Atenas exibido');
-assert(html.includes('Total reservado: R$ 7.264,01 · rateio final: 4 × R$ 1.452,80 + 1 × R$ 1.452,81'), 'total e centavo residual exibidos');
-assert(html.includes('{sec:"Atenas",tag:"05–08/09 · 3 noites · reservado ✓ · R$ 2.844,70 total · R$ 568,94 por hóspede"}'), 'cabeçalho da hospedagem inicial de Atenas exibido');
-assert(html.includes('{sec:"Atenas · reta final",tag:"15–19/09 · 4 noites · reservado ✓ · R$ 4.419,31 total · R$ 883,86 por hóspede"}'), 'cabeçalho da hospedagem final de Atenas exibido');
-for (const stay of [
-  '09–12/09 · 3 noites · R$ 6.784,59 total · R$ 1.356,92 por hóspede',
-  '12–15/09 · 3 noites · R$ 4.049,33 total · R$ 809,87 por hóspede',
-]) assert(html.includes(stay), `hospedagem reservada exibida: ${stay}`);
+assert(html.includes('Total do rateio: R$ 7.265 · R$ 1.453 por hóspede'), 'consolidado inteiro de Atenas exibido');
+assert(html.includes('Hospedagens: valores individuais arredondados para cima'), 'regra de arredondamento explicada');
+assert(html.includes('{sec:"Atenas",tag:"05–08/09 · 3 noites · reservado ✓ · R$ 2.845 total do rateio · R$ 569 por hóspede"}'), 'cabeçalho inicial de Atenas arredondado');
+assert(html.includes('{sec:"Atenas · reta final",tag:"15–19/09 · 4 noites · reservado ✓ · R$ 4.420 total do rateio · R$ 884 por hóspede"}'), 'cabeçalho final de Atenas arredondado');
 for (const booking of [
   'Hospedagem de Santorini · reservada ✓',
   'Hospedagem de Naxos · reservada ✓',
   'https://www.airbnb.com.br/rooms/1376191516126500714',
   'https://www.airbnb.com.br/rooms/586349424632209829',
-  'Rateio final: 4 × R$ 1.356,92 + 1 × R$ 1.356,91',
-  'Rateio final: 4 × R$ 809,87 + 1 × R$ 809,85',
 ]) assert(html.includes(booking), `reserva exibida: ${booking}`);
+for (const oldValue of [
+  'R$ 2.844,70 total · R$ 568,94',
+  'R$ 4.419,31 total · R$ 883,86',
+  'R$ 6.784,59 total · R$ 1.356,92',
+  'R$ 4.049,33 total · R$ 809,87',
+  '4 × R$ 1.356,92 + 1 × R$ 1.356,91',
+  '4 × R$ 809,87 + 1 × R$ 809,85',
+]) assert(!html.includes(oldValue), `rateio antigo removido: ${oldValue}`);
 assert(html.includes('Hotel em Paros') && !html.includes('Hotéis em Paros, Santorini e Naxos'), 'somente Paros permanece pendente');
-assert(html.includes('{sec:"Santorini",tag:"09–12/09 · 3 noites · reservado ✓ · R$ 6.784,59 total · R$ 1.356,92 por hóspede"}'), 'cabeçalho de Santorini atualizado');
-assert(html.includes('{sec:"Naxos",tag:"12–15/09 · 3 noites · reservado ✓ · R$ 4.049,33 total · R$ 809,87 por hóspede"}'), 'cabeçalho de Naxos atualizado');
+assert(html.includes('{sec:"Santorini",tag:"09–12/09 · 3 noites · reservado ✓ · R$ 6.785 total do rateio · R$ 1.357 por hóspede"}'), 'cabeçalho de Santorini arredondado');
+assert(html.includes('{sec:"Naxos",tag:"12–15/09 · 3 noites · reservado ✓ · R$ 4.050 total do rateio · R$ 810 por hóspede"}'), 'cabeçalho de Naxos arredondado');
 assert(html.includes('Athinais Mansion, em Megalochori') && html.includes('Melitoma Home, em Chora'), 'bases reservadas exibidas');
 assert(html.includes('Checkout na Melitoma Home antes das 09:00') && html.includes('guarda-volumes local'), 'checkout antecipado e bagagem de Naxos exibidos');
 

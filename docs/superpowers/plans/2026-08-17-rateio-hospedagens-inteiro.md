@@ -29,7 +29,7 @@
 - Consumes: o HTML estático lido por `test-itinerary.mjs`.
 - Produces: cinco rateios inteiros e seus totais recalculados para o grupo.
 
-- [ ] **Step 1: Escrever o teste que falha**
+- [x] **Step 1: Escrever o teste que falha**
 
 Substituir as verificações atuais das hospedagens por:
 
@@ -56,13 +56,13 @@ assert(html.includes('{sec:"Naxos",tag:"12–15/09 · 3 noites · reservado ✓ 
 assert(html.includes('{sec:"Atenas · reta final",tag:"15–19/09 · 4 noites · reservado ✓ · R$ 4.420 total do rateio · R$ 884 por hóspede"}'), 'cabeçalho final de Atenas arredondado');
 ```
 
-- [ ] **Step 2: Executar o teste e confirmar a falha**
+- [x] **Step 2: Executar o teste e confirmar a falha**
 
 Run: `node test-itinerary.mjs`
 
 Expected: FAIL com `rateio inteiro exibido: 05–08/09`.
 
-- [ ] **Step 3: Implementar os textos arredondados**
+- [x] **Step 3: Implementar os textos arredondados**
 
 Usar estes resultados em “Reservas críticas” e nos cabeçalhos das seções:
 
@@ -77,18 +77,18 @@ Naxos 12–15/09: R$ 810 por hóspede · R$ 4.050 total do rateio
 Depois da lista de reservas, adicionar:
 
 ```html
-<p class="lead"><b>Hospedagens:</b> valores individuais arredondados para cima; o total do rateio corresponde ao valor por hóspede × 5.</p>
+<p class="lead">Hospedagens: valores individuais arredondados para cima; o total do rateio corresponde ao valor por hóspede × 5.</p>
 ```
 
 Remover os dois rateios residuais com `4 × ... + 1 × ...`.
 
-- [ ] **Step 4: Executar a verificação completa**
+- [x] **Step 4: Executar a verificação completa**
 
 Run: `node test-itinerary.mjs && git diff --check`
 
 Expected: `OK: 17 dias, 17 agendas e 34 imagens locais.` e nenhum erro de whitespace.
 
-- [ ] **Step 5: Commitar a atualização**
+- [x] **Step 5: Commitar a atualização**
 
 ```bash
 git add index.html test-itinerary.mjs docs/superpowers/plans/2026-08-17-rateio-hospedagens-inteiro.md
