@@ -70,6 +70,12 @@ for (const price of [
   'Museu Arqueológico Nacional · €20/pessoa · €100 grupo',
 ]) assert(html.includes(price), `preço exibido: ${price}`);
 assert(html.includes('€187/pessoa · €935 para 5 adultos'), 'total das atrações para o grupo');
+for (const stay of [
+  '05–08/09 · 3 noites · R$ 2.844,70 total · R$ 568,94 por hóspede',
+  '15–19/09 · 4 noites · R$ 4.419,31 total · R$ 883,86 por hóspede',
+]) assert(html.includes(stay), `hospedagem reservada exibida: ${stay}`);
+assert(html.includes('Hospedagens de Atenas · reservadas ✓'), 'status das hospedagens de Atenas exibido');
+assert(html.includes('Total reservado: R$ 7.264,01 · rateio final: 4 × R$ 1.452,80 + 1 × R$ 1.452,81'), 'total e centavo residual exibidos');
 
 const day06 = html.match(/\{d:"06\/09"([\s\S]*?)\n \{d:"07\/09"/)?.[1] ?? '';
 const acropolis = day06.indexOf('["11:00-13:00","Acrópole e encostas"');
