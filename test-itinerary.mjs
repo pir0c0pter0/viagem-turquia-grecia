@@ -52,8 +52,10 @@ const attractionLinks = [
   'https://archaeologicalmuseums.gr/en/museum/5df34af3deca5e2d79e8c1a0',
 ];
 assert(attractionLinks.every(link => html.includes(link)), 'links oficiais das atrações');
-assert([...html.matchAll(/💶 Comprar/g)].length >= 14, 'links de compra têm prefixo monetário');
+assert([...html.matchAll(/💶 Comprar|✅ [^<"]+ · comprado/g)].length >= 16, 'links de compra ou comprados exibem status');
 for (const price of [
+  'Pireu → Paros · comprado · R$529/pessoa · R$2.645 grupo',
+  'Paros → Santorini · comprado · R$459/pessoa · R$2.295 grupo',
   'Ingresso da Acrópole de Atenas · comprado · R$192/pessoa · R$960 grupo',
   'Ingresso do Museu da Acrópole · comprado · R$129/pessoa · R$645 grupo',
   'Ágora Antiga · €20/pessoa · €100 grupo',
