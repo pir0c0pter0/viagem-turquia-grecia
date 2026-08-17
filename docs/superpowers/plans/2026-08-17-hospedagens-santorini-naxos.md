@@ -30,7 +30,7 @@
 - Consumes: o HTML estático lido por `test-itinerary.mjs`.
 - Produces: textos visíveis com reservas, valores, rateios, bases e logística de checkout.
 
-- [ ] **Step 1: Escrever o teste que falha**
+- [x] **Step 1: Escrever o teste que falha**
 
 Adicionar depois das verificações das hospedagens de Atenas:
 
@@ -44,8 +44,8 @@ for (const booking of [
   'Hospedagem de Naxos · reservada ✓',
   'https://www.airbnb.com.br/rooms/1376191516126500714',
   'https://www.airbnb.com.br/rooms/586349424632209829',
-  'rateio final: 4 × R$ 1.356,92 + 1 × R$ 1.356,91',
-  'rateio final: 4 × R$ 809,87 + 1 × R$ 809,85',
+  'Rateio final: 4 × R$ 1.356,92 + 1 × R$ 1.356,91',
+  'Rateio final: 4 × R$ 809,87 + 1 × R$ 809,85',
 ]) assert(html.includes(booking), `reserva exibida: ${booking}`);
 assert(html.includes('Hotel em Paros') && !html.includes('Hotéis em Paros, Santorini e Naxos'), 'somente Paros permanece pendente');
 assert(html.includes('{sec:"Santorini",tag:"09–12/09 · 3 noites · reservado ✓ · R$ 6.784,59 total · R$ 1.356,92 por hóspede"}'), 'cabeçalho de Santorini atualizado');
@@ -54,13 +54,13 @@ assert(html.includes('Athinais Mansion, em Megalochori') && html.includes('Melit
 assert(html.includes('Checkout na Melitoma Home antes das 09:00') && html.includes('guarda-volumes local'), 'checkout antecipado e bagagem de Naxos exibidos');
 ```
 
-- [ ] **Step 2: Executar o teste e confirmar a falha**
+- [x] **Step 2: Executar o teste e confirmar a falha**
 
 Run: `node test-itinerary.mjs`
 
 Expected: FAIL com `hospedagem reservada exibida: 09–12/09`.
 
-- [ ] **Step 3: Implementar o conteúdo mínimo**
+- [x] **Step 3: Implementar o conteúdo mínimo**
 
 Em “Reservas críticas”, inserir duas entradas com os links dos anúncios e estes textos:
 
@@ -95,13 +95,13 @@ Nos dias 09–12/09, substituir a base provisória em Fira pela Athinais Mansion
 ["13:00-14:00","Retirar bagagem e seguir ao porto","1h · a pé ou transfer curto; estar no porto às 14:00"]
 ```
 
-- [ ] **Step 4: Executar a verificação completa**
+- [x] **Step 4: Executar a verificação completa**
 
 Run: `node test-itinerary.mjs && git diff --check`
 
 Expected: `OK: 17 dias, 17 agendas e 34 imagens locais.` e nenhum erro de whitespace.
 
-- [ ] **Step 5: Commitar a atualização**
+- [x] **Step 5: Commitar a atualização**
 
 ```bash
 git add index.html test-itinerary.mjs docs/superpowers/plans/2026-08-17-hospedagens-santorini-naxos.md
