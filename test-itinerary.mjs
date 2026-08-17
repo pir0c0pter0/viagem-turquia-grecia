@@ -87,6 +87,17 @@ for (const booking of [
   'https://www.airbnb.com.br/rooms/1376191516126500714',
   'https://www.airbnb.com.br/rooms/586349424632209829',
 ]) assert(html.includes(booking), `reserva exibida: ${booking}`);
+for (const booking of [
+  'Hospedagem de Paros · reservada ✓',
+  'Hotel Kontes Comfort · Parikia',
+  '08–09/09 · 1 noite · 4 quartos · R$ 4.530 total do rateio · R$ 906 por hóspede',
+  'https://www.booking.com/hotel/gr/kontes.pt-br.html?checkin=2026-09-08&amp;checkout=2026-09-09&amp;group_adults=5&amp;no_rooms=4&amp;group_children=0',
+]) assert(html.includes(booking), `reserva de Paros exibida: ${booking}`);
+assert(html.includes('<strong>Paros:</strong> Hotel Kontes Comfort, em Parikia'), 'base reservada de Paros exibida');
+assert(html.includes('Todas as hospedagens do roteiro estão reservadas.'), 'nenhuma hospedagem permanece pendente');
+assert(html.includes('{sec:"Paros",tag:"08–09/09 · 1 noite · reservado ✓ · R$ 4.530 total do rateio · R$ 906 por hóspede"}'), 'cabeçalho de Paros atualizado');
+assert(!html.includes('R$ 4.527'), 'valor aproximado de Paros não exibido');
+assert(!html.includes('Hotel em Paros'), 'pendência de Paros removida');
 for (const oldValue of [
   'R$ 2.844,70 total · R$ 568,94',
   'R$ 4.419,31 total · R$ 883,86',
@@ -95,7 +106,6 @@ for (const oldValue of [
   '4 × R$ 1.356,92 + 1 × R$ 1.356,91',
   '4 × R$ 809,87 + 1 × R$ 809,85',
 ]) assert(!html.includes(oldValue), `rateio antigo removido: ${oldValue}`);
-assert(html.includes('Hotel em Paros') && !html.includes('Hotéis em Paros, Santorini e Naxos'), 'somente Paros permanece pendente');
 assert(html.includes('{sec:"Santorini",tag:"09–12/09 · 3 noites · reservado ✓ · R$ 6.785 total do rateio · R$ 1.357 por hóspede"}'), 'cabeçalho de Santorini arredondado');
 assert(html.includes('{sec:"Naxos",tag:"12–15/09 · 3 noites · reservado ✓ · R$ 4.050 total do rateio · R$ 810 por hóspede"}'), 'cabeçalho de Naxos arredondado');
 assert(html.includes('Athinais Mansion, em Megalochori') && html.includes('Melitoma Home, em Chora'), 'bases reservadas exibidas');
