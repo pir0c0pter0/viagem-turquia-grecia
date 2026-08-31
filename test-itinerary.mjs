@@ -77,7 +77,7 @@ for (const stay of [
 ]) assert(html.includes(stay), `rateio inteiro exibido: ${stay}`);
 assert(html.includes('Hospedagens de Atenas · reservadas ✓'), 'status das hospedagens de Atenas exibido');
 assert(html.includes('Total do rateio: R$ 7.265 · R$ 1.453 por hóspede'), 'consolidado inteiro de Atenas exibido');
-assert(html.includes('R$ 22.630 para o grupo · R$ 4.526 por viajante, incluindo o primeiro Airbnb de Atenas (05–08/09) e mantendo o arredondamento para cima de cada hospedagem'), 'rateio final inclui o primeiro Airbnb');
+assert(html.includes('hospedagens: R$ 4.526 · 4 balsas: R$ 1.870 · total: R$ 6.396 por viajante · R$ 31.980 para o grupo'), 'rateio final inclui hospedagens e balsas');
 assert(html.includes('{sec:"Atenas",tag:"05–08/09 · 3 noites · reservado ✓ · R$ 2.845 total do rateio · R$ 569 por hóspede"}'), 'cabeçalho inicial de Atenas arredondado');
 assert(html.includes('{sec:"Atenas · reta final",tag:"15–19/09 · 4 noites · reservado ✓ · R$ 4.420 total do rateio · R$ 884 por hóspede"}'), 'cabeçalho final de Atenas arredondado');
 for (const booking of [
