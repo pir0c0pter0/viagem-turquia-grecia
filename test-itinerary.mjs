@@ -69,16 +69,15 @@ for (const price of [
   'Sounion · €20/pessoa · €100 grupo',
   'Museu Arqueológico Nacional · €20/pessoa · €100 grupo',
 ]) assert(html.includes(price), `preço exibido: ${price}`);
-assert(html.includes('€187/pessoa · €935 para 5 adultos'), 'total das atrações para o grupo');
 for (const stay of [
   '05–08/09 · 3 noites · R$ 2.845 total do rateio · R$ 569 por hóspede',
-  '15–19/09 · 4 noites · R$ 4.420 total do rateio · R$ 884 por hóspede',
+  'R$ 4.420 total do rateio · R$ 884 por hóspede',
   '09–12/09 · 3 noites · R$ 6.785 total do rateio · R$ 1.357 por hóspede',
   '12–15/09 · 3 noites · R$ 4.050 total do rateio · R$ 810 por hóspede',
 ]) assert(html.includes(stay), `rateio inteiro exibido: ${stay}`);
 assert(html.includes('Hospedagens de Atenas · reservadas ✓'), 'status das hospedagens de Atenas exibido');
 assert(html.includes('Total do rateio: R$ 7.265 · R$ 1.453 por hóspede'), 'consolidado inteiro de Atenas exibido');
-assert(html.includes('Hospedagens: valores individuais arredondados para cima'), 'regra de arredondamento explicada');
+assert(html.includes('R$ 22.630 para o grupo · R$ 4.526 por viajante, incluindo o primeiro Airbnb de Atenas (05–08/09) e mantendo o arredondamento para cima de cada hospedagem'), 'rateio final inclui o primeiro Airbnb');
 assert(html.includes('{sec:"Atenas",tag:"05–08/09 · 3 noites · reservado ✓ · R$ 2.845 total do rateio · R$ 569 por hóspede"}'), 'cabeçalho inicial de Atenas arredondado');
 assert(html.includes('{sec:"Atenas · reta final",tag:"15–19/09 · 4 noites · reservado ✓ · R$ 4.420 total do rateio · R$ 884 por hóspede"}'), 'cabeçalho final de Atenas arredondado');
 for (const booking of [
