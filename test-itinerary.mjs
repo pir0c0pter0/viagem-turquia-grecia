@@ -118,12 +118,30 @@ const plaka = day06.indexOf('["17:15-19:15","Plaka e Anafiotika"');
 assert(acropolis >= 0 && acropolis < lunch && lunch < museum && museum < plaka, '06/09 segue Acrópole → almoço → museu → Plaka');
 assert(html.includes('slot das 11:00–12:00 em 06/09') && html.includes('slot das 15:00–16:00'), 'reservas de 06/09 exibem os horários comprados');
 
-const day14 = html.match(/\{d:"14\/09"([\s\S]*?)\n \{sec:/)?.[1] ?? '';
-const demeter = day14.indexOf('["09:20-10:20","Templo de Deméter"');
-const halki = day14.indexOf('["10:40-12:15","Halki"');
-const apiranthos = day14.indexOf('["14:15-15:30","Apiranthos"');
-assert(demeter >= 0 && demeter < halki && halki < apiranthos, '14/09 segue Deméter → Halki → Apiranthos');
-assert(day14.includes('visita concluída bem antes do fechamento às 15:30'), 'Templo de Deméter termina antes das 15:30');
+const days = new Script(html.match(/const DAYS=([\s\S]*?\n\]);/)[0] + '\nDAYS').runInNewContext();
+const day14 = days.find(day => day.d === '14/09');
+const demeter = day14.schedule.findIndex(([, title]) => title === 'Templo de Deméter');
+const halki = day14.schedule.findIndex(([, title]) => title === 'Halki (Chalki)');
+const filoti = day14.schedule.findIndex(([, title]) => title === 'Almoço e passeio em Filoti');
+const apiranthos = day14.schedule.findIndex(([, title]) => title === 'Apiranthos (Apeiranthos)');
+assert(demeter >= 0 && demeter < halki && halki < filoti && filoti < apiranthos, '14/09 segue Deméter → Halki → Filoti → Apiranthos');
+assert(day14.schedule[demeter][0].split('-')[1] < '15:30', 'Templo de Deméter termina antes das 15:30');
+
+for (const date of ['09/09', '10/09', '11/09', '12/09', '13/09', '14/09', '15/09']) {
+  const day = days.find(day => day.d === date);
+  assert(day.move.includes('🚗'), `${date} considera carro`);
+  let previousEnd = '00:00';
+  for (const [time] of day.schedule) {
+    const [start, end] = time.split('-');
+    assert(start >= previousEnd && end > start, `${date}: horários em ordem e sem sobreposição em ${time}`);
+    previousEnd = end;
+  }
+}
+for (const date of ['12/09', '13/09', '14/09', '15/09']) {
+  const links = days.find(day => day.d === date).links.map(([, link]) => new URL(link));
+  assert(links.some(link => link.searchParams.get('origin') === '37.102264,25.384935'), `${date}: rota sai da hospedagem informada`);
+  if (date !== '15/09') assert(links.some(link => link.searchParams.get('destination') === '37.102264,25.384935'), `${date}: rota chega à hospedagem informada`);
+}
 
 const day13 = html.match(/\{d:"13\/09"([\s\S]*?)\n \{d:"14\/09"/)?.[1] ?? '';
 assert(day13.includes('Lancha pela costa sudoeste') && day13.includes('lotação legal para as 5 pessoas'), '13/09 inclui lancha segura para todo o grupo');
@@ -134,5 +152,34 @@ await Promise.all([...images].map(path => access(new URL(path, root))));
 
 const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x => x[1]).join('\n');
 new Script(scripts, { filename: 'index.inline.js' });
+
+// A virada deve seguir a Grécia, inclusive com a página aberta em outro fuso.
+let now = '2026-09-09T20:59:59Z'; // 23:59:59 em Atenas
+const cards = ['2026-09-08', '2026-09-09', '2026-09-10'].map(date => ({ dataset: { date }, open: true }));
+const events = {};
+let tick;
+const rendered = { innerHTML: '' };
+new Script([...html.matchAll(/<script>([\s\S]*?)<\/script>/g)][0][1]).runInNewContext({
+  Date: class extends Date { constructor() { super(now); } },
+  Intl,
+  document: {
+    getElementById: () => rendered,
+    querySelectorAll: () => cards,
+    addEventListener: (name, callback) => { events[name] = callback; },
+  },
+  setInterval: callback => { tick = callback; },
+  addEventListener: (name, callback) => { events[name] = callback; },
+});
+assert.deepEqual(cards.map(card => card.open), [false, true, true], 'passado recolhido, hoje e futuro abertos');
+assert.equal([...rendered.innerHTML.matchAll(/<details class="card day-card/g)].length, 17, 'os 17 dias podem ser reabertos');
+cards[0].open = true;
+tick();
+assert.equal(cards[0].open, true, 'abrir manualmente um dia passado permanece válido no mesmo dia');
+now = '2026-09-09T21:00:00Z'; // meia-noite em Atenas, ainda dia 09 no Brasil
+tick();
+assert.deepEqual(cards.map(card => card.open), [false, false, true], 'a virada na Grécia recolhe o dia que terminou');
+now = '2027-01-01T12:00:00Z';
+events.visibilitychange();
+assert(cards.every(card => !card.open), 'retomar a aba após a viagem recolhe todos os dias, considerando o ano');
 
 console.log(`OK: 17 dias, 17 agendas e ${images.size} imagens locais.`);
