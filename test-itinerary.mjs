@@ -49,10 +49,9 @@ const attractionLinks = [
   'https://tickets.hh.gr/en/venues/sounion',
   'https://tickets.hh.gr/en/venues/national-archaeological-museum',
   'https://www.panathenaicstadium.gr/',
-  'https://archaeologicalmuseums.gr/en/museum/5df34af3deca5e2d79e8c1a0',
 ];
 assert(attractionLinks.every(link => html.includes(link)), 'links oficiais das atrações');
-assert([...html.matchAll(/💶 Comprar|✅ [^<"]+ · comprado/g)].length >= 16, 'links de compra ou comprados exibem status');
+assert([...html.matchAll(/💶 Comprar|✅ [^<"]+ · comprado/g)].length >= 15, 'links de compra ou comprados exibem status');
 for (const price of [
   'Pireu → Paros · comprado · R$529/pessoa · R$2.645 grupo',
   'Paros → Santorini · comprado · R$459/pessoa · R$2.295 grupo',
@@ -64,7 +63,6 @@ for (const price of [
   'Olympieion · €20/pessoa · €100 grupo',
   'Estádio Panatenaico · €12/pessoa · €60 grupo',
   'Akrotiri · €20/pessoa · €100 grupo',
-  'Templo de Deméter · €5/pessoa · €25 grupo',
   'Delfos · €20/pessoa · €100 grupo',
   'Sounion · €20/pessoa · €100 grupo',
   'Museu Arqueológico Nacional · €20/pessoa · €100 grupo',
@@ -108,7 +106,7 @@ for (const oldValue of [
 assert(html.includes('{sec:"Santorini",tag:"09–12/09 · 3 noites · reservado ✓ · R$ 6.785 total do rateio · R$ 1.357 por hóspede"}'), 'cabeçalho de Santorini arredondado');
 assert(html.includes('{sec:"Naxos",tag:"12–15/09 · 3 noites · reservado ✓ · R$ 4.050 total do rateio · R$ 810 por hóspede"}'), 'cabeçalho de Naxos arredondado');
 assert(html.includes('Athinais Mansion, em Megalochori') && html.includes('Melitoma Home, em Chora'), 'bases reservadas exibidas');
-assert(html.includes('Checkout na Melitoma Home antes das 09:00') && html.includes('guarda-volumes local'), 'checkout antecipado e bagagem de Naxos exibidos');
+assert(html.includes('Checkout na Melitoma Home antes das 09:00') && html.includes('porta-malas'), 'checkout antecipado e bagagem no carro exibidos');
 
 const day06 = html.match(/\{d:"06\/09"([\s\S]*?)\n \{d:"07\/09"/)?.[1] ?? '';
 const acropolis = day06.indexOf('["11:00-13:00","Acrópole e encostas"');
@@ -119,13 +117,24 @@ assert(acropolis >= 0 && acropolis < lunch && lunch < museum && museum < plaka, 
 assert(html.includes('slot das 11:00–12:00 em 06/09') && html.includes('slot das 15:00–16:00'), 'reservas de 06/09 exibem os horários comprados');
 
 const days = new Script(html.match(/const DAYS=([\s\S]*?\n\]);/)[0] + '\nDAYS').runInNewContext();
+const day12 = days.find(day => day.d === '12/09');
+const day13 = days.find(day => day.d === '13/09');
 const day14 = days.find(day => day.d === '14/09');
-const demeter = day14.schedule.findIndex(([, title]) => title === 'Templo de Deméter');
-const halki = day14.schedule.findIndex(([, title]) => title === 'Halki (Chalki)');
-const filoti = day14.schedule.findIndex(([, title]) => title === 'Almoço e passeio em Filoti');
-const apiranthos = day14.schedule.findIndex(([, title]) => title === 'Apiranthos (Apeiranthos)');
-assert(demeter >= 0 && demeter < halki && halki < filoti && filoti < apiranthos, '14/09 segue Deméter → Halki → Filoti → Apiranthos');
-assert(day14.schedule[demeter][0].split('-')[1] < '15:30', 'Templo de Deméter termina antes das 15:30');
+const day15 = days.find(day => day.d === '15/09');
+assert(!day12.schedule.some(([, title]) => title.includes('Retirada do carro')), 'carro de Naxos não é retirado no dia da chegada');
+assert(day13.schedule.some(([, title]) => title === 'Retirada do carro em Naxos'), 'carro é retirado domingo no fim da manhã');
+for (const day of [day13, day14]) {
+  assert(day.schedule[0][0] === '09:30-10:30', `${day.d} começa sem acordar cedo`);
+}
+assert(day13.schedule.some(([, title]) => title === 'Almoço em Kastraki'), 'domingo inclui almoço na praia');
+assert(day13.schedule.some(([time, title]) => time === '14:00-18:00' && title.includes('Kastraki')), 'domingo reserva a tarde para descanso em Kastraki');
+assert(day14.schedule.some(([, title]) => title === 'Almoço em Plaka'), 'segunda inclui almoço na praia');
+assert(day14.schedule.some(([time, title]) => time === '14:30-18:00' && title.includes('Plaka')), 'segunda reserva a tarde para descanso em Plaka');
+assert(day15.schedule.some(([, title]) => title === 'Malas no carro e manhã livre em Chora'), 'carro guarda as malas após o checkout');
+assert(day15.schedule.some(([, title]) => title === 'Devolução do carro em Naxos'), 'carro é devolvido antes do ferry');
+for (const place of ['Templo de Deméter', 'Halki (Chalki)', 'Filoti', 'Apiranthos (Apeiranthos)']) {
+  assert(!day14.schedule.some(([, title]) => title.includes(place)), `segunda sem circuito pelo interior: ${place}`);
+}
 
 for (const date of ['09/09', '10/09', '11/09', '12/09', '13/09', '14/09', '15/09']) {
   const day = days.find(day => day.d === date);
@@ -137,15 +146,11 @@ for (const date of ['09/09', '10/09', '11/09', '12/09', '13/09', '14/09', '15/09
     previousEnd = end;
   }
 }
-for (const date of ['12/09', '13/09', '14/09', '15/09']) {
+for (const date of ['13/09', '14/09', '15/09']) {
   const links = days.find(day => day.d === date).links.map(([, link]) => new URL(link));
   assert(links.some(link => link.searchParams.get('origin') === '37.102264,25.384935'), `${date}: rota sai da hospedagem informada`);
   if (date !== '15/09') assert(links.some(link => link.searchParams.get('destination') === '37.102264,25.384935'), `${date}: rota chega à hospedagem informada`);
 }
-
-const day13 = html.match(/\{d:"13\/09"([\s\S]*?)\n \{d:"14\/09"/)?.[1] ?? '';
-assert(day13.includes('Lancha pela costa sudoeste') && day13.includes('lotação legal para as 5 pessoas'), '13/09 inclui lancha segura para todo o grupo');
-assert(day13.includes('sem habilitação') && day13.includes('contratar skipper'), '13/09 mantém alternativa quando a lancha sem habilitação não comportar o grupo');
 
 const images = new Set([...html.matchAll(/assets\/images\/[a-z0-9-]+\.webp/g)].map(x => x[0]));
 await Promise.all([...images].map(path => access(new URL(path, root))));
